@@ -22,7 +22,7 @@ kotlin {
             dependencies {
                 api(kotlinx.serialization.core)
                 api(projects.kollectionsInteroperable)
-                api(projects.kronoApi)
+                api(projects.kronoKotlinx)
                 api(projects.identifierCore)
                 api(projects.kashMoney)
             }

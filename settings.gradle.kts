@@ -36,13 +36,11 @@ rootProject.name = "kost"
 includeSubs("functions", "../functions", "core")
 includeSubs("expect", "../expect", "core", "coroutines")
 includeSubs("kollections", "../kollections", "interoperable")
-includeSubs("koncurrent-primitives", "../koncurrent/primitives", "core", "coroutines", "mock")
-includeSubs("koncurrent-later", "../koncurrent/later", "core", "coroutines", "test")
 includeSubs("formatter", "../formatter", "core")
 
 includeBuild("../kash/kash-generator")
 includeSubs("kash", "../kash", "currency", "money")
-includeSubs("krono", "../krono", "api")
+includeSubs("krono", "../krono", "api", "kotlinx")
 
 includeSubs("identifier", "../identifier", "core")
 includeSubs("kost", ".", "core")
