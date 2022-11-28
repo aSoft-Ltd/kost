@@ -5,6 +5,8 @@ package kost
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
+import kollections.List
+import kollections.iEmptyList
 
 @Serializable
 sealed class LineItem : Calculable {
@@ -24,7 +26,7 @@ sealed class LineItem : Calculable {
         override val tax: Tax = Tax.GENERIC_ZERO,
         val ref: VendorReference = VendorReference.UNSET,
         val unitDiscount: Long = 0,
-        val images: List<String> = emptyList()
+        val images: List<String> = iEmptyList()
     ) : LineItem() {
 
         /**
