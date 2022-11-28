@@ -1,8 +1,11 @@
-package payments.requests
+@file:JsExport
+
+package kost
 
 import kash.Currency
-import kotlinx.datetime.*
 import kotlinx.serialization.Serializable
+import krono.LocalDate
+import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
 @Serializable

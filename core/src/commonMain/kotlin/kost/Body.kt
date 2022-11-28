@@ -1,15 +1,19 @@
-package payments.requests
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.toInteroperableList
+package kost
+
+import kollections.List
+import kollections.toIList
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @Serializable
 class Body(val items: List<LineItem>) : Calculable {
     @JsName("fromArray")
-    constructor(vararg items: LineItem) : this(items.toInteroperableList())
+    constructor(vararg items: LineItem) : this(items.toIList())
 
     override val costBeforeDiscount: Long get() = items.sumOf { it.costBeforeDiscount }
 

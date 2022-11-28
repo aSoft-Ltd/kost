@@ -1,8 +1,7 @@
 @file:JsExport
-package payments.requests
 
-import kotlinx.collections.interoperable.List
-import kotlinx.collections.interoperable.emptyList
+package kost
+
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads

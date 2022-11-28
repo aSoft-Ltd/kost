@@ -1,6 +1,6 @@
 @file:JvmName("SenderUtils")
 
-package payments.requests
+package kost
 
 import kotlin.jvm.JvmName
 

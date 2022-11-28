@@ -1,10 +1,10 @@
-package payments.requests
+@file:JsExport
+package kost
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 @Serializable
 class Receiver @JvmOverloads constructor(
     val uid: String,

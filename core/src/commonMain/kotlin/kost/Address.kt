@@ -1,14 +1,15 @@
-package payments.requests
+@file:JsExport
+
+package kost
 
 import identifier.Email
 import identifier.Phone
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@JsExport
 @Serializable
 sealed class Address {
-    
+
     @Serializable
     object Unset : Address()
 

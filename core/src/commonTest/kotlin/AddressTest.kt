@@ -1,6 +1,6 @@
 import identifier.Email
 import identifier.Phone
-import payments.requests.Address
+import kost.Address
 import kotlin.test.Test
 
 class AddressTest {

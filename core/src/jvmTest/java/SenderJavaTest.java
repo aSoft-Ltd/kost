@@ -1,7 +1,7 @@
 import identifier.Email;
 import identifier.Phone;
-import payments.requests.Address;
-import payments.requests.Sender;
+import kost.Address;
+import kost.Sender;
 
 import org.junit.jupiter.api.Test;
 

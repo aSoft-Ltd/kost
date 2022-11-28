@@ -1,7 +1,7 @@
-import payments.requests.Invoice;
-import payments.requests.Header;
-import payments.requests.Tax;
-import payments.requests.TaxAgency;
+import kost.Invoice;
+import kost.Header;
+import kost.Tax;
+import kost.TaxAgency;
 import kash.Currency;
 import kotlinx.datetime.LocalDate;
 

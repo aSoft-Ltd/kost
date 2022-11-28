@@ -1,11 +1,12 @@
-package payments.requests
+@file:JsExport
+
+package kost
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 
-@JsExport
 @Serializable
 class TaxAgency @JvmOverloads constructor(
     val name: String,

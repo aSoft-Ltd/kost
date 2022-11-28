@@ -1,8 +1,4 @@
-import payments.requests.Tax;
-import payments.requests.TaxAgency;
 import org.junit.jupiter.api.Test;
-
-import static expect.ExpectBuilders.*;
 
 public class TaxTest {
 

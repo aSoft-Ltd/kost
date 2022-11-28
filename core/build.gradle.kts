@@ -16,7 +16,7 @@ kotlin {
     }
     js(IR) { library() }
     //nativeTargets(true)
-	linuxTargets(true)
+    linuxTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -38,6 +38,6 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.stdlib.get(),
+    version = asoft.versions.root.get(),
     description = "A platform agnostic representation of payments and requests"
 )

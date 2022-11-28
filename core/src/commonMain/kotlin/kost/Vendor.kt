@@ -1,9 +1,10 @@
-package payments.requests
+@file:JsExport
+
+package kost
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@JsExport
 @Serializable
 open class Vendor(
     val name: String

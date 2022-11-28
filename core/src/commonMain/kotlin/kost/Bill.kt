@@ -1,6 +1,6 @@
 @file:JsExport
 
-package payments.requests
+package kost
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport

@@ -2,7 +2,7 @@ import static expect.ExpectBuilders.*;
 
 import identifier.Email;
 import identifier.Phone;
-import payments.requests.Address;
+import kost.Address;
 
 import org.junit.jupiter.api.Test;
 

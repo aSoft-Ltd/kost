@@ -1,4 +1,9 @@
-import payments.requests.*
+import kost.Address
+import kost.Body
+import kost.LineItem
+import kost.Receiver
+import kost.Sender
+import kost.Tax
 
 object TestUtils {
     const val UNSET = "<unset>"

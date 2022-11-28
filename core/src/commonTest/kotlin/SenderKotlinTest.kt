@@ -1,5 +1,5 @@
-import payments.requests.Address
-import payments.requests.Sender
+import kost.Address
+import kost.Sender
 import kotlin.test.Test
 
 class SenderKotlinTest {
