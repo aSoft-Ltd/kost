@@ -4,20 +4,16 @@
 package kost
 
 import kash.Currency
-import kotlinx.serialization.Serializable
 import krono.LocalDateTime
+import kotlinx.serialization.Serializable
 import krono.Now
 import krono.TimeZones
 import kotlin.js.JsExport
-import kotlin.jvm.JvmOverloads
 
-@Serializable
-class Header @JvmOverloads constructor(
-    val sender: Sender,
-    val receiver: Receiver,
-    val currency: Currency,
-    val createdOn: LocalDateTime = Now(TimeZones.UTC),
-    val dueOn: LocalDateTime = createdOn.atEndOfMonth(),
-    val vendor: Vendor = Vendor.GENERIC,
-    val ref: VendorReference = VendorReference.UNSET,
-)
+interface Header {
+    val currency: Currency
+    val createdOn: LocalDateTime
+    val dueOn: LocalDateTime
+    val vendor: Vendor
+    val ref: VendorReference
+}

@@ -1,12 +1,12 @@
 @file:JsExport
+
 package kost
 
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
-import kotlin.jvm.JvmOverloads
 
 @Serializable
-class Sender @JvmOverloads constructor(
+data class Subject(
     val uid: String,
     val name: String,
     val address: Address = Address.Unset,

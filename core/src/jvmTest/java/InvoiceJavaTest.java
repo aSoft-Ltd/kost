@@ -1,10 +1,8 @@
-import kost.Invoice;
-import kost.Header;
-import kost.Tax;
-import kost.TaxAgency;
+import kost.*;
 import kash.Currency;
-import kotlinx.datetime.LocalDate;
 
+import krono.LocalDateTimeConstructorsKt;
+import krono.TimeZones;
 import org.junit.jupiter.api.Test;
 
 import static expect.ExpectBuilders.*;
@@ -29,10 +27,9 @@ public class InvoiceJavaTest {
     @Test
     public void should_create_a_minimalistic_invoice() {
         var address = TestUtils.makeAddress();
-        var sender = TestUtils.makeSender(address);
-        var receiver = TestUtils.makeReceiver(address);
-        var createdOn = new LocalDate(2021, 1, 1);
-        var header = new Header(sender, receiver, Currency.TZS.INSTANCE, createdOn);
+        var customer = TestUtils.makeSubject(address);
+        var createdOn = LocalDateTimeConstructorsKt.LocalDateTime(2022, 1, 1);
+        var header = new InvoiceHeader(customer, Currency.TZS.INSTANCE, createdOn);
         var body = TestUtils.makeBody();
         var invoice = new Invoice(TestUtils.UNSET, header, body);
         System.out.println(invoice);
