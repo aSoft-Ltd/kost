@@ -7,6 +7,9 @@ import kollections.List
 import kollections.iListOf
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
+import kotlin.jvm.JvmOverloads
+import kollections.List
+import kollections.iEmptyList
 
 @Serializable
 data class LineItem(
