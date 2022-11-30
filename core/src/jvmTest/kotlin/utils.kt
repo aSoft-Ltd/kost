@@ -1,8 +1,7 @@
 import kost.Address
 import kost.Body
 import kost.LineItem
-import kost.Receiver
-import kost.Sender
+import kost.Subject
 import kost.Tax
 
 object TestUtils {
@@ -14,24 +13,17 @@ object TestUtils {
     }
 
     @JvmStatic
-    fun makeSender(address: Address): Sender {
-        return Sender(UNSET, "Test Sender", address)
-    }
-
-    @JvmStatic
-    fun makeReceiver(address: Address): Receiver {
-        return Receiver(UNSET, "Test Receiver", address)
-    }
+    fun makeSubject(address: Address) = Subject(UNSET, "Test Subject", address)
 
     @JvmStatic
     @JvmOverloads
     fun makeBody(tax1: Tax = Tax.GENERIC_ZERO, tax2: Tax = tax1): Body {
         return Body(
-            LineItem.Product(UNSET, "Test Product 1", 100000, 1, tax1.copy()),
-            LineItem.Product(UNSET, "Test Product 2", 200000, 2, tax2.copy()),
-            LineItem.Product(UNSET, "Test Product 3", 300000, 3, tax1.copy()),
-            LineItem.Product(UNSET, "Test Product 4", 400000, 4, tax2.copy()),
-            LineItem.Product(UNSET, "Test Product 5", 500000, 5, tax1.copy())
+            LineItem(UNSET, "Test Product 1", 1, 100000, tax = tax1.copy()),
+            LineItem(UNSET, "Test Product 2", 2, 200000, tax = tax2.copy()),
+            LineItem(UNSET, "Test Product 3", 3, 300000, tax = tax1.copy()),
+            LineItem(UNSET, "Test Product 4", 4, 400000, tax = tax2.copy()),
+            LineItem(UNSET, "Test Product 5", 5, 500000, tax = tax1.copy())
         )
     }
 }

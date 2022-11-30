@@ -1,8 +1,6 @@
 import identifier.Email;
 import identifier.Phone;
 import kost.Address;
-import kost.Sender;
-
 import org.junit.jupiter.api.Test;
 
 public class SenderJavaTest {
@@ -13,10 +11,9 @@ public class SenderJavaTest {
                 "Tanzania",
                 "Dar Es Salaam",
                 "Bunju",
-                new Phone("254711111122"),
-                new Email("andy@lamax.net")
+                Phone.of("254711111122"),
+                Email.of("andy@lamax.net")
         );
         var address2 = new Address.Description("Michigan");
-        var sender = new Sender("", "Test Sender", address2);
     }
 }

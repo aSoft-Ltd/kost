@@ -1,14 +1,13 @@
 import kash.Currency
 import kost.Address
 import kost.Body
-import kost.Header
 import kost.Invoice
+import kost.InvoiceHeader
 import kost.LineItem
-import kost.Receiver
-import kost.Sender
-import kotlinx.datetime.LocalDate
+import kost.Subject
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import krono.LocalDateTime
 import kotlin.test.Test
 
 class InvoiceTest {
@@ -17,15 +16,14 @@ class InvoiceTest {
         val address = Address.Description("Test Address");
         val invoice = Invoice(
             uid = "<unset>",
-            header = Header(
-                sender = Sender("<unset>", "Test Sender", address),
-                receiver = Receiver("<unset>", "Receiver", address),
+            header = InvoiceHeader(
+                customer = Subject("<unset>", "John Doe", address),
                 currency = Currency.TZS,
-                createdOn = LocalDate(2021, 1, 1)
+                createdOn = LocalDateTime(2021, 1, 1)
             ),
             body = Body(
-                LineItem.Product("<unset>", "Keyboard", 2000000, 1),
-                LineItem.Task("<unset>", "Computer Maintenace", 10000000, "man-days", 2)
+                LineItem("<unset>", "Keyboard", 1, 2_000_000, "each"),
+                LineItem("<unset>", "Computer Maintenance", 2, 10_000_000, "man-days")
             )
         )
         println(Json.encodeToString(invoice))
