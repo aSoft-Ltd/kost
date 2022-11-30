@@ -11,13 +11,16 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @Serializable
-class Body(val items: List<LineItem>) : Calculable {
+class Body(
+    val items: List<LineItem>,
+    override val compoundDiscount: Long = 0L
+) : Calculable {
     @JsName("fromArray")
     constructor(vararg items: LineItem) : this(items.toIList())
 
-    override val costBeforeDiscount: Long get() = items.sumOf { it.costBeforeDiscount }
+    override val costBeforeDiscount: Long = items.sumOf { it.costBeforeDiscount }
 
-    override val discount: Long get() = items.sumOf { it.discount }
+    override val discount: Long = items.sumOf { it.discount } + compoundDiscount
 
     @Transient
     val taxRates = run {
