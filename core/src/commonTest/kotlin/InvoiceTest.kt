@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 import kost.printToConsole
-=======
 import kash.Currency
 import kost.Address
 import kost.Body
@@ -11,16 +9,15 @@ import kost.Subject
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import krono.LocalDateTime
->>>>>>> 73a67e5 (Merging with dev-andy)
 import kotlin.test.Test
 
 class InvoiceTest {
     @Test
-<<<<<<< HEAD
     fun should_print_to_console() {
         val invoice = TestUtils.makeInvoice()
         invoice.printToConsole()
-=======
+    }
+
     fun should_serialize() {
         val address = Address.Description("Test Address");
         val invoice = Invoice(
@@ -36,6 +33,5 @@ class InvoiceTest {
             )
         )
         println(Json.encodeToString(invoice))
->>>>>>> 73a67e5 (Merging with dev-andy)
     }
 }
