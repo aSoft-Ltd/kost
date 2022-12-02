@@ -4,13 +4,13 @@
 package kost
 
 import kash.Currency
-import krono.LocalDateTime
+import krono.Instant
 import kotlin.js.JsExport
 
 interface Header {
     val currency: Currency
-    val createdOn: LocalDateTime
-    val dueOn: LocalDateTime
+    val createdOn: Instant
+    val dueOn: Instant
     val vendor: Vendor
     val ref: VendorReference
 }
