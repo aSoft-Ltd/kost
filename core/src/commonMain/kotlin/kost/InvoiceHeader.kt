@@ -5,7 +5,6 @@ package kost
 
 import kash.Currency
 import kotlinx.serialization.Serializable
-import krono.Instant
 import krono.Now
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
