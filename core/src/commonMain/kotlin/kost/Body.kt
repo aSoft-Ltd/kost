@@ -12,9 +12,9 @@ import kotlin.js.JsName
 
 @Serializable
 class Body(
-    val items: List<LineItem>,
+    override val items: List<LineItem>,
     override val compoundDiscount: Long = 0L
-) : Calculable {
+) : ItemizedCalculable {
     @JsName("fromArray")
     constructor(vararg items: LineItem) : this(items.toIList())
 

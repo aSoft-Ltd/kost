@@ -8,6 +8,7 @@ import kost.Subject
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import krono.LocalDateTime
+import krono.Now
 import kotlin.test.Test
 
 class InvoiceSerializationTest {
@@ -19,7 +20,7 @@ class InvoiceSerializationTest {
             header = InvoiceHeader(
                 customer = Subject("<unset>", "John Doe", address),
                 currency = Currency.TZS,
-                createdOn = LocalDateTime(2021, 1, 1)
+                createdOn = Now()
             ),
             body = Body(
                 LineItem("<unset>", "Keyboard", 1, 2_000_000, "each"),

@@ -5,6 +5,7 @@ package kost
 
 import kash.Currency
 import kotlin.js.JsExport
+import krono.Instant
 
 interface Header {
     val currency: Currency

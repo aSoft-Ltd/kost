@@ -16,7 +16,7 @@ kotlin {
     }
     js(IR) { library() }
     //nativeTargets(true)
-    linuxTargets(true)
+//    linuxTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {

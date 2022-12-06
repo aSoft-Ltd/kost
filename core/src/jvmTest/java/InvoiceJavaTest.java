@@ -1,6 +1,7 @@
 import kost.*;
 import kash.Currency;
 
+import krono.InstantKxBuildersKt;
 import krono.LocalDateTimeConstructorsKt;
 import krono.TimeZones;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class InvoiceJavaTest {
     public void should_create_a_minimalistic_invoice() {
         var address = TestUtils.makeAddress();
         var customer = TestUtils.makeSubject(address);
-        var createdOn = LocalDateTimeConstructorsKt.LocalDateTime(2022, 1, 1);
+        var createdOn = InstantKxBuildersKt.Now();
         var header = new InvoiceHeader(customer, Currency.TZS.INSTANCE, createdOn);
         var body = TestUtils.makeBody();
         var invoice = new Invoice(TestUtils.UNSET, header, body);
