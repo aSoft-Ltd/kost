@@ -10,7 +10,8 @@ import kotlin.js.JsExport
 
 @Serializable
 data class LineItem(
-    val uid: String,
+    val uid: String? = null,
+    val identifier: String?=null,
     val details: String,
     val quantity: Int = 1,
     val unitRate: Long,
