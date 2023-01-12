@@ -7,11 +7,11 @@ import kost.LineItem
 import kost.Subject
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import krono.LocalDateTime
 import krono.Now
 import kotlin.test.Test
 
 class InvoiceSerializationTest {
+
     @Test
     fun should_serialize() {
         val address = Address.Description("Test Address");
@@ -23,8 +23,8 @@ class InvoiceSerializationTest {
                 createdOn = Now()
             ),
             body = Body(
-                LineItem("<unset>", "Keyboard", 1, 2_000_000, "each"),
-                LineItem("<unset>", "Computer Maintenance", 2, 10_000_000, "man-days")
+                LineItem("<unset>", "Keyboard", quantity = 1, unitRate = 2_000_000, unit = "each"),
+                LineItem("<unset>", "Computer Maintenance", quantity = 2, unitRate = 10_000_000, unit = "man-days")
             )
         )
         println(Json.encodeToString(invoice))

@@ -5,7 +5,7 @@ package kost
 
 import kotlin.js.JsExport
 
-interface PaymentRequest {
+sealed interface PaymentRequest {
     val uid: String
     val header: Header
     val body: Body
