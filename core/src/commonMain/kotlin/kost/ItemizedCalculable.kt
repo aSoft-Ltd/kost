@@ -9,6 +9,5 @@ import kotlin.js.JsExport
 interface ItemizedCalculable : Calculable {
     val items: List<LineItem>
 
-
     override val costBeforeDiscount: Long get() = items.map { it.costBeforeDiscount }.sum()
 }
