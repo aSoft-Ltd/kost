@@ -3,11 +3,13 @@
 
 package kost
 
+import kash.Monetary
+import kash.sumOf
 import kollections.List
 import kotlin.js.JsExport
 
 interface ItemizedCalculable : Calculable {
     val items: List<LineItem>
 
-    override val costBeforeDiscount: Long get() = items.map { it.costBeforeDiscount }.sum()
+    override val costBeforeDiscount: Monetary get() = items.sumOf { it.costBeforeDiscount }
 }

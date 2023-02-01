@@ -3,18 +3,19 @@
 
 package kost
 
+import kash.Monetary
 import kotlin.js.JsExport
 
 interface Calculable {
-    val costBeforeDiscount: Long
+    val costBeforeDiscount: Monetary
 
     /**
      * A general discount that is offered after all unit discounts have been considered
      */
-    val compoundDiscount: Long
-    val discount: Long
-    val taxAmount: Long
-    val costAfterDiscount: Long get() = costBeforeDiscount - discount
-    val costBeforeTax: Long get() = costAfterDiscount
-    val costAfterTax: Long get() = costBeforeTax + taxAmount
+    val compoundDiscount: Monetary
+    val discount: Monetary
+    val taxAmount: Monetary
+    val costAfterDiscount: Monetary get() = costBeforeDiscount - discount
+    val costBeforeTax: Monetary get() = costAfterDiscount
+    val costAfterTax: Monetary get() = costBeforeTax + taxAmount
 }

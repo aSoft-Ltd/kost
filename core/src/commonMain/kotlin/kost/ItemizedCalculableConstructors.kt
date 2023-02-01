@@ -1,11 +1,13 @@
 package kost
 
+import kash.Monetary
+import kash.Money
 import kollections.List
 import kollections.iListOf
 import kost.internal.ItemizedCalculableImpl
 
 inline fun ItemizedCalculable(
     items: List<LineItem> = iListOf(),
-    discount: Long = 0L,
-    taxAmount: Long = 0L,
+    discount: Monetary = Money(0),
+    taxAmount: Monetary = Money(0),
 ): ItemizedCalculable = ItemizedCalculableImpl(items, discount, taxAmount)

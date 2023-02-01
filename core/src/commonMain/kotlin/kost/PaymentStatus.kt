@@ -2,13 +2,15 @@
 
 package kost
 
+import kash.Monetary
+import kash.sumOf
 import kotlin.js.JsExport
 
 sealed interface PaymentStatus
 
-data class Unpaid(val amount: Long) : PaymentStatus
+data class Unpaid(val amount: Monetary) : PaymentStatus
 
-data class PartiallyPaid(val payments: List<Payment>, val total: Long) : PaymentStatus {
+data class PartiallyPaid(val payments: List<Payment>, val total: Monetary) : PaymentStatus {
     val amount get() = payments.sumOf { it.amount }
     val remaning get() = total - amount
 }

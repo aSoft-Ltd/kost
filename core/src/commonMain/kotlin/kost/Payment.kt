@@ -1,7 +1,9 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package kost
 
+import kash.Monetary
 import kotlinx.serialization.Serializable
 import krono.Instant
 import kotlin.js.JsExport
@@ -12,7 +14,7 @@ data class Payment(
     val details: String,
     val from: String,
     val on: Instant,
-    val amount: Long,
+    val amount: Monetary,
     val to: String,
     val method: PaymentMethod = PaymentMethod.Cash
 )

@@ -1,5 +1,6 @@
 package kost.internal
 
+import kash.Monetary
 import kollections.List
 import kost.ItemizedCalculable
 import kost.LineItem
@@ -7,8 +8,8 @@ import kost.LineItem
 @PublishedApi
 internal class ItemizedCalculableImpl(
     override val items: List<LineItem>,
-    override val discount: Long,
-    override val taxAmount: Long,
+    override val discount: Monetary,
+    override val taxAmount: Monetary,
 ) : ItemizedCalculable {
-    override val compoundDiscount: Long = discount
+    override val compoundDiscount: Monetary = discount
 }

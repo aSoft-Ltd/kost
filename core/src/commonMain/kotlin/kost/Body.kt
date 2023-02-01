@@ -3,6 +3,10 @@
 
 package kost
 
+import kash.Monetary
+import kash.Money
+import kash.sum
+import kash.sumOf
 import kollections.List
 import kollections.toIList
 import kotlinx.serialization.Serializable
@@ -13,24 +17,24 @@ import kotlin.js.JsName
 @Serializable
 class Body(
     override val items: List<LineItem>,
-    override val compoundDiscount: Long = 0L
+    override val compoundDiscount: Monetary = Money(0)
 ) : ItemizedCalculable {
     @JsName("fromArray")
     constructor(vararg items: LineItem) : this(items.toIList())
 
-    override val costBeforeDiscount: Long = items.sumOf { it.costBeforeDiscount }
+    override val costBeforeDiscount = items.sumOf { it.costBeforeDiscount }
 
-    override val discount: Long = items.sumOf { it.discount } + compoundDiscount
+    override val discount = items.sumOf { it.discount } + compoundDiscount
 
     @Transient
     val taxRates = run {
-        val rates = mutableMapOf<Tax, Long>()
+        val rates = mutableMapOf<Tax, Monetary>()
         for (item in items) {
-            val prev = rates.getOrPut(item.tax) { 0 }
+            val prev = rates.getOrPut(item.tax) { Money(0) }
             rates[item.tax] = prev + item.taxAmount
         }
         rates
     }
 
-    override val taxAmount: Long get() = taxRates.values.sum()
+    override val taxAmount = taxRates.values.sum()
 }
