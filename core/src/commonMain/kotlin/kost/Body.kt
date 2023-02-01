@@ -3,6 +3,7 @@
 
 package kost
 
+import identifier.Unique
 import kash.Monetary
 import kash.Money
 import kash.sum

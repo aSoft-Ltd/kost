@@ -3,6 +3,7 @@
 
 package kost
 
+import identifier.Unique
 import kash.Monetary
 import kash.Money
 import kollections.List
@@ -14,7 +15,7 @@ import kotlin.js.JsExport
 data class LineItem(
     val uid: String? = null,
     val details: String,
-    val identifier: String? = null,
+    val data: Unique,
     val quantity: Int = 1,
     val unitRate: Monetary,
     val unit: String = "each",
