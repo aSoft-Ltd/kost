@@ -14,11 +14,11 @@ public class InvoiceJavaTest {
     public void body_should_calculate_tax_appropriately() {
         var SRS = new TaxAgency("South Africa Revenue Service");
         var body1 = TestUtils.makeBody(new Tax("GST", 10, SRS));
-        expect(body1.getCostBeforeTax()).toBe(5500000L);
-        expect(body1.getCostAfterTax()).toBe(6050000L);
+        expect(body1.getCostBeforeTax().getAmountAsLong()).toBe(5500000L);
+        expect(body1.getCostAfterTax().getAmountAsLong()).toBe(6050000L);
 
         var body2 = TestUtils.makeBody(Tax.GENERIC_ZERO);
-        expect(body2.getCostBeforeTax()).toBe(5500000L);
+        expect(body2.getCostBeforeTax().getAmountAsLong()).toBe(5500000L);
         expect(body2.getCostBeforeTax()).toBe(body2.getCostAfterTax());
 
         var body3 = TestUtils.makeBody(new Tax("GST", 10, SRS), new Tax("VAT", 15, SRS));

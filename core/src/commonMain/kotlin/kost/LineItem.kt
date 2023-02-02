@@ -3,21 +3,21 @@
 
 package kost
 
-import identifier.Unique
 import kash.Monetary
 import kash.Money
 import kollections.List
 import kollections.iListOf
 import kotlinx.serialization.Serializable
+import kommerce.Offerable
 import kotlin.js.JsExport
 
 @Serializable
 data class LineItem(
     val uid: String? = null,
-    val details: String,
-    val data: Unique,
-    val quantity: Int = 1,
+    val data: Offerable,
     val unitRate: Monetary,
+    val details: String = data.name,
+    val quantity: Int = 1,
     val unit: String = "each",
     val unitDiscount: Monetary = Money(0),
     override val compoundDiscount: Monetary = Money(0),
