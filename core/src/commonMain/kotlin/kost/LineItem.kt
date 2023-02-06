@@ -17,20 +17,17 @@ data class LineItem(
     val data: Offerable,
     val unitRate: Monetary,
     val details: String = data.name,
-    val quantity: Int = 1,
+    val quantity: Double = 1.0,
     val unit: String = "each",
     val unitDiscount: Monetary = Money(0),
-    override val compoundDiscount: Monetary = Money(0),
     val tax: Tax = Tax.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
-    val photos: List<String> = iListOf()
+    val photos: List<String> = iListOf(),
+    val compoundDiscount: Monetary = Money(0)
 ) : Calculable {
-    override val costBeforeDiscount: Monetary = unitRate * quantity
+    override val costBeforeDiscount = unitRate * quantity
 
-    override val discount = (unitDiscount * quantity) + compoundDiscount
+    override val discount = discountOf(costBeforeDiscount, unitRate, quantity, compoundDiscount)
 
-    /**
-     * cost of a [LineItem] without discount in mind
-     */
-    override val taxAmount: Monetary get() = costBeforeTax * tax.rate / 100
+    override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
 }

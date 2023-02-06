@@ -8,6 +8,5 @@ import kost.internal.ItemizedCalculableImpl
 
 inline fun ItemizedCalculable(
     items: List<LineItem> = iListOf(),
-    discount: Monetary = Money(0),
-    taxAmount: Monetary = Money(0),
-): ItemizedCalculable = ItemizedCalculableImpl(items, discount, taxAmount)
+    discount: Monetary = Money(0)
+): ItemizedCalculable = ItemizedCalculableImpl(items, discount)

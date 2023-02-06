@@ -1,12 +1,12 @@
-import kost.*;
 import kash.Currency;
-
+import kost.Invoice;
+import kost.InvoiceHeader;
+import kost.Tax;
+import kost.TaxAgency;
 import krono.InstantKxBuildersKt;
-import krono.LocalDateTimeConstructorsKt;
-import krono.TimeZones;
 import org.junit.jupiter.api.Test;
 
-import static expect.ExpectBuilders.*;
+import static expect.ExpectBuilders.expect;
 
 public class InvoiceJavaTest {
 
