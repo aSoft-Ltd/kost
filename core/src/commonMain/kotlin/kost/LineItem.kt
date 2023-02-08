@@ -27,7 +27,7 @@ data class LineItem(
 ) : Calculable {
     override val costBeforeDiscount = unitRate * quantity
 
-    override val discount = discountOf(costBeforeDiscount, unitRate, quantity, compoundDiscount)
+    override val discount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
     override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
 }

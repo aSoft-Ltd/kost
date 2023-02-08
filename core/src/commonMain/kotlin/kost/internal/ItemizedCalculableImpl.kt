@@ -2,7 +2,6 @@ package kost.internal
 
 import kash.Monetary
 import kollections.List
-import kost.Discount
 import kost.ItemizedCalculable
 import kost.LineItem
 import kost.discountOf
