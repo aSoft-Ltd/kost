@@ -15,6 +15,8 @@ import kotlin.js.JsExport
 interface ItemizedCalculable : Calculable {
     val items: List<LineItem>
 
+    override val discount: LineItemsDiscount
+
     override val costBeforeDiscount get() = items.sumOf { it.discount.costAfter }
 
     val itemsDiscountTotal get() = items.sumOf { it.discount.total }
