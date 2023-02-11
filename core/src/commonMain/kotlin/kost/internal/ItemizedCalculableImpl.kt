@@ -11,5 +11,5 @@ internal class ItemizedCalculableImpl(
     override val items: List<LineItem>,
     compoundDiscount: Monetary
 ) : ItemizedCalculable {
-    override val discount = discountOf(costBeforeDiscount, compoundDiscount)
+    override val discount = discountOf(items, compoundDiscount)
 }

@@ -23,5 +23,6 @@ class Body(
     @JsName("fromArray")
     constructor(vararg items: LineItem) : this(items.toIList())
 
-    override val discount = discountOf(costBeforeDiscount, compoundDiscount)
+    @Transient
+    override val discount = discountOf(items, compoundDiscount)
 }
