@@ -28,8 +28,8 @@ class LineItems(config: ScopeConfig<*>) : CollectionsViewModel<LineItem>(config)
         column("discount") { it.item.discount.total.amountAsDouble.toString() }
     }
 
-    fun update(calc: ItemizedCalculable) {
-        current.value = calc
+    fun update(calc: ItemizedCalculable?) {
+        current.value = calc ?: EMPTY_ITEMS
         paginator.refresh()
     }
 
