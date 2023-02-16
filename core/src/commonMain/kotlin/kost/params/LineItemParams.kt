@@ -1,19 +1,24 @@
 @file:JsExport
 @file:Suppress("NON_EXPORTABLE_TYPE")
 
-package kost
+package kost.params
 
 import kash.Monetary
 import kash.Money
 import kollections.List
 import kollections.iListOf
-import kotlinx.serialization.Serializable
 import kommerce.Offerable
+import kost.Calculable
+import kost.LineItemDiscount
+import kost.Tax
+import kost.VendorReference
+import kost.discountOf
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.js.JsExport
 
 @Serializable
-data class LineItem(
-    val uid: String,
+data class LineItemParams(
     val data: Offerable,
     val unitRate: Monetary,
     val details: String = data.name,
@@ -25,9 +30,12 @@ data class LineItem(
     val photos: List<String> = iListOf(),
     val compoundDiscount: Monetary = Money(0)
 ) : Calculable {
+    @Transient
     override val costBeforeDiscount = unitRate * quantity
 
+    @Transient
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
+    @Transient
     override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
 }
