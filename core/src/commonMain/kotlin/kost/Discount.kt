@@ -5,7 +5,8 @@ package kost
 
 import kash.Monetary
 import kash.Money
-import kash.totalOf
+import kash.Zero
+import kash.sumOf
 import kost.discount.CanBeCompoundForLineItem
 import kost.discount.CanBeCompoundForLineItems
 import kost.discount.CanBeGlobal
@@ -17,9 +18,9 @@ import kost.discount.HasLineItems
 import kotlin.js.JsExport
 
 sealed interface Discount {
-    val costBefore: Monetary
-    val total: Monetary
-    val costAfter get() = costBefore - total
+    val costBefore: Money
+    val total: Money
+    val costAfter: Money get() = costBefore - total
 }
 
 /**
@@ -39,8 +40,8 @@ sealed interface LineItemDiscount : Discount, CanBeZero, CanBeUnit, CanBeGlobal,
  */
 sealed interface LineItemsDiscount : Discount, CanBeZero, CanBeGranular, CanBeGlobal, CanBeCompoundForLineItems
 
-data class NoDiscount(override val costBefore: Monetary) : LineItemDiscount, LineItemsDiscount {
-    override val total = Money(0)
+data class NoDiscount(override val costBefore: Money) : LineItemDiscount, LineItemsDiscount {
+    override val total = Zero
     override val costAfter = costBefore
 
     override val asZero: NoDiscount = this
@@ -51,8 +52,8 @@ data class NoDiscount(override val costBefore: Monetary) : LineItemDiscount, Lin
 }
 
 data class UnitDiscount internal constructor(
-    override val costBefore: Monetary,
-    val rate: Monetary,
+    override val costBefore: Money,
+    val rate: Money,
     val quantity: Double
 ) : LineItemDiscount {
     override val total = rate * quantity
@@ -64,8 +65,8 @@ data class UnitDiscount internal constructor(
 }
 
 data class GlobalDiscount internal constructor(
-    override val costBefore: Monetary,
-    override val global: Monetary
+    override val costBefore: Money,
+    override val global: Money
 ) : LineItemDiscount, LineItemsDiscount, HasGlobal {
     override val asZero: Nothing? = null
     override val asUnit: Nothing? = null
@@ -76,10 +77,10 @@ data class GlobalDiscount internal constructor(
 }
 
 data class CompoundLineItemDiscount internal constructor(
-    override val costBefore: Monetary,
-    val rate: Monetary,
+    override val costBefore: Money,
+    val rate: Money,
     val quantity: Double,
-    override val global: Monetary
+    override val global: Money
 ) : LineItemDiscount, HasGlobal {
     val ratesTotal = rate * quantity
     val costBeforeGlobal get() = costBefore - ratesTotal
@@ -92,12 +93,12 @@ data class CompoundLineItemDiscount internal constructor(
 }
 
 data class CompoundLineItemsDiscount internal constructor(
-    override val costBefore: Monetary,
-    override val items: Monetary,
-    override val global: Monetary
+    override val costBefore: Money,
+    override val items: Money,
+    override val global: Money
 ) : LineItemsDiscount, HasGlobal, HasLineItems {
     val costBeforeGlobal = costBefore - items
-    override val total: Monetary = items + global
+    override val total: Money = items + global
 
     override val asZero: Nothing? = null
     override val asCompound: CompoundLineItemsDiscount = this
@@ -106,10 +107,10 @@ data class CompoundLineItemsDiscount internal constructor(
 }
 
 data class GranularLineItemsDiscount internal constructor(
-    override val costBefore: Monetary,
-    override val items: Monetary,
+    override val costBefore: Money,
+    override val items: Money,
 ) : LineItemsDiscount, HasLineItems {
-    override val total: Monetary = items
+    override val total: Money = items
 
     override val asZero: Nothing? = null
     override val asCompound: Nothing? = null
@@ -117,20 +118,25 @@ data class GranularLineItemsDiscount internal constructor(
     override val asGranular: GranularLineItemsDiscount = this
 }
 
-internal fun discountOf(costBefore: Monetary, rate: Monetary, quantity: Double, global: Monetary): LineItemDiscount = when {
-    rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
-    rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
-    rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
-    else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
-}
+internal fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount =
+    when {
+        rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
+        rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
+        rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
+        else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
+    }
 
 fun discountOf(items: Collection<LineItem>, global: Monetary): LineItemsDiscount {
-    val costBefore = items.totalOf { it.discount.costBefore }
-    val itemsDiscount = items.totalOf { it.discount.total }
+    val costBefore = items.sumOf { it.discount.costBefore }
+    val itemsDiscount = items.sumOf { it.discount.total }
     return when {
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
-        itemsDiscount.centsAsLong != 0uL && global.centsAsLong == 0uL -> GranularLineItemsDiscount(costBefore, itemsDiscount)
+        itemsDiscount.centsAsLong != 0uL && global.centsAsLong == 0uL -> GranularLineItemsDiscount(
+            costBefore,
+            itemsDiscount
+        )
+
         else -> CompoundLineItemsDiscount(costBefore, itemsDiscount, global)
     }
 }

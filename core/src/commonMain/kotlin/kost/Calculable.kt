@@ -3,13 +3,13 @@
 
 package kost
 
-import kash.Monetary
+import kash.Money
 import kotlin.js.JsExport
 
 interface Calculable {
-    val costBeforeDiscount: Monetary
-    val taxAmount: Monetary
+    val costBeforeDiscount: Money
+    val taxAmount: Money
     val discount: Discount
-    val costBeforeTax: Monetary get() = discount.costAfter
-    val costAfterTax: Monetary get() = costBeforeTax + taxAmount
+    val costBeforeTax: Money get() = discount.costAfter
+    val costAfterTax: Money get() = costBeforeTax + taxAmount
 }

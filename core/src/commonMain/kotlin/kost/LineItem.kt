@@ -15,19 +15,19 @@ import kotlin.js.JsExport
 data class LineItem(
     val uid: String,
     val data: Offerable,
-    val unitRate: Monetary,
+    val unitRate: Money,
     val details: String = data.name,
     val quantity: Double = 1.0,
     val unit: String = "each",
-    val unitDiscount: Monetary = Money(0),
+    val unitDiscount: Money = Monetary(0),
     val tax: Tax = Tax.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
-    val compoundDiscount: Monetary = Money(0)
+    val compoundDiscount: Money = Monetary(0)
 ) : Calculable {
     override val costBeforeDiscount = unitRate * quantity
 
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
-    override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
+    override val taxAmount: Money get() = discount.costAfter * tax.rate / 100
 }

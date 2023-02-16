@@ -4,9 +4,8 @@
 package kost
 
 import kash.Monetary
-import kash.Money
-import kash.total
-import kash.totalOf
+import kash.sum
+import kash.sumOf
 import kollections.List
 import kollections.toIMap
 import kotlin.js.JsExport
@@ -16,17 +15,17 @@ interface ItemizedCalculable : Calculable {
 
     override val discount: LineItemsDiscount
 
-    override val costBeforeDiscount get() = items.totalOf { it.discount.costAfter }
+    override val costBeforeDiscount get() = items.sumOf { it.discount.costAfter }
 
-    val itemsDiscountTotal get() = items.totalOf { it.discount.total }
+    val itemsDiscountTotal get() = items.sumOf { it.discount.total }
 
     val taxRates
         get() = buildMap<Tax, Monetary> {
             for (item in items) {
-                val prev = getOrPut(item.tax) { Money(0) }
+                val prev = getOrPut(item.tax) { Monetary(0) }
                 put(item.tax, prev + item.taxAmount)
             }
         }.toIMap()
 
-    override val taxAmount get() = taxRates.values.total()
+    override val taxAmount get() = taxRates.values.sum()
 }

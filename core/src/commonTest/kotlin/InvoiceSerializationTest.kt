@@ -1,5 +1,5 @@
 import kash.Currency
-import kash.Money
+import kash.Monetary
 import kost.Address
 import kost.Body
 import kost.Invoice
@@ -25,8 +25,8 @@ class InvoiceSerializationTest {
                 createdOn = Now()
             ),
             body = Body(
-                LineItem("<unset>", data = ProductRef("unset", "Keyboard"), quantity = 1.0, unitRate = Money(2_000_000), unit = "each"),
-                LineItem("<unset>", data = ProductRef("unset", "Keyboard"), quantity = 2.0, unitRate = Money(10_000_000), unit = "man-days")
+                LineItem("<unset>", data = ProductRef("unset", "Keyboard"), quantity = 1.0, unitRate = Monetary(2_000_000), unit = "each"),
+                LineItem("<unset>", data = ProductRef("unset", "Keyboard"), quantity = 2.0, unitRate = Monetary(10_000_000), unit = "man-days")
             )
         )
         println(Json.encodeToString(invoice))

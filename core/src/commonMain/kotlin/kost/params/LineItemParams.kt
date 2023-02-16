@@ -4,7 +4,6 @@
 package kost.params
 
 import kash.Monetary
-import kash.Money
 import kollections.List
 import kollections.iListOf
 import kommerce.Offerable
@@ -24,11 +23,11 @@ data class LineItemParams(
     val details: String = data.name,
     val quantity: Double = 1.0,
     val unit: String = "each",
-    val unitDiscount: Monetary = Money(0),
+    val unitDiscount: Monetary = Monetary(0),
     val tax: Tax = Tax.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
-    val compoundDiscount: Monetary = Money(0)
+    val compoundDiscount: Monetary = Monetary(0)
 ) : Calculable {
     @Transient
     override val costBeforeDiscount = unitRate * quantity
