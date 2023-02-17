@@ -3,7 +3,8 @@
 
 package kost
 
-import kash.Monetary
+import kash.Money
+import kash.Zero
 import kash.sum
 import kash.sumOf
 import kollections.List
@@ -20,9 +21,9 @@ interface ItemizedCalculable : Calculable {
     val itemsDiscountTotal get() = items.sumOf { it.discount.total }
 
     val taxRates
-        get() = buildMap<Tax, Monetary> {
+        get() = buildMap<Tax, Money> {
             for (item in items) {
-                val prev = getOrPut(item.tax) { Monetary(0) }
+                val prev = getOrPut(item.tax) { Zero }
                 put(item.tax, prev + item.taxAmount)
             }
         }.toIMap()

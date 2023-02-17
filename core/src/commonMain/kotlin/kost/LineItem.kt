@@ -3,12 +3,12 @@
 
 package kost
 
-import kash.Monetary
 import kash.Money
+import kash.Zero
 import kollections.List
 import kollections.iListOf
-import kotlinx.serialization.Serializable
 import kommerce.Offerable
+import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @Serializable
@@ -19,11 +19,11 @@ data class LineItem(
     val details: String = data.name,
     val quantity: Double = 1.0,
     val unit: String = "each",
-    val unitDiscount: Money = Monetary(0),
+    val unitDiscount: Money = Zero,
     val tax: Tax = Tax.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
-    val compoundDiscount: Money = Monetary(0)
+    val compoundDiscount: Money = Zero
 ) : Calculable {
     override val costBeforeDiscount = unitRate * quantity
 

@@ -7,7 +7,7 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmField
 
 @Serializable
-class VendorReference(
+data class VendorReference(
     val uid: String,
     val name: String
 ) {

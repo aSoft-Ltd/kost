@@ -126,7 +126,7 @@ internal fun discountOf(costBefore: Money, rate: Money, quantity: Double, global
         else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
     }
 
-fun discountOf(items: Collection<LineItem>, global: Monetary): LineItemsDiscount {
+fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
     val costBefore = items.sumOf { it.discount.costBefore }
     val itemsDiscount = items.sumOf { it.discount.total }
     return when {
