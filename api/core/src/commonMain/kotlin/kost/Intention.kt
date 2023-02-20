@@ -20,4 +20,4 @@ inline fun <P : Any> CreateIntention(params: P) = Intention(null, params, Intent
 
 inline fun <I : Any, P : Any> UpdateIntention(uid: I, params: P) = Intention(uid, params, Intention.Type.Update)
 
-inline fun <I : Any> DeleteIntention(uid: I) = Intention(uid, null, Intention.Type.Delete)
+inline fun <I : Any, P : Any> DeleteIntention(uid: I, params: P) = Intention(uid, params, Intention.Type.Delete)

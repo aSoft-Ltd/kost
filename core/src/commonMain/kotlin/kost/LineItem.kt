@@ -9,6 +9,8 @@ import kollections.List
 import kollections.iListOf
 import kotlinx.serialization.Serializable
 import kommerce.Offerable
+import kommerce.ServiceRef
+import kost.params.LineItemParams
 import kotlin.js.JsExport
 
 @Serializable
@@ -30,4 +32,17 @@ data class LineItem(
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
     override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
+
+    fun toParams() = LineItemParams(
+        data = data,
+        unitRate = unitRate,
+        details = details,
+        quantity = quantity,
+        unit = unit,
+        unitDiscount = unitDiscount,
+        tax = tax,
+        ref = ref,
+        photos = photos,
+        compoundDiscount = compoundDiscount
+    )
 }
