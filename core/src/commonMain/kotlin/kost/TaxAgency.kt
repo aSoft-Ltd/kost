@@ -8,7 +8,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 
 @Serializable
-class TaxAgency @JvmOverloads constructor(
+data class TaxAgency @JvmOverloads constructor(
     val name: String,
     val ref: VendorReference = VendorReference.UNSET
 ) {

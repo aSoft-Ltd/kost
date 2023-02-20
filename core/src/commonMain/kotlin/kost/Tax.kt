@@ -1,4 +1,5 @@
 @file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
 
 package kost
 
@@ -8,7 +9,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 
 @Serializable
-class Tax @JvmOverloads constructor(
+data class Tax @JvmOverloads constructor(
     val name: String,
     /**
      * must be between 0 and 100
@@ -25,11 +26,4 @@ class Tax @JvmOverloads constructor(
         @JvmField
         val GENERIC_ZERO = Tax("ZERO", 0, TaxAgency.GENERIC)
     }
-
-    fun copy(
-        name: String = this.name,
-        rate: Int = this.rate,
-        agency: TaxAgency = this.agency,
-        ref: VendorReference = this.ref
-    ) = Tax(name, rate, agency, ref)
 }

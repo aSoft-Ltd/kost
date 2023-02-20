@@ -3,7 +3,7 @@
 
 package kost.discount
 
-import kash.Monetary
+import kash.Money
 import kost.CompoundLineItemDiscount
 import kost.CompoundLineItemsDiscount
 import kost.GlobalDiscount
@@ -37,9 +37,9 @@ interface CanBeCompoundForLineItems {
 }
 
 interface HasGlobal {
-    val global: Monetary
+    val global: Money
 }
 
 interface HasLineItems {
-    val items: Monetary
+    val items: Money
 }

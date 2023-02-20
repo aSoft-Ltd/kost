@@ -4,7 +4,6 @@
 package kost
 
 import kash.Monetary
-import kash.Money
 import kollections.List
 import kollections.toIList
 import kotlinx.serialization.Serializable
@@ -15,7 +14,7 @@ import kotlin.js.JsName
 @Serializable
 class Body(
     override val items: List<LineItem>,
-    val compoundDiscount: Monetary = Money(0)
+    val compoundDiscount: Monetary = Monetary(0)
 ) : ItemizedCalculable {
     @JsName("fromArray")
     constructor(vararg items: LineItem) : this(items.toIList())

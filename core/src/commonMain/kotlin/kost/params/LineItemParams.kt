@@ -5,6 +5,7 @@ package kost.params
 
 import kash.Monetary
 import kash.Money
+import kash.Zero
 import kollections.List
 import kollections.iListOf
 import kommerce.Offerable
@@ -20,15 +21,15 @@ import kotlin.js.JsExport
 @Serializable
 data class LineItemParams(
     val data: Offerable,
-    val unitRate: Monetary,
+    val unitRate: Money,
     val details: String = data.name,
     val quantity: Double = 1.0,
     val unit: String = "each",
-    val unitDiscount: Monetary = Money(0),
+    val unitDiscount: Money = Zero,
     val tax: Tax = Tax.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
-    val compoundDiscount: Monetary = Money(0)
+    val compoundDiscount: Money = Zero
 ) : Calculable {
     @Transient
     override val costBeforeDiscount = unitRate * quantity
@@ -37,5 +38,5 @@ data class LineItemParams(
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
     @Transient
-    override val taxAmount: Monetary get() = discount.costAfter * tax.rate / 100
+    override val taxAmount: Money get() = discount.costAfter * tax.rate / 100
 }
