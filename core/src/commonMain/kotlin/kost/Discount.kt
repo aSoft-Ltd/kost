@@ -3,7 +3,6 @@
 
 package kost
 
-import kash.Monetary
 import kash.Money
 import kash.Zero
 import kash.sumOf
@@ -118,13 +117,12 @@ data class GranularLineItemsDiscount internal constructor(
     override val asGranular: GranularLineItemsDiscount = this
 }
 
-internal fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount =
-    when {
-        rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
-        rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
-        rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
-        else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
-    }
+internal fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount = when {
+    rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
+    rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
+    rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
+    else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
+}
 
 fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
     val costBefore = items.sumOf { it.discount.costBefore }
@@ -133,8 +131,7 @@ fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
         itemsDiscount.centsAsLong != 0uL && global.centsAsLong == 0uL -> GranularLineItemsDiscount(
-            costBefore,
-            itemsDiscount
+            costBefore, itemsDiscount
         )
 
         else -> CompoundLineItemsDiscount(costBefore, itemsDiscount, global)

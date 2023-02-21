@@ -4,7 +4,9 @@
 package kost
 
 import bitframe.CollectionsViewModel
+import kollections.iMutableListOf
 import koncurrent.Later
+import kost.params.LineItemParams
 import kotlinx.serialization.KSerializer
 import live.mutableLiveOf
 import presenters.collections.PageLoader
@@ -28,6 +30,8 @@ class LineItems(config: ScopeConfig<*>) : CollectionsViewModel<LineItem>(config)
         column("discount") { it.item.discount.total.amountAsDouble.toString() }
     }
 
+    val intentions = iMutableListOf<Intention<String, LineItemParams>>()
+
     fun update(calc: ItemizedCalculable?) {
         current.value = calc ?: EMPTY_ITEMS
         paginator.refresh()
@@ -35,6 +39,7 @@ class LineItems(config: ScopeConfig<*>) : CollectionsViewModel<LineItem>(config)
 
     override fun deInitialize(clearPages: Boolean) {
         current.value = EMPTY_ITEMS
+        intentions.clear()
         super.deInitialize(clearPages)
     }
 

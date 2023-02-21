@@ -30,7 +30,7 @@ abstract class PaymentRequestFields(val subjectUid: String?, val body: ItemizedC
 //    )
 
     val products = list(
-        name = Params::products,
+        name = Params::items,
         value = body?.items?.filter { it.data.asProduct != null }
     )
 

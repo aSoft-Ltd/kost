@@ -9,6 +9,6 @@ import kotlin.js.JsExport
 
 interface PaymentRequestFormParams {
     val customerId: String?
-    val products: List<LineItem>
+    val items: List<LineItem>
     val discount: Money?
 }
