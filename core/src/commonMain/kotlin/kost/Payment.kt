@@ -14,7 +14,8 @@ data class Payment(
     val details: String,
     val from: String,
     val on: Instant,
+    val invoice: InvoicePointer,
     val amount: Monetary,
     val to: String,
-    val method: PaymentMethod = PaymentMethod.Cash
+    val method: PaymentMethod
 )
