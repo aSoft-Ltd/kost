@@ -15,6 +15,7 @@ import kost.discount.CanBeZero
 import kost.discount.HasGlobal
 import kost.discount.HasLineItems
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 sealed interface Discount {
     val costBefore: Money
@@ -117,7 +118,8 @@ data class GranularLineItemsDiscount internal constructor(
     override val asGranular: GranularLineItemsDiscount = this
 }
 
-internal fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount = when {
+@JsName("discountOfLineItem")
+fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount = when {
     rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
     rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
     rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
