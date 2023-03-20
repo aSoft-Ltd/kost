@@ -8,8 +8,6 @@ import kash.Zero
 import kollections.List
 import kollections.iListOf
 import kommerce.Offerable
-
-import kommerce.ServiceRef
 import kost.params.LineItemParams
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
