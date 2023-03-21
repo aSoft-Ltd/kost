@@ -22,6 +22,7 @@ kotlin {
             dependencies {
                 api(kotlinx.serialization.core)
                 api(projects.kollectionsInteroperable)
+                api(projects.beeCore)
                 api(projects.kronoKotlinx)
                 api(projects.identifierCore)
                 api(projects.identifierComm)

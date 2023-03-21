@@ -3,6 +3,7 @@
 
 package kost
 
+import bee.TaskStatus
 import kash.Money
 import kash.Zero
 import kollections.List
@@ -17,6 +18,7 @@ data class LineItem(
     val uid: String,
     val data: Offerable,
     val unitRate: Money,
+    val status: TaskStatus,
     val details: String = data.name,
     val quantity: Double = 1.0,
     val unit: String = "each",

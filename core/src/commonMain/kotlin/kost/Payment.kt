@@ -3,6 +3,7 @@
 
 package kost
 
+import bee.DocumentStatus
 import kash.Monetary
 import kotlinx.serialization.Serializable
 import krono.Instant
@@ -14,8 +15,8 @@ data class Payment(
     val details: String,
     val from: String,
     val on: Instant,
-    val invoice: InvoicePointer,
     val amount: Monetary,
     val to: String,
-    val method: PaymentMethod
+    val method: PaymentMethod,
+    val status: DocumentStatus
 )
