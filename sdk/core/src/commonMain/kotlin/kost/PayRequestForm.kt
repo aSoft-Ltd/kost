@@ -3,6 +3,7 @@
 
 package kost
 
+import bee.TaskStatus
 import identifier.UNSET
 import kash.Monetary
 import kollections.List
@@ -111,7 +112,8 @@ abstract class PayRequestForm<out F : PaymentRequestFields, out P, out R>(
             details = name,
             data = ref(),
             quantity = quantity,
-            unitRate = sellingPrice
+            unitRate = sellingPrice,
+            status = TaskStatus.Pending
         )
     }
 }
