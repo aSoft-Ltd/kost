@@ -14,8 +14,10 @@ import kotlin.jvm.JvmOverloads
 data class InvoiceHeader @JvmOverloads constructor(
     val customer: Subject,
     override val currency: Currency,
-    override val createdOn: Instant = Now(),
-    override val dueOn: Instant = createdOn,
+    val subject: String? = null,
+    val number: String? = null,
+    override val issueDate: Instant = Now(),
+    override val dueDate: Instant = issueDate,
     override val vendor: Vendor = Vendor.GENERIC,
     override val ref: VendorReference = VendorReference.UNSET,
 ) : Header

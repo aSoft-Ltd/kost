@@ -39,7 +39,7 @@ object TestUtils {
         header = InvoiceHeader(
             customer = Subject("<unset>", "John Doe", address),
             currency = Currency.TZS,
-            createdOn = Now()
+            issueDate = Now()
         ),
         body = makeBody()
     )

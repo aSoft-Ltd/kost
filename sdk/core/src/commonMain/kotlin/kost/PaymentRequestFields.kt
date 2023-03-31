@@ -4,6 +4,7 @@
 package kost
 
 import presenters.Fields
+import presenters.date
 import presenters.list
 import presenters.money
 import presenters.text
@@ -11,6 +12,11 @@ import kotlin.js.JsExport
 import kost.PaymentRequestFormParams as Params
 
 abstract class PaymentRequestFields(val subjectUid: String?, val body: ItemizedCalculable?) : Fields() {
+
+    val issueDate = date(
+        name = Params::issueDate
+    )
+
     val customerId = text(
         name = Params::customerId,
         value = subjectUid
@@ -18,7 +24,7 @@ abstract class PaymentRequestFields(val subjectUid: String?, val body: ItemizedC
 
 //    val channel = selectSingle(
 //        name = Params::channel,
-//        items = cellar.orders.OrderChannel.values().toList(),
+//        items = cellar.OrderChannel.values().toList(),
 //        mapper = { presenters.Option(it.name, it.name) },
 //        value = order?.channel,
 //        isRequired = false
