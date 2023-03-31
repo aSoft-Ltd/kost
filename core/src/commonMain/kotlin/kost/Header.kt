@@ -9,8 +9,8 @@ import krono.Instant
 
 interface Header {
     val currency: Currency
-    val createdOn: Instant
-    val dueOn: Instant
+    val issueDate: Instant
+    val dueDate: Instant
     val vendor: Vendor
     val ref: VendorReference
 }

@@ -22,7 +22,7 @@ class InvoiceSerializationTest {
             header = InvoiceHeader(
                 customer = Subject("<unset>", "John Doe", address),
                 currency = Currency.TZS,
-                createdOn = Now()
+                issueDate = Now()
             ),
             body = Body(
                 LineItem("<unset>", data = ProductRef("unset", "Keyboard"), quantity = 1.0, unitRate = Monetary(2_000_000), unit = "each"),
