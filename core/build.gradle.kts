@@ -20,6 +20,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                api(projects.koncurrentLaterCore)
                 api(kotlinx.serialization.core)
                 api(projects.kollectionsInteroperable)
                 api(projects.beeCore)
