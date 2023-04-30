@@ -29,7 +29,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-                implementation(asoft.expect.core)
+                implementation(projects.kommanderCore)
             }
         }
     }

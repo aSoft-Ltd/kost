@@ -25,14 +25,14 @@ kotlin {
                 api(projects.cellarApiCore)
                 api(projects.flameSdkClientCore)
                 api(projects.stockerSdkClientCore)
-                api(projects.presentersInputsCollections)
+                // api(projects.symphonyInputsCollections)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-                implementation(asoft.expect.core)
+                implementation(projects.kommanderCore)
             }
         }
     }
