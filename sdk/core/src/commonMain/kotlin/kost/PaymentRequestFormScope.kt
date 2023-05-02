@@ -11,7 +11,7 @@ import kollections.List
 import kollections.iEmptyList
 import live.mutableLiveOf
 import stocker.StockerApi
-import stocker.collections.Products
+import stocker.collections.ProductCollection
 import stocker.products.Product
 import viewmodel.LazyViewModel
 import viewmodel.ScopeConfig
@@ -23,7 +23,7 @@ abstract class PaymentRequestFormScope<A, out F : PayRequestForm<*, *, *>>(
 
     protected val api = config.api
 
-    val products = mutableLiveOf<Products?>(null)
+    val products = mutableLiveOf<ProductCollection?>(null)
 
     val customers = mutableLiveOf<Customers?>(null)
 
@@ -48,7 +48,7 @@ abstract class PaymentRequestFormScope<A, out F : PayRequestForm<*, *, *>>(
             single { onAdd { addProduct(it, close) } }
             multi { onAddAll { addProducts(it) } }
         }
-        products.value = Products(config).apply { initialize() }
+        products.value = ProductCollection(config).apply { initialize() }
     }
 
     fun showCustomers(close: Boolean = DEFAULT_CLOSE_AFTER_CUSTOMERS_SELECTION) {
