@@ -9,16 +9,17 @@ import kash.Zero
 import kost.Cash
 import kost.PaymentMethod
 import kotlinx.serialization.Serializable
-import krono.Instant
+import krono.LocalDate
 import kotlin.js.JsExport
 
 @Serializable
 data class PaymentParams(
     val amount: Double,
-    val date: Instant,
+    val date: LocalDate?,
     val details: String?,
     val from: String? = null,
     val to: String? = null,
     val status: DocumentStatus = DocumentStatus.Draft,
-    val method: PaymentMethod = Cash(Monetary(amount), Zero)
+    val method: PaymentMethod = Cash(Monetary(amount), Zero),
+    val transactionId: String? = null
 )

@@ -16,9 +16,13 @@ data class PaymentSummary(
     val amount: Money,
     val terms: String? = null
 ) {
-    val status: PaymentStatus = when (val paid = items.sumOf { it.amount }) {
+    val status: PaymentStatus = when (val paid = paidAmount()) {
         Zero -> Unpaid(amount)
         amount -> FullyPaid(items, amount)
         else -> PartiallyPaid(items, paid, amount)
     }
+
+    fun paidAmount() = items.sumOf { it.amount }
+
+    fun unpaidAmount() = amount - paidAmount()
 }
