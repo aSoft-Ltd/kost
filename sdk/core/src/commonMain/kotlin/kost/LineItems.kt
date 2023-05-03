@@ -3,17 +3,17 @@
 
 package kost
 
-import bitframe.CollectionsViewModel
+import keep.Cacheable
 import kollections.iMutableListOf
 import koncurrent.Later
 import kost.params.LineItemParams
 import kotlinx.serialization.KSerializer
-import live.mutableLiveOf
-import presenters.collections.PageLoader
-import viewmodel.ScopeConfig
+import cinematic.mutableLiveOf
+import symphony.CollectionScene
+import symphony.PageLoader
 import kotlin.js.JsExport
 
-class LineItems(config: ScopeConfig<*>) : CollectionsViewModel<LineItem>(config) {
+class LineItems(config: Cacheable) : CollectionScene<LineItem>(config) {
 
     val current = mutableLiveOf(EMPTY_ITEMS)
 

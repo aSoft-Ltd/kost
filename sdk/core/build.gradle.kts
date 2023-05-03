@@ -21,11 +21,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(projects.kostApiCore)
-                // api(projects.bitframeServiceBuilderSdkClientCore)
                 api(projects.cellarApiCore)
                 api(projects.flameSdkClientCore)
                 api(projects.stockerSdkClientCore)
-                // api(projects.symphonyInputsCollections)
+                api(projects.symphonyInputList)
             }
         }
 

@@ -4,22 +4,23 @@
 package kost
 
 import bitframe.actions
+import cinematic.LazyScene
+import cinematic.mutableLiveOf
 import flame.FlameApi
 import flame.collections.Customers
 import identifier.LegalEntity
+import kase.Pending
 import kollections.List
 import kollections.iEmptyList
-import live.mutableLiveOf
 import stocker.StockerApi
 import stocker.collections.ProductCollection
 import stocker.products.Product
-import viewmodel.LazyViewModel
 import viewmodel.ScopeConfig
 import kotlin.js.JsExport
 
 abstract class PaymentRequestFormScope<A, out F : PayRequestForm<*, *, *>>(
     private val config: ScopeConfig<A>
-) : LazyViewModel<@UnsafeVariance F>(config) where A : FlameApi, A : StockerApi {
+) : LazyScene<F>(Pending) where A : FlameApi, A : StockerApi {
 
     protected val api = config.api
 

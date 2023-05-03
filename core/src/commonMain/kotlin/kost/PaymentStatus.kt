@@ -10,6 +10,10 @@ import kotlin.js.JsExport
 @Serializable
 sealed interface PaymentStatus {
     val amount: Money
+
+    val asUnPaid get() = this as? Unpaid
+    val asPartiallyPaid get() = this as? PartiallyPaid
+    val asFullPaid get() = this as? FullyPaid
 }
 
 @Serializable
