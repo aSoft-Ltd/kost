@@ -14,11 +14,9 @@ import kost.discount.CanBeUnit
 import kost.discount.CanBeZero
 import kost.discount.HasGlobal
 import kost.discount.HasLineItems
-import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
-@Serializable
 sealed interface Discount {
     val costBefore: Money
     val total: Money
@@ -32,7 +30,6 @@ sealed interface Discount {
  * 3. GlobalDiscount: For global discount only
  * 4. CompoundLineItemDiscount: For a mixture of global and compound discount
  */
-@Serializable
 sealed interface LineItemDiscount : Discount, CanBeZero, CanBeUnit, CanBeGlobal, CanBeCompoundForLineItem
 
 /**
@@ -41,10 +38,8 @@ sealed interface LineItemDiscount : Discount, CanBeZero, CanBeUnit, CanBeGlobal,
  * 3. GlobalDiscount: For global discount only
  * 4. CompoundLineItemsDiscount: For a mixture of global and compound discount
  */
-@Serializable
 sealed interface LineItemsDiscount : Discount, CanBeZero, CanBeGranular, CanBeGlobal, CanBeCompoundForLineItems
 
-@Serializable
 data class NoDiscount(override val costBefore: Money) : LineItemDiscount, LineItemsDiscount {
     override val total = Zero
     override val costAfter = costBefore
@@ -56,7 +51,6 @@ data class NoDiscount(override val costBefore: Money) : LineItemDiscount, LineIt
     override val asGlobal: Nothing? = null
 }
 
-@Serializable
 data class UnitDiscount internal constructor(
     override val costBefore: Money,
     val rate: Money,
@@ -70,7 +64,6 @@ data class UnitDiscount internal constructor(
     override val asGlobal: Nothing? = null
 }
 
-@Serializable
 data class GlobalDiscount internal constructor(
     override val costBefore: Money,
     override val global: Money
@@ -83,7 +76,6 @@ data class GlobalDiscount internal constructor(
     override val total = global
 }
 
-@Serializable
 data class CompoundLineItemDiscount internal constructor(
     override val costBefore: Money,
     val rate: Money,
@@ -100,7 +92,6 @@ data class CompoundLineItemDiscount internal constructor(
     override val asGlobal: Nothing? = null
 }
 
-@Serializable
 data class CompoundLineItemsDiscount internal constructor(
     override val costBefore: Money,
     override val items: Money,
@@ -115,7 +106,6 @@ data class CompoundLineItemsDiscount internal constructor(
     override val asGranular: Nothing? = null
 }
 
-@Serializable
 data class GranularLineItemsDiscount internal constructor(
     override val costBefore: Money,
     override val items: Money,
@@ -128,7 +118,6 @@ data class GranularLineItemsDiscount internal constructor(
     override val asGranular: GranularLineItemsDiscount = this
 }
 
-@JsName("discountOfLineItem")
 fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount = when {
     rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
     rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
@@ -136,6 +125,7 @@ fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money):
     else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
 }
 
+@JsName("itemsDiscount")
 fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
     val costBefore = items.sumOf { it.discount.costBefore }
     val itemsDiscount = items.sumOf { it.discount.total }

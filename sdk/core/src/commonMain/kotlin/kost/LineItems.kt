@@ -3,21 +3,17 @@
 
 package kost
 
+import cinematic.mutableLiveOf
 import keep.Cacheable
 import kollections.iMutableListOf
-import koncurrent.Later
 import kost.params.LineItemParams
 import kotlinx.serialization.KSerializer
-import cinematic.mutableLiveOf
 import symphony.CollectionScene
-import symphony.PageLoader
 import kotlin.js.JsExport
 
 class LineItems(config: Cacheable) : CollectionScene<LineItem>(config) {
 
     val current = mutableLiveOf(EMPTY_ITEMS)
-
-    override val loader = PageLoader { _, _ -> Later(current.value.items) }
 
     override val serializer: KSerializer<LineItem> = LineItem.serializer()
 
@@ -37,10 +33,10 @@ class LineItems(config: Cacheable) : CollectionScene<LineItem>(config) {
         paginator.refresh()
     }
 
-    override fun deInitialize(clearPages: Boolean) {
+    fun deInitialize(clearPages: Boolean) {
         current.value = EMPTY_ITEMS
         intentions.clear()
-        super.deInitialize(clearPages)
+        paginator.deInitialize(clearPages)
     }
 
     private companion object {

@@ -21,8 +21,6 @@ data class PaymentSummary(
         amount -> FullyPaid(items, amount)
         else -> PartiallyPaid(items, paid, amount)
     }
-
     fun paidAmount() = items.sumOf { it.amount }
-
     fun unpaidAmount() = amount - paidAmount()
 }

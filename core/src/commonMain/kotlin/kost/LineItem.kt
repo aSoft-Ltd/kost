@@ -11,6 +11,7 @@ import kollections.iListOf
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlin.js.JsExport
 
 @Serializable
@@ -28,8 +29,11 @@ data class LineItem(
     val photos: List<String> = iListOf(),
     val compoundDiscount: Money = Zero
 ) : Calculable {
+
+    @Transient
     override val costBeforeDiscount = unitRate * quantity
 
+    @Transient
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
     override val taxAmount: Money get() = discount.costAfter * tax.rate / 100
