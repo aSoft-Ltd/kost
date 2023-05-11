@@ -13,7 +13,7 @@ import kase.Pending
 import kollections.List
 import kollections.iEmptyList
 import stocker.StockerApi
-import stocker.collections.ProductCollection
+import stocker.products.collections.ProductCollection
 import stocker.products.Product
 import viewmodel.ScopeConfig
 import kotlin.js.JsExport
