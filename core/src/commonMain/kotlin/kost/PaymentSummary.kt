@@ -16,11 +16,17 @@ data class PaymentSummary(
     val amount: Money,
     val terms: String? = null
 ) {
-    val status: PaymentStatus = when (val paid = paidAmount()) {
-        Zero -> Unpaid(amount)
-        amount -> FullyPaid(items, amount)
-        else -> PartiallyPaid(items, paid, amount)
-    }
+    val status: PaymentStatus by lazy { computeStatus() }
+
     fun paidAmount() = items.sumOf { it.amount }
     fun unpaidAmount() = amount - paidAmount()
+
+    private fun computeStatus(): PaymentStatus {
+        val paid = paidAmount()
+        return when {
+            paid == Zero -> Unpaid(amount)
+            paid >= amount -> FullyPaid(items, amount)
+            else -> PartiallyPaid(items, paid, amount)
+        }
+    }
 }
