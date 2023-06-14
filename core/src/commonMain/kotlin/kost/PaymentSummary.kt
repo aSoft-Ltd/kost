@@ -11,7 +11,7 @@ import kost.serializers.PaymentSummarySerializer
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-@Serializable(with = PaymentSummarySerializer::class)
+@Serializable
 data class PaymentSummary(
     val items: List<Payment>,
     val amount: Money,
