@@ -12,7 +12,6 @@ import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@Serializable
 object PaymentSummarySerializer : KSerializer<PaymentSummary> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("kost.PaymentSummary")
 
