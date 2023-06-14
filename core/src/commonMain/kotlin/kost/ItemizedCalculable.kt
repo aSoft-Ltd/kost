@@ -20,8 +20,7 @@ interface ItemizedCalculable : Calculable {
 
     val itemsDiscountTotal get() = items.map { it.discount.total }.sum()
 
-    val taxRates
-        get() = buildMap<Tax, Money> {
+    val taxRates get() = buildMap<Tax, Money> {
             for (item in items) {
                 val prev = getOrPut(item.tax) { Zero }
                 put(item.tax, prev + item.taxAmount)
