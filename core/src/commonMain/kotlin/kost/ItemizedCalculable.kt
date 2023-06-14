@@ -16,9 +16,9 @@ interface ItemizedCalculable : Calculable {
 
     override val discount: LineItemsDiscount
 
-    override val costBeforeDiscount get() = items.sumOf { it.discount.costAfter }
+    override val costBeforeDiscount get() = items.map { it.discount.costAfter }.sum()
 
-    val itemsDiscountTotal get() = items.sumOf { it.discount.total }
+    val itemsDiscountTotal get() = items.map { it.discount.total }.sum()
 
     val taxRates
         get() = buildMap<Tax, Money> {

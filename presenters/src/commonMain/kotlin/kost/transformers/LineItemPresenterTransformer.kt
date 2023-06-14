@@ -1,10 +1,12 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package kost
+package kost.transformers
 
 import kash.Currency
 import kash.MoneyFormatter
-import kash.toPresenter
+import kash.transformers.toPresenter
+import kost.LineItemDto
+import kost.LineItemPresenter
 
 inline fun LineItemDto.toPresenter(
     currency: Currency,

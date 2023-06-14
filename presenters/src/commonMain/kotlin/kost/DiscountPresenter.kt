@@ -1,16 +1,15 @@
+@file:JsExport
+@file:Suppress("OPT_IN_USAGE", "NON_EXPORTABLE_TYPE")
+
 package kost
 
-import kash.Cents
 import kash.MoneyPresenter
-import kash.ZeroCents
-import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
-@Serializable
 data class NoDiscountPresenter(
     override val total: MoneyPresenter
 ) : LineItemDiscountPresenter, LineItemsDiscountPresenter
 
-@Serializable
 data class OverallDiscountPresenter(
     override val total: MoneyPresenter
 ) : LineItemDiscountPresenter, LineItemsDiscountPresenter

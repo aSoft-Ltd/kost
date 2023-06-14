@@ -5,6 +5,7 @@ package kost
 
 import kash.Money
 import kash.Zero
+import kash.sum
 import kash.sumOf
 import kost.discount.CanBeCompoundForLineItem
 import kost.discount.CanBeCompoundForLineItems
@@ -127,8 +128,8 @@ fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money):
 
 @JsName("itemsDiscount")
 fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
-    val costBefore = items.sumOf { it.discount.costBefore }
-    val itemsDiscount = items.sumOf { it.discount.total }
+    val costBefore = items.map { it.discount.costBefore }.sum()
+    val itemsDiscount = items.map { it.discount.total }.sum()
     return when {
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
         itemsDiscount.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)

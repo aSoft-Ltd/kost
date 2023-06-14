@@ -1,14 +1,16 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package kost
 
 import kash.MoneyPresenter
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
-@Serializable
 sealed interface LineItemDiscountPresenter {
     val total: MoneyPresenter
 }
 
-@Serializable
 data class PerUnitBasedDiscountPresenter(
     val unit: MoneyPresenter,
     override val total: MoneyPresenter
@@ -17,7 +19,6 @@ data class PerUnitBasedDiscountPresenter(
 /**
  * A discount modelling a mixture of both PerUnitBasedDiscount and OverallLineItemDiscount
  */
-@Serializable
 data class MixedDiscountPresenter(
     val unit: MoneyPresenter,
     val overall: MoneyPresenter,
