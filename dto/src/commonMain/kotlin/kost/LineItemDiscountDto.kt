@@ -25,11 +25,13 @@ data class MixedDiscountDto(
     override val total: Cents
 ) : LineItemDiscountDto
 
+
 internal fun LineItemDiscountDto.unit(): Cents = when (this) {
     is PerUnitBasedDiscountDto -> unit
     is MixedDiscountDto -> unit
     else -> ZeroCents
 }
+
 
 internal fun LineItemDiscountDto.overall(): Cents = when (this) {
     is NoDiscountDto -> ZeroCents

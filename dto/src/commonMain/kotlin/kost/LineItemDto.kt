@@ -5,7 +5,6 @@ package kost
 
 import bee.TaskStatus
 import kash.Cents
-import kash.ZeroCents
 import kash.sum
 import kollections.List
 import kommerce.Offerable
@@ -28,15 +27,14 @@ data class LineItemDto(
     override val taxes: TaxesDto,
     override val discount: LineItemDiscountDto,
 ) : ItemCalculableDto {
-
-    @Transient
-    override val cost by lazy {
+    
+    override val cost: CostDto by lazy {
         val costBeforeDiscount = unitPrice * quantity
         val costBeforeTax = costBeforeDiscount - discount.total
-        val costAfterTax = taxes.items.map { it.amount }.sum()
+        val totalTax = taxes.items.map { it.amount }.sum()
         CostDto(
             before = CostBreakDownDto(discount = costBeforeDiscount, tax = costBeforeTax),
-            after = CostBreakDownDto(discount = costBeforeTax, tax = costAfterTax),
+            after = CostBreakDownDto(discount = costBeforeTax, tax = costBeforeTax + totalTax),
         )
     }
 
