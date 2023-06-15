@@ -9,7 +9,6 @@ import kash.Zero
 import kollections.List
 import kollections.iListOf
 import kommerce.Offerable
-import kost.params.LineItemParams
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import kotlin.js.JsExport
@@ -38,16 +37,16 @@ data class LineItem(
 
     override val taxAmount: Money get() = discount.costAfter * tax.rate / 100
 
-    fun toParams() = LineItemParams(
-        data = data,
-        unitRate = unitRate,
-        details = details,
-        quantity = quantity,
-        unit = unit,
-        unitDiscount = unitDiscount,
-        tax = tax,
-        ref = ref,
-        photos = photos,
-        compoundDiscount = compoundDiscount
-    )
+//    fun toParams() = LineItemParams(
+//        data = data,
+//        unitRate = unitRate,
+//        details = details,
+//        quantity = quantity,
+//        unit = unit,
+//        unitDiscount = unitDiscount,
+//        tax = tax,
+//        ref = ref,
+//        photos = photos,
+//        compoundDiscount = compoundDiscount
+//    )
 }

@@ -2,8 +2,8 @@
 
 package kost
 
-import kost.params.LineItemParams
-
-inline fun LineItem.toParams() = LineItemParams(
-    data, unitRate, details, quantity, unit, unitDiscount, tax, ref, photos, compoundDiscount
-)
+//import kost.params.LineItemParams
+//
+//inline fun LineItem.toParams() = LineItemParams(
+//    data, unitRate, details, quantity, unit, unitDiscount, tax, ref, photos, compoundDiscount
+//)

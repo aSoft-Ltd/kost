@@ -8,4 +8,6 @@ import kotlin.js.JsExport
 
 data class TaxesPresenter(
     val items: List<TaxPresenter>
-) : List<TaxPresenter> by items
+) : List<TaxPresenter> by items {
+    fun toDto() = TaxesDto(items.map { it.toDto() })
+}

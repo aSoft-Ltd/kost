@@ -3,11 +3,8 @@
 
 package kost
 
-import kash.MoneyPresenter
 import kotlin.js.JsExport
 
 interface CalculablePresenter {
-    val costBeforeDiscount: MoneyPresenter
-    val costBeforeTax: MoneyPresenter
-    val costAfterTax: MoneyPresenter
+    val cost: CostPresenter
 }

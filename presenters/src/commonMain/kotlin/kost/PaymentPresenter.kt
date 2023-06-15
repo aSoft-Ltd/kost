@@ -6,7 +6,6 @@ package kost
 import bee.DocumentStatus
 import kash.MoneyPresenter
 import krono.DateTimePresenter
-import krono.Instant
 import kotlin.js.JsExport
 
 data class PaymentPresenter(

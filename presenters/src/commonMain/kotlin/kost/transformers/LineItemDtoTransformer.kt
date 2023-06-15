@@ -21,9 +21,7 @@ inline fun LineItemDto.toPresenter(
     unit = unit,
     ref = ref,
     photos = photos,
-    costBeforeDiscount = costBeforeDiscount.toPresenter(currency, formatter),
     discount = discount.toPresenter(currency, formatter),
     taxes = taxes.toPresenter(currency, formatter),
-    costBeforeTax = costBeforeTax.toPresenter(currency, formatter),
-    costAfterTax = costAfterTax.toPresenter(currency, formatter)
+    cost = cost.toPresenter(currency, formatter)
 )

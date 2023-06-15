@@ -10,7 +10,6 @@ import kollections.List
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlin.js.JsExport
 
 @Serializable
@@ -26,8 +25,8 @@ data class LineItemDto(
     val photos: List<String>,
     override val taxes: TaxesDto,
     override val discount: LineItemDiscountDto,
-) : ItemCalculableDto {
-    
+) : LineItemCalculableDto {
+
     override val cost: CostDto by lazy {
         val costBeforeDiscount = unitPrice * quantity
         val costBeforeTax = costBeforeDiscount - discount.total

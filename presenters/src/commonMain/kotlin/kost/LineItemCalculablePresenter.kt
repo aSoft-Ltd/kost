@@ -5,7 +5,7 @@ package kost
 
 import kotlin.js.JsExport
 
-interface ItemCalculablePresenter : CalculablePresenter {
+interface LineItemCalculablePresenter : CalculablePresenter {
     val taxes: TaxesPresenter
     val discount: LineItemDiscountPresenter
 }

@@ -6,6 +6,6 @@ package kost
 import kotlin.js.JsExport
 
 interface NuancedCalculablePresenter : CalculablePresenter {
-    val tax: TaxPresenter
+    val tax: TaxPresenter?
     val discount: OverallDiscountPresenter
 }
