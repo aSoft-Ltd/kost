@@ -6,7 +6,6 @@ package kost
 import kash.Money
 import kash.Zero
 import kash.sum
-import kash.sumOf
 import kost.discount.CanBeCompoundForLineItem
 import kost.discount.CanBeCompoundForLineItems
 import kost.discount.CanBeGlobal

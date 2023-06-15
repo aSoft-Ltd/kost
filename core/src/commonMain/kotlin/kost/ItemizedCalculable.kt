@@ -6,7 +6,6 @@ package kost
 import kash.Money
 import kash.Zero
 import kash.sum
-import kash.sumOf
 import kollections.List
 import kollections.toIMap
 import kotlin.js.JsExport

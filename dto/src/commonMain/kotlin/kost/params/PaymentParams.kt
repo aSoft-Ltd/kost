@@ -4,10 +4,10 @@
 package kost.params
 
 import bee.DocumentStatus
-import kash.Monetary
-import kash.Zero
-import kost.Cash
-import kost.PaymentMethod
+import kash.Cents
+import kash.ZeroCents
+import kost.CashDto
+import kost.PaymentMethodDto
 import kotlinx.serialization.Serializable
 import krono.Instant
 import kotlin.js.JsExport
@@ -20,6 +20,6 @@ data class PaymentParams(
     val from: String? = null,
     val to: String? = null,
     val status: DocumentStatus = DocumentStatus.Draft,
-    val method: PaymentMethod = Cash(Monetary(amount), Zero),
+    val method: PaymentMethodDto = CashDto(Cents(amount * 100), ZeroCents),
     val transactionId: String? = null
 )

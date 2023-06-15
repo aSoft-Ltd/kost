@@ -1,7 +1,7 @@
 package kost
 
 import kash.Cents
-import kash.sumOf
+import kash.sum
 import kollections.List
 import kost.serializer.TaxesSerializer
 import kotlinx.serialization.Serializable
@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 data class TaxesDto(
     val items: List<TaxDto>
 ) : List<TaxDto> by items {
-    val total: Cents by lazy { items.sumOf { it.amount } }
+    val total: Cents by lazy { items.map { it.amount }.sum() }
 }
