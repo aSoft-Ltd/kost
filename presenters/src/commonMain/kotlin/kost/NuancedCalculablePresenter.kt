@@ -5,7 +5,7 @@ package kost
 
 import kotlin.js.JsExport
 
-interface NuancedCalculablePresenter : CalculablePresenter {
+interface NuancedCalculablePresenter : LineItemsCalculablePresenter {
     val tax: TaxPresenter?
     val discount: OverallDiscountPresenter
 }
