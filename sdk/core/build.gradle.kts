@@ -15,16 +15,19 @@ kotlin {
         }
     }
     js(IR) { library() }
-    //nativeTargets(true)
-//    linuxTargets(true)
     sourceSets {
         val commonMain by getting {
             dependencies {
                 api(projects.kostApiCore)
-                api(projects.cellarApiCore)
-                api(projects.flameSdkClientCore)
-                api(projects.stockerSdkClientCore)
+                api(projects.kostPresenters)
+                api(projects.symphonyInputForm)
                 api(projects.symphonyInputList)
+                api(projects.symphonyInputChoice)
+                api(projects.symphonyInputKrono)
+                api(projects.symphonyInputKash)
+                api(projects.symphonyInputNumber)
+                api(projects.symphonyInputChoice)
+                api(projects.symphonyCollections)
             }
         }
 

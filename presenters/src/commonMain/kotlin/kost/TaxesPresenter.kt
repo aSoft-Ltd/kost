@@ -3,11 +3,12 @@
 
 package kost
 
+import kash.MoneyPresenter
 import kollections.List
 import kotlin.js.JsExport
 
 data class TaxesPresenter(
-    val items: List<TaxPresenter>
-) : List<TaxPresenter> by items {
-    fun toDto() = TaxesDto(items.map { it.toDto() })
-}
+    val src: TaxesDto,
+    val items: List<TaxPresenter>,
+    val total: MoneyPresenter
+) : List<TaxPresenter> by items

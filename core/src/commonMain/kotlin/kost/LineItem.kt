@@ -23,7 +23,7 @@ data class LineItem(
     val quantity: Double = 1.0,
     val unit: String = "each",
     val unitDiscount: Money = Zero,
-    val tax: Tax = Tax.GENERIC_ZERO,
+    val tax: TaxDeprecated = TaxDeprecated.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
     val compoundDiscount: Money = Zero

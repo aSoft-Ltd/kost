@@ -32,8 +32,7 @@ data class LineItemPresenter(
         quantity = quantity,
         unit = unit,
         unitDiscount = ZeroCents,
-        taxes = taxes.toDto(),
-        photos = photos,
+        taxes = taxes.src.items.map { Tax(it.name, it.rate) },
         unitPrice = unitPrice.cents,
         overallDiscount = discount.total.cents
     )

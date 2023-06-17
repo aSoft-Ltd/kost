@@ -9,7 +9,7 @@ import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 
 @Serializable
-data class Tax @JvmOverloads constructor(
+data class TaxDeprecated @JvmOverloads constructor(
     val name: String,
     /**
      * must be between 0 and 100
@@ -24,6 +24,6 @@ data class Tax @JvmOverloads constructor(
 
     companion object {
         @JvmField
-        val GENERIC_ZERO = Tax("ZERO", 0, TaxAgency.GENERIC)
+        val GENERIC_ZERO = TaxDeprecated("ZERO", 0, TaxAgency.GENERIC)
     }
 }

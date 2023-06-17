@@ -44,8 +44,7 @@ data class LineItemDto(
         quantity = quantity,
         unit = unit,
         unitDiscount = discount.unit(),
-        taxes = taxes,
-        photos = photos,
+        taxes = taxes.toTaxes(),
         overallDiscount = discount.overall()
     )
 }
