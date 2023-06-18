@@ -11,7 +11,7 @@ import koncurrent.Later
 import kost.transfomers.toOutput
 import symphony.Form
 import symphony.FormConfig
-import symphony.FormInitialzer
+import symphony.FormInitializer
 import symphony.toFormConfig
 import kotlin.js.JsExport
 
@@ -22,7 +22,7 @@ class LineItemForm(
     val item: LineItemPresenter?,
     taxes: List<Tax>,
     config: FormConfig,
-    initializer: FormInitialzer<LineItemOutput, LineItemOutput>
+    initializer: FormInitializer<LineItemOutput, LineItemOutput>
 ) : Form<LineItemFields, LineItemOutput, LineItemOutput>(
     heading, details, LineItemFields(item.toOutput(offerable)), config, initializer
 ) {

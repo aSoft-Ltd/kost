@@ -9,7 +9,7 @@ import kash.MoneyPresenter
 import kash.ZeroCents
 import kash.transformers.toPresenter
 import symphony.Form
-import symphony.FormInitialzer
+import symphony.FormInitializer
 import symphony.FormConfig
 import kotlin.js.JsExport
 import kost.PaymentCaptureFields as Fields
@@ -24,5 +24,5 @@ class PaymentCaptureForm(
     val paid: MoneyPresenter = ZeroCents.toPresenter(currency, formatter),
     val unpaid: MoneyPresenter = total,
     config: FormConfig,
-    initializer: FormInitialzer<Params, Params>,
-) : Form<Fields, Params, Params>(heading, details, Fields(unpaid), config, initializer)
+    initializer: FormInitializer<Params, Any>,
+) : Form<Fields, Params, Any>(heading, details, Fields(unpaid), config, initializer)

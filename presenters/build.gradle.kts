@@ -27,6 +27,7 @@ kotlin {
                 api(projects.kronoKotlinx)
                 api(projects.kostDto)
                 api(projects.kashMoney)
+                api(projects.symphonyCollections)
             }
         }
 
