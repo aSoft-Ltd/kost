@@ -8,7 +8,6 @@ import kash.ZeroCents
 import kollections.JsExport
 import symphony.Fields
 import symphony.Option
-import symphony.boolean
 import symphony.date
 import symphony.money
 import symphony.selectSingle
@@ -25,7 +24,7 @@ class PaymentCaptureFields(unpaid: MoneyPresenter) : Fields<Params>(Params(unpai
 
     val to = text(output::to)
 
-    val fullyPaid = boolean(
+    val fullyPaid = selectSingle(
         name = output::fullyPaid,
         label = "Fully paid"
     )
