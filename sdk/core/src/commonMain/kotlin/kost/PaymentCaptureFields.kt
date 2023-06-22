@@ -8,13 +8,14 @@ import kash.ZeroCents
 import kollections.JsExport
 import symphony.Fields
 import symphony.Option
+import symphony.boolean
 import symphony.date
 import symphony.money
 import symphony.selectSingle
 import symphony.text
 import kost.PaymentCaptureOutput as Params
 
-class PaymentCaptureFields(unpaid: MoneyPresenter) : Fields<Params>(Params(unpaid.money)) {
+class PaymentCaptureFields(unpaid: MoneyPresenter) : Fields<Params>(Params(unpaid.amount.asDouble)) {
 
     val amount = money(output::amount)
 
@@ -24,7 +25,7 @@ class PaymentCaptureFields(unpaid: MoneyPresenter) : Fields<Params>(Params(unpai
 
     val to = text(output::to)
 
-    val fullyPaid = selectSingle(
+    val fullyPaid = boolean(
         name = output::fullyPaid,
         label = "Fully paid"
     )

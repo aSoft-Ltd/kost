@@ -1,7 +1,5 @@
 package kost
 
-import kash.Money
-import kash.Zero
 import kash.ZeroCents
 import kash.cents
 import kollections.List
@@ -11,19 +9,19 @@ import kost.params.LineItemParams
 
 class LineItemOutput(
     val offerable: Offerable,
-    var unitPrice: Money = Zero,
+    var unitPrice: Double = 0.0,
     var details: String = offerable.name,
     var quantity: Double = 1.0,
     var unit: String = "each",
-    var unitDiscount: Money = Zero,
-    var overallDiscount: Money = Zero,
+    var unitDiscount: Double = 0.0,
+    var overallDiscount: Double = 0.0,
     var taxes: List<Tax> = iEmptyList()
 ) {
     val cost
         get() = run {
-            val beforeDiscount = unitPrice.centsAsDouble.cents * quantity
-            val discountPerItem = unitDiscount.centsAsDouble.cents
-            val allItemsDiscount = overallDiscount.amountAsDouble.cents
+            val beforeDiscount = unitPrice.cents * quantity * 100
+            val discountPerItem = unitDiscount.cents * 100
+            val allItemsDiscount = overallDiscount.cents * 100
             val totalDiscount = allItemsDiscount + (discountPerItem * quantity)
             val afterDiscount = beforeDiscount - totalDiscount
             val txes = taxes.toTaxesDto(afterDiscount)
@@ -41,7 +39,7 @@ class LineItemOutput(
         unit = unit,
         unitDiscount = ZeroCents,
         taxes = taxes,
-        unitPrice = unitPrice.centsAsDouble.cents,
-        overallDiscount = overallDiscount.centsAsDouble.cents
+        unitPrice = unitPrice.cents,
+        overallDiscount = overallDiscount.cents
     )
 }
