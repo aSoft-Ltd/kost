@@ -25,7 +25,7 @@ kotlin {
                 api(projects.kollectionsInteroperable)
                 api(projects.beeCore)
                 api(projects.kronoKotlinx)
-                api(projects.kostDto)
+                api(projects.kostDtos)
                 api(projects.kashMoney)
                 api(projects.symphonyCollections)
             }

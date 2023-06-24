@@ -14,14 +14,30 @@ class LineItemFields(
     taxes: List<Tax>,
     item: LineItemOutput
 ) : Fields<LineItemOutput>(item) {
-    val unitPrice = money(output::unitPrice)
+    val unitPrice = money(
+        name = output::unitPrice,
+        onChange = { state.dispatch() }
+    )
     val details = text(output::details)
-    val unit = text(output::unit)
-    val quantity = double(output::quantity)
-    val unitDiscount = money(output::unitDiscount)
-    val overallDiscount = money(output::overallDiscount)
+    val unit = text(
+        name = output::unit,
+        onChange = { state.dispatch() }
+    )
+    val quantity = double(
+        name = output::quantity,
+        onChange = { state.dispatch() }
+    )
+    val unitDiscount = money(
+        name = output::unitDiscount,
+        onChange = { state.dispatch() }
+    )
+    val overallDiscount = money(
+        name = output::overallDiscount,
+        onChange = { state.dispatch() }
+    )
     val taxes = taxes(
         name = output::taxes,
-        src = taxes
+        src = taxes,
+        onChange = { state.dispatch() }
     )
 }

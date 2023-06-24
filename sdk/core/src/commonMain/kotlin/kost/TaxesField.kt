@@ -10,6 +10,7 @@ import kollections.toIList
 import koncurrent.Later
 import symphony.SubmitConfig
 import symphony.internal.AbstractBaseField
+import symphony.internal.Changer
 import symphony.toForm
 import kotlin.js.JsExport
 import kotlin.reflect.KMutableProperty0
@@ -21,7 +22,8 @@ class TaxesField(
     value: List<Tax>,
     hidden: Boolean,
     hint: String,
-) : AbstractBaseField<List<Tax>>(name, label, value, hidden, hint, null) {
+    onChange: Changer<List<Tax>>?,
+) : AbstractBaseField<List<Tax>>(name, label, value, hidden, hint, onChange, null) {
     val source = mutableLiveListOf(*src.toTypedArray())
 
     val tax = TaxFields().toForm(

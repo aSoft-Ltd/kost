@@ -2,6 +2,7 @@ package kost
 
 import kollections.List
 import symphony.Fields
+import symphony.internal.Changer
 import kotlin.reflect.KMutableProperty0
 
 fun Fields<*>.taxes(
@@ -10,7 +11,8 @@ fun Fields<*>.taxes(
     value: List<Tax> = name.get(),
     label: String = name.name,
     hidden: Boolean = false,
-    hint: String = label
+    hint: String = label,
+    onChange: Changer<List<Tax>>?
 ) = getOrCreate(name) {
-    TaxesField(name, label, src, value, hidden, hint)
+    TaxesField(name, label, src, value, hidden, hint, onChange)
 }
