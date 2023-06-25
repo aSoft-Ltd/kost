@@ -12,6 +12,7 @@ inline fun LineItemDto.toPresenter(
     currency: Currency,
     formatter: MoneyFormatter
 ) = LineItemPresenter(
+    src = this,
     uid = uid,
     data = data,
     unitPrice = unitPrice.toPresenter(currency, formatter),
@@ -23,5 +24,7 @@ inline fun LineItemDto.toPresenter(
     photos = photos,
     discount = discount.toPresenter(currency, formatter),
     taxes = taxes.toPresenter(currency, formatter),
-    cost = cost.toPresenter(currency, formatter)
+    cost = cost.toPresenter(currency, formatter),
+    currency = currency,
+    formatter = formatter
 )

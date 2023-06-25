@@ -12,32 +12,45 @@ import kotlin.js.JsExport
 
 class LineItemFields(
     taxes: List<Tax>,
-    item: LineItemOutput
+    item: LineItemOutput,
+    onChange: ((LineItemOutput) -> Unit)?
 ) : Fields<LineItemOutput>(item) {
     val unitPrice = money(
         name = output::unitPrice,
-        onChange = { state.dispatch() }
+        onChange = {
+            onChange?.invoke(output)
+            state.value = state.value.copy(output = output)
+        }
     )
     val details = text(output::details)
-    val unit = text(
-        name = output::unit,
-        onChange = { state.dispatch() }
-    )
+    val unit = text(output::unit)
     val quantity = double(
         name = output::quantity,
-        onChange = { state.dispatch() }
+        onChange = {
+            onChange?.invoke(output)
+            state.value = state.value.copy(output = output)
+        }
     )
     val unitDiscount = money(
         name = output::unitDiscount,
-        onChange = { state.dispatch() }
+        onChange = {
+            onChange?.invoke(output)
+            state.value = state.value.copy(output = output)
+        }
     )
     val overallDiscount = money(
         name = output::overallDiscount,
-        onChange = { state.dispatch() }
+        onChange = {
+            onChange?.invoke(output)
+            state.value = state.value.copy(output = output)
+        }
     )
     val taxes = taxes(
         name = output::taxes,
         src = taxes,
-        onChange = { state.dispatch() }
+        onChange = {
+            onChange?.invoke(output)
+            state.value = state.value.copy(output = output)
+        }
     )
 }

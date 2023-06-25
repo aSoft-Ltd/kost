@@ -1,36 +1,44 @@
+@file:JsExport
+@file:Suppress("NON_EXPORTABLE_TYPE")
+
 package kost
 
+import kash.Currency
+import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
 import kollections.List
-import kollections.iEmptyList
 import kommerce.Offerable
 import kost.params.LineItemParams
+import kost.transformers.toPresenter
+import kotlin.js.JsExport
 
 class LineItemOutput(
     val offerable: Offerable,
-    var unitPrice: Double = 0.0,
-    var details: String = offerable.name,
-    var quantity: Double = 1.0,
-    var unit: String = "each",
-    var unitDiscount: Double = 0.0,
-    var overallDiscount: Double = 0.0,
-    var taxes: List<Tax> = iEmptyList()
+    val currency: Currency,
+    val formatter: MoneyFormatter,
+    var unitPrice: Double,
+    var details: String,
+    var quantity: Double,
+    var unit: String,
+    var unitDiscount: Double,
+    var overallDiscount: Double,
+    var taxes: List<Tax>
 ) {
-    val cost
-        get() = run {
-            val beforeDiscount = unitPrice.cents * quantity * 100
-            val discountPerItem = unitDiscount.cents * 100
-            val allItemsDiscount = overallDiscount.cents * 100
-            val totalDiscount = allItemsDiscount + (discountPerItem * quantity)
-            val afterDiscount = beforeDiscount - totalDiscount
-            val txes = taxes.toTaxesDto(afterDiscount)
-            val afterTaxes = afterDiscount + txes.total
-            CostDto(
-                before = CostBreakDownDto(discount = beforeDiscount, tax = afterDiscount),
-                after = CostBreakDownDto(discount = afterDiscount, tax = afterTaxes)
-            )
-        }
+
+    fun cost(): CostPresenter {
+        val beforeDiscount = unitPrice.cents * quantity * 100
+        val discountPerItem = unitDiscount.cents * 100
+        val allItemsDiscount = overallDiscount.cents * 100
+        val totalDiscount = allItemsDiscount + (discountPerItem * quantity)
+        val afterDiscount = beforeDiscount - totalDiscount
+        val txes = taxes.toTaxesDto(afterDiscount)
+        val afterTaxes = afterDiscount + txes.total
+        return CostDto(
+            before = CostBreakDownDto(discount = beforeDiscount, tax = afterDiscount),
+            after = CostBreakDownDto(discount = afterDiscount, tax = afterTaxes)
+        ).toPresenter(currency, formatter)
+    }
 
     fun toParams() = LineItemParams(
         data = offerable,

@@ -4,6 +4,8 @@
 package kost
 
 import bee.TaskStatus
+import kash.Currency
+import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kash.ZeroCents
 import kollections.List
@@ -12,6 +14,7 @@ import kost.params.LineItemParams
 import kotlin.js.JsExport
 
 data class LineItemPresenter(
+    val src: LineItemDto,
     val uid: String,
     val data: Offerable,
     val unitPrice: MoneyPresenter,
@@ -21,6 +24,8 @@ data class LineItemPresenter(
     val unit: String,
     val ref: VendorReference,
     val photos: List<String>,
+    val currency: Currency,
+    val formatter: MoneyFormatter,
     override val discount: LineItemDiscountPresenter,
     override val taxes: TaxesPresenter,
     override val cost: CostPresenter
