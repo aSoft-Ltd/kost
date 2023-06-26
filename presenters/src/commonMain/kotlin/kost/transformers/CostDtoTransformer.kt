@@ -14,8 +14,11 @@ fun CostDto.toPresenter(
     currency: Currency,
     formatter: MoneyFormatter
 ) = CostPresenter(
+    src = this,
     before = before.toPresenter(currency, formatter),
-    after = after.toPresenter(currency, formatter)
+    after = after.toPresenter(currency, formatter),
+    discount = discount.toPresenter(currency, formatter),
+    taxes = taxes.toPresenter(currency, formatter)
 )
 
 internal fun CostBreakDownDto.toPresenter(
@@ -23,5 +26,5 @@ internal fun CostBreakDownDto.toPresenter(
     formatter: MoneyFormatter
 ) = CostBreakDownPresenter(
     discount = discount.toPresenter(currency, formatter),
-    tax = discount.toPresenter(currency, formatter)
+    tax = tax.toPresenter(currency, formatter)
 )

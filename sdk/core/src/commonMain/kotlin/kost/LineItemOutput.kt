@@ -7,6 +7,7 @@ import kash.Currency
 import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
+import kash.sum
 import kollections.List
 import kommerce.Offerable
 import kost.params.LineItemParams
@@ -32,11 +33,11 @@ class LineItemOutput(
         val allItemsDiscount = overallDiscount.cents * 100
         val totalDiscount = allItemsDiscount + (discountPerItem * quantity)
         val afterDiscount = beforeDiscount - totalDiscount
-        val txes = taxes.toTaxesDto(afterDiscount)
-        val afterTaxes = afterDiscount + txes.total
+
         return CostDto(
-            before = CostBreakDownDto(discount = beforeDiscount, tax = afterDiscount),
-            after = CostBreakDownDto(discount = afterDiscount, tax = afterTaxes)
+            beforeDiscount = beforeDiscount,
+            discount = totalDiscount,
+            taxes = taxes.map { it.toDto(afterDiscount).amount }.sum()
         ).toPresenter(currency, formatter)
     }
 

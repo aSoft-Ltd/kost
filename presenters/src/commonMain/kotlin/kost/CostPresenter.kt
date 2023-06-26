@@ -2,6 +2,7 @@
 
 package kost
 
+import kash.MoneyPresenter
 import kash.ZeroCents
 import kollections.List
 import kollections.iEmptyList
@@ -9,28 +10,29 @@ import kollections.iListOf
 import kotlin.js.JsExport
 
 data class CostPresenter(
+    val src: CostDto,
     val before: CostBreakDownPresenter,
-    val after: CostBreakDownPresenter
+    val after: CostBreakDownPresenter,
+    val discount: MoneyPresenter,
+    val taxes: MoneyPresenter
 ) {
     val summary: List<CostSummary> by lazy {
-        val discount = before.discount.cents - after.discount.cents
-        val tax = before.tax.cents - after.tax.cents
         when {
-            discount > ZeroCents && tax > ZeroCents -> iListOf(
+            discount.cents > ZeroCents && taxes.cents > ZeroCents -> iListOf(
                 CostSummary("Value", before.discount),
-                CostSummary("Discount", before.discount.copy(cents = discount)),
+                CostSummary("Discount", discount),
                 CostSummary("Subtotal", after.discount),
-                CostSummary("Tax", before.tax.copy(cents = tax))
+                CostSummary("Tax", taxes)
             )
 
-            discount > ZeroCents && tax <= ZeroCents -> iListOf(
+            discount.cents > ZeroCents && taxes.cents <= ZeroCents -> iListOf(
                 CostSummary("Subtotal", before.discount),
-                CostSummary("Discount", before.discount.copy(cents = discount))
+                CostSummary("Discount", discount)
             )
 
-            discount <= ZeroCents && tax > ZeroCents -> iListOf(
+            discount.cents <= ZeroCents && taxes.cents > ZeroCents -> iListOf(
                 CostSummary("Subtotal", before.tax),
-                CostSummary("Tax", before.tax.copy(cents = tax))
+                CostSummary("Tax", taxes)
             )
 
             else -> iEmptyList()

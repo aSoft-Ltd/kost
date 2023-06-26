@@ -6,5 +6,5 @@ package kost
 import kotlin.js.JsExport
 
 interface CalculableDto {
-    val cost: CostDto
+    val costWithLineItemDiscount: CostDto
 }

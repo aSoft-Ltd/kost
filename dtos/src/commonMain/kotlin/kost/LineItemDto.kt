@@ -5,7 +5,6 @@ package kost
 
 import bee.TaskStatus
 import kash.Cents
-import kash.sum
 import kollections.List
 import kommerce.Offerable
 import kost.params.LineItemParams
@@ -23,17 +22,15 @@ data class LineItemDto(
     val unit: String,
     val ref: VendorReference,
     val photos: List<String>,
-    override val taxes: TaxesDto,
-    override val discount: LineItemDiscountDto,
-) : LineItemCalculableDto {
+    val taxes: TaxesDto,
+    val discount: LineItemDiscountDto,
+) {
 
-    override val cost: CostDto by lazy {
-        val costBeforeDiscount = unitPrice * quantity
-        val costBeforeTax = costBeforeDiscount - discount.total
-        val totalTax = taxes.items.map { it.amount }.sum()
+    val cost: CostDto by lazy {
         CostDto(
-            before = CostBreakDownDto(discount = costBeforeDiscount, tax = costBeforeTax),
-            after = CostBreakDownDto(discount = costBeforeTax, tax = costBeforeTax + totalTax),
+            beforeDiscount = unitPrice * quantity,
+            discount = discount.total,
+            taxes = taxes.total
         )
     }
 

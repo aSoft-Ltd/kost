@@ -38,7 +38,10 @@ class TaxesField(
         }
     }
 
-    fun add(tax: Tax) = set((output + tax).toIList())
+    fun add(tax: Tax) {
+        val t = output.find { it == tax }
+        if (t == null) set((output + tax).toIList())
+    }
 
     fun remove(tax: Tax) = set((output - tax).toIList())
 
