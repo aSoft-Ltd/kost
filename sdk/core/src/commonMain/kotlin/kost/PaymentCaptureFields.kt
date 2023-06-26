@@ -15,7 +15,11 @@ import symphony.selectSingle
 import symphony.text
 import kost.PaymentCaptureOutput as Params
 
-class PaymentCaptureFields(unpaid: MoneyPresenter) : Fields<Params>(Params(unpaid.amount.asDouble)) {
+class PaymentCaptureFields(
+    val paid: MoneyPresenter,
+    val unpaid: MoneyPresenter,
+    val total: MoneyPresenter
+) : Fields<Params>(Params(unpaid.amount.asDouble)) {
 
     val amount = money(output::amount)
 
