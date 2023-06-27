@@ -22,12 +22,13 @@ import symphony.toWarnings
 import kotlin.js.JsExport
 import kotlin.reflect.KMutableProperty0
 
-class PaymentCaptureField<O : PaymentCaptureOutput?>(
+class PaymentCaptureField<O : PaymentCaptureOutput?, out T>(
     val name: KMutableProperty0<O>,
     label: String,
     value: O,
     hidden: Boolean,
     hint: String,
+    val reference: () -> T,
     val total: MoneyPresenter,
     val paid: MoneyPresenter,
     val unpaid: MoneyPresenter,
@@ -35,7 +36,10 @@ class PaymentCaptureField<O : PaymentCaptureOutput?>(
     factory: ValidationFactory<O>?
 ) : AbstractField<O, State<O>>(label, factory), Settable<O> {
 
-    val form = PaymentCaptureFields(paid, unpaid, total).toForm(
+    val form = PaymentCaptureFields(
+        reference = reference,
+        paid, unpaid, total
+    ).toForm(
         heading = "Payment Capture Form",
         details = "Capture a payment",
         config = SubmitConfig(Logger(), exitOnSuccess = false)
@@ -43,7 +47,9 @@ class PaymentCaptureField<O : PaymentCaptureOutput?>(
         onSubmit { set(it as O); Later(it) }
     }
 
-    init { form.hide() }
+    init {
+        form.hide()
+    }
 
     override fun set(value: O) {
         val res = validator.validate(value)
@@ -58,9 +64,9 @@ class PaymentCaptureField<O : PaymentCaptureOutput?>(
     override fun cleared() = initial.copy(output = null)
 
     override fun State<O>.with(
-        hidden: Boolean,
+        visibility: Boolean,
         feedbacks: Feedbacks
-    ) = copy(hidden = hidden, feedbacks = feedbacks)
+    ) = copy(hidden = visibility, feedbacks = feedbacks)
 
     data class State<out O>(
         override val output: O?,

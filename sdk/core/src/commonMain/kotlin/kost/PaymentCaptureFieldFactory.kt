@@ -7,9 +7,10 @@ import symphony.Fields
 import symphony.internal.Changer
 import kotlin.reflect.KMutableProperty0
 
-fun <T : PaymentCaptureOutput?> Fields<*>.payment(
+fun <T : PaymentCaptureOutput?, P> Fields<*>.payment(
     name: KMutableProperty0<T>,
     label: String = name.name,
+    reference: () -> P,
     total: MoneyPresenter,
     paid: MoneyPresenter = total.copy(cents = ZeroCents),
     unpaid: MoneyPresenter = total,
@@ -19,5 +20,5 @@ fun <T : PaymentCaptureOutput?> Fields<*>.payment(
     onChange: Changer<T>? = null,
     factory: ValidationFactory<T>? = null
 ) = getOrCreate(name) {
-    PaymentCaptureField(name, label, value, hidden, hint, total, paid, unpaid, onChange, factory)
+    PaymentCaptureField(name, label, value, hidden, hint, reference, total, paid, unpaid, onChange, factory)
 }

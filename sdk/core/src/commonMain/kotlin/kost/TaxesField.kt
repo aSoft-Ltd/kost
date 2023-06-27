@@ -9,7 +9,7 @@ import kollections.iEmptyList
 import kollections.toIList
 import koncurrent.Later
 import symphony.SubmitConfig
-import symphony.internal.AbstractBaseField
+import symphony.internal.BaseFieldImpl
 import symphony.internal.Changer
 import symphony.toForm
 import kotlin.js.JsExport
@@ -23,7 +23,7 @@ class TaxesField(
     hidden: Boolean,
     hint: String,
     onChange: Changer<List<Tax>>?,
-) : AbstractBaseField<List<Tax>>(name, label, value, hidden, hint, onChange, null) {
+) : BaseFieldImpl<List<Tax>>(name, label, value, hidden, hint, onChange, null) {
     val source = mutableLiveListOf(*src.toTypedArray())
 
     val tax = TaxFields().toForm(

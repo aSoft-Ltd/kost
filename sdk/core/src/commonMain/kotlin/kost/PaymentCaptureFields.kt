@@ -15,7 +15,8 @@ import symphony.selectSingle
 import symphony.text
 import kost.PaymentCaptureOutput as Params
 
-class PaymentCaptureFields(
+class PaymentCaptureFields<out T>(
+    val reference: () -> T,
     val paid: MoneyPresenter,
     val unpaid: MoneyPresenter,
     val total: MoneyPresenter

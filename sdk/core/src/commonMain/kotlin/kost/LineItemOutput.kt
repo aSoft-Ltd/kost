@@ -18,20 +18,21 @@ class LineItemOutput(
     val offerable: Offerable,
     val currency: Currency,
     val formatter: MoneyFormatter,
-    var unitPrice: Double,
-    var details: String,
-    var quantity: Double,
-    var unit: String,
-    var unitDiscount: Double,
-    var overallDiscount: Double,
+    var unitPrice: Double?,
+    var details: String?,
+    var quantity: Double?,
+    var unit: String?,
+    var unitDiscount: Double?,
+    var overallDiscount: Double?,
     var taxes: List<Tax>
 ) {
 
     fun cost(): CostPresenter {
-        val beforeDiscount = unitPrice.cents * quantity * 100
-        val discountPerItem = unitDiscount.cents * 100
-        val allItemsDiscount = overallDiscount.cents * 100
-        val totalDiscount = allItemsDiscount + (discountPerItem * quantity)
+        val n = quantity ?: 1.0
+        val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
+        val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
+        val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
+        val totalDiscount = allItemsDiscount + (discountPerItem * n)
         val afterDiscount = beforeDiscount - totalDiscount
 
         return CostDto(
@@ -43,12 +44,12 @@ class LineItemOutput(
 
     fun toParams() = LineItemParams(
         data = offerable,
-        details = details,
-        quantity = quantity,
-        unit = unit,
+        details = details ?: offerable.name,
+        quantity = quantity ?: 1.0,
+        unit = unit ?: "each",
         unitDiscount = ZeroCents,
         taxes = taxes,
-        unitPrice = unitPrice.cents,
-        overallDiscount = overallDiscount.cents
+        unitPrice = unitPrice?.cents ?: ZeroCents,
+        overallDiscount = overallDiscount?.cents ?: ZeroCents
     )
 }
