@@ -1,18 +1,20 @@
 package kost
 
 import kollections.List
+import kollections.MutableList
+import neat.ValidationFactory
 import symphony.Fields
-import symphony.internal.Changer
-import kotlin.reflect.KMutableProperty0
+import symphony.Visibility
+import symphony.Changer
+import kotlin.reflect.KProperty0
 
 fun Fields<*>.taxes(
-    name: KMutableProperty0<List<Tax>>,
+    name: KProperty0<MutableList<Tax>>,
     src: Collection<Tax>,
-    value: List<Tax> = name.get(),
     label: String = name.name,
-    hidden: Boolean = false,
-    hint: String = label,
-    onChange: Changer<List<Tax>>?
+    visibility: Visibility = Visibility.Visible,
+    onChange: Changer<List<Tax>>? = null,
+    factory: ValidationFactory<List<Tax>>? = null
 ) = getOrCreate(name) {
-    TaxesField(name, label, src, value, hidden, hint, onChange)
+    TaxesField(name, label, src, visibility, onChange, factory)
 }

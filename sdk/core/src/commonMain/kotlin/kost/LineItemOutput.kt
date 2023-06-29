@@ -9,6 +9,7 @@ import kash.ZeroCents
 import kash.cents
 import kash.sum
 import kollections.List
+import kollections.MutableList
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kost.transformers.toPresenter
@@ -24,7 +25,7 @@ class LineItemOutput(
     var unit: String?,
     var unitDiscount: Double?,
     var overallDiscount: Double?,
-    var taxes: List<Tax>
+    val taxes: MutableList<Tax>
 ) {
 
     fun cost(): CostPresenter {

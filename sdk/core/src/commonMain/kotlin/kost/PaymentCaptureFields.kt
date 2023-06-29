@@ -13,14 +13,14 @@ import symphony.date
 import symphony.money
 import symphony.selectSingle
 import symphony.text
-import kost.PaymentCaptureOutput as Params
+import kost.PaymentCaptureOutput as Output
 
 class PaymentCaptureFields<out T>(
     val reference: () -> T,
     val paid: MoneyPresenter,
     val unpaid: MoneyPresenter,
     val total: MoneyPresenter
-) : Fields<Params>(Params(unpaid.amount.asDouble)) {
+) : Fields<Output>(Output(unpaid.amount.asDouble)) {
 
     val amount = money(output::amount)
 
@@ -37,14 +37,12 @@ class PaymentCaptureFields<out T>(
 
     val status = selectSingle(
         name = output::status,
-        value = DocumentStatus.Draft,
         items = DocumentStatus.values().toList(),
         mapper = { Option(it.label, it.name, false) }
     )
 
     val method = selectSingle(
         name = output::method,
-        value = CashDto(ZeroCents, ZeroCents),
         items = listOf(
             CashDto(ZeroCents, ZeroCents),
             ChequeDto(""),

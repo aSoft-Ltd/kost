@@ -8,7 +8,7 @@ import symphony.integer
 import symphony.name
 import kotlin.js.JsExport
 
-class TaxFields : Fields<Tax>(Tax("", 0)) {
+class TaxFields : Fields<TaxOutput>(TaxOutput("", 0)) {
     val name = name(output::name)
     val rate = integer(output::rate)
 }

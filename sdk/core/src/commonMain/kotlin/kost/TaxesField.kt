@@ -5,50 +5,38 @@ package kost
 
 import cinematic.mutableLiveListOf
 import kollections.List
-import kollections.iEmptyList
-import kollections.toIList
+import kollections.MutableList
 import koncurrent.Later
+import neat.ValidationFactory
 import symphony.SubmitConfig
-import symphony.internal.BaseFieldImpl
-import symphony.internal.Changer
+import symphony.Visibility
+import symphony.Changer
+import symphony.internal.ListFieldImpl
 import symphony.toForm
 import kotlin.js.JsExport
-import kotlin.reflect.KMutableProperty0
+import kotlin.reflect.KProperty0
 
 class TaxesField(
-    name: KMutableProperty0<List<Tax>>,
+    name: KProperty0<MutableList<Tax>>,
     label: String,
     src: Collection<Tax>,
-    value: List<Tax>,
-    hidden: Boolean,
-    hint: String,
+    visibility: Visibility,
     onChange: Changer<List<Tax>>?,
-) : BaseFieldImpl<List<Tax>>(name, label, value, hidden, hint, onChange, null) {
+    factory: ValidationFactory<List<Tax>>?
+) : ListFieldImpl<Tax>(name, label, visibility, onChange, factory) {
     val source = mutableLiveListOf(*src.toTypedArray())
 
     val tax = TaxFields().toForm(
         heading = "Tax Form",
         details = "Add a new tax",
-        config = SubmitConfig()
+        config = SubmitConfig(),
+        visibility = Visibility.Hidden
     ) {
         onSubmit {
-            source.add(it)
-            add(it)
-            Later(it)
+            val tax = it.toTax().getOrThrow()
+            source.add(tax)
+            add(tax)
+            Later(tax)
         }
     }
-
-    fun add(tax: Tax) {
-        val t = output.find { it == tax }
-        if (t == null) set((output + tax).toIList())
-    }
-
-    fun remove(tax: Tax) = set((output - tax).toIList())
-
-    override fun finish() {
-        tax.finish()
-        super.finish()
-    }
-
-    override val output: List<Tax> get() = state.value.output ?: iEmptyList()
 }

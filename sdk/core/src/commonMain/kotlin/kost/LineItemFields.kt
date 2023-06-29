@@ -21,7 +21,7 @@ class LineItemFields(
         label = "Price",
         onChange = {
             onChange?.invoke(output)
-            state.value = state.value.copy(output = output)
+            notify()
         }
     )
 
@@ -33,7 +33,7 @@ class LineItemFields(
         name = output::quantity,
         onChange = {
             onChange?.invoke(output)
-            state.value = state.value.copy(output = output)
+            notify()
         }
     )
 
@@ -42,7 +42,7 @@ class LineItemFields(
         label = "Discount per item",
         onChange = {
             onChange?.invoke(output)
-            state.value = state.value.copy(output = output)
+            notify()
         }
     )
 
@@ -50,7 +50,7 @@ class LineItemFields(
         name = output::overallDiscount,
         onChange = {
             onChange?.invoke(output)
-            state.value = state.value.copy(output = output)
+            notify()
         }
     )
 
@@ -59,7 +59,7 @@ class LineItemFields(
         src = taxes,
         onChange = {
             onChange?.invoke(output)
-            state.value = state.value.copy(output = output)
+            notify()
         }
     )
 }
