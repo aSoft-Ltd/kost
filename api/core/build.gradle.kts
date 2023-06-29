@@ -20,8 +20,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.kostCore)
-                api(projects.bitframeServiceBuilderApiCore)
                 api(projects.koncurrentLaterCore)
             }
         }

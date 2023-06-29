@@ -36,17 +36,4 @@ data class LineItem(
     override val discount: LineItemDiscount = discountOf(costBeforeDiscount, unitDiscount, quantity, compoundDiscount)
 
     override val taxAmount: Money get() = discount.costAfter * tax.rate / 100
-
-//    fun toParams() = LineItemParams(
-//        data = data,
-//        unitRate = unitRate,
-//        details = details,
-//        quantity = quantity,
-//        unit = unit,
-//        unitDiscount = unitDiscount,
-//        tax = tax,
-//        ref = ref,
-//        photos = photos,
-//        compoundDiscount = compoundDiscount
-//    )
 }
