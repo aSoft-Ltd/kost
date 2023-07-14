@@ -4,7 +4,10 @@
 package kost
 
 import cinematic.mutableLiveOf
+import kash.Currency
+import kash.MoneyFormatter
 import kash.MoneyPresenter
+import kash.transformers.toPresenter
 import kollections.iEmptyList
 import koncurrent.Later
 import kost.PaymentCaptureField.State
@@ -26,15 +29,17 @@ import symphony.toForm
 import symphony.toWarnings
 import kotlin.js.JsExport
 import kotlin.reflect.KMutableProperty0
+import kotlin.reflect.KProperty0
 
 class PaymentCaptureField<out T>(
     private val property: KMutableProperty0<PaymentCaptureOutput?>,
     label: String,
     visibility: Visibility,
-    val reference: () -> T,
-    val total: MoneyPresenter,
-    val paid: MoneyPresenter,
-    val unpaid: MoneyPresenter,
+    currency: Currency,
+    formatter: MoneyFormatter,
+    referenceProperty: KProperty0<T>,
+    totalProperty: KProperty0<MoneyPresenter>,
+    paidProperty: KProperty0<MoneyPresenter>,
     private val onChange: Changer<PaymentCaptureOutput>?,
     factory: ValidationFactory<PaymentCaptureOutput>?
 ) : AbstractHideable(), Field<PaymentCaptureOutput, State>, Settable<PaymentCaptureOutput> {
@@ -42,8 +47,11 @@ class PaymentCaptureField<out T>(
     protected val validator = custom<PaymentCaptureOutput>(label).configure(factory)
 
     val form = PaymentCaptureFields(
-        reference = reference,
-        paid, unpaid, total
+        currency = currency,
+        formatter = formatter,
+        referenceProperty = referenceProperty,
+        totalProperty = totalProperty,
+        paidProperty = paidProperty,
     ).toForm(
         heading = "Payment Capture Form",
         details = "Capture a payment",
@@ -111,6 +119,11 @@ class PaymentCaptureField<out T>(
     override fun setVisibility(v: Visibility) {
         state.value = state.value.copy(visibility = v)
     }
+
+    val reference get() = form.fields.reference
+    val total get() = form.fields.total
+    val paid get() = form.fields.paid
+    val unpaid get() = form.fields.unpaid
 
     override val output get() = state.value.output
     override val required get() = state.value.required

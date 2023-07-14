@@ -11,7 +11,9 @@ import krono.Instant
 import krono.LocalDate
 
 data class PaymentCaptureOutput(
-    var amount: Double? = 0.0,
+    val amountRequired: Double,
+    val amountPaid: Double,
+    var amount: Double? = null,
     var date: LocalDate? = null,
     var details: String? = null,
     var from: String? = null,

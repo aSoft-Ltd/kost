@@ -2,25 +2,28 @@
 
 package kost
 
-import bee.DocumentStatus
+import kash.Currency
+import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kash.ZeroCents
+import kash.transformers.toPresenter
 import kollections.JsExport
 import symphony.Fields
 import symphony.Option
-import symphony.boolean
 import symphony.date
 import symphony.money
 import symphony.selectSingle
 import symphony.text
+import kotlin.reflect.KProperty0
 import kost.PaymentCaptureOutput as Output
 
 class PaymentCaptureFields<out T>(
-    val reference: () -> T,
-    val paid: MoneyPresenter,
-    val unpaid: MoneyPresenter,
-    val total: MoneyPresenter
-) : Fields<Output>(Output(unpaid.amount.asDouble)) {
+    private val currency: Currency,
+    private val formatter: MoneyFormatter,
+    private val referenceProperty: KProperty0<T>?,
+    private val totalProperty: KProperty0<MoneyPresenter>?,
+    private val paidProperty: KProperty0<MoneyPresenter>?,
+) : Fields<Output>(Output(totalProperty?.get()?.amount?.asDouble ?: 0.0, paidProperty?.get()?.amount?.asDouble ?: 0.0)) {
 
     val amount = money(output::amount)
 
@@ -29,17 +32,6 @@ class PaymentCaptureFields<out T>(
     val details = text(output::details)
 
     val to = text(output::to)
-
-    val fullyPaid = boolean(
-        name = output::fullyPaid,
-        label = "Fully paid"
-    )
-
-    val status = selectSingle(
-        name = output::status,
-        items = DocumentStatus.values().toList(),
-        mapper = { Option(it.label, it.name, false) }
-    )
 
     val method = selectSingle(
         name = output::method,
@@ -55,5 +47,21 @@ class PaymentCaptureFields<out T>(
         mapper = { Option(it.typ.label, it.typ.name, false) }
     )
 
+    fun setRemainingAmountToBePaid() {
+        amount.set(unpaid.amount.asDouble.toString())
+    }
+
+    fun smartPopulate() {
+        if (amount.output != null) return
+        setRemainingAmountToBePaid()
+    }
+
     val transactionId = text(output::transactionId)
+
+    val reference get() = referenceProperty?.get()
+    val total get() = totalProperty?.get() ?: Zero
+    val paid get() = paidProperty?.get() ?: Zero
+    val unpaid get() = (total.cents - paid.cents).toPresenter(currency, formatter)
+
+    private val Zero = ZeroCents.toPresenter(currency, formatter)
 }
