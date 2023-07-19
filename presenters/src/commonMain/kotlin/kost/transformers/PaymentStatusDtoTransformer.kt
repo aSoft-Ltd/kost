@@ -10,26 +10,26 @@ import kost.PartiallyPaidPresenter
 import kost.PaymentStatusDto
 import kost.UnpaidDto
 import kost.UnpaidPresenter
-import krono.PureDateTimeFormatter
+import krono.PresenterPattern
 import krono.TimeZone
 
 fun PaymentStatusDto.toPresenter(
     tz: TimeZone,
     currency: Currency,
-    dateFormatter: PureDateTimeFormatter,
-    moneyFormatter: MoneyFormatter,
+    pattern: PresenterPattern,
+    formatter: MoneyFormatter,
 ) = when (this) {
-    is UnpaidDto -> UnpaidPresenter(amount.toPresenter(currency, moneyFormatter))
+    is UnpaidDto -> UnpaidPresenter(amount.toPresenter(currency, formatter))
 
     is FullyPaidDto -> FullyPaidPresenter(
-        payments = payments.map { it.toPresenter(tz, currency, dateFormatter, moneyFormatter) },
-        amount = amount.toPresenter(currency, moneyFormatter)
+        payments = payments.map { it.toPresenter(tz, currency, pattern, formatter) },
+        amount = amount.toPresenter(currency, formatter)
     )
 
     is PartiallyPaidDto -> PartiallyPaidPresenter(
-        payments = payments.map { it.toPresenter(tz, currency, dateFormatter, moneyFormatter) },
-        amount = amount.toPresenter(currency, moneyFormatter),
-        remaining = amount.toPresenter(currency, moneyFormatter),
-        total = total.toPresenter(currency, moneyFormatter)
+        payments = payments.map { it.toPresenter(tz, currency, pattern, formatter) },
+        amount = amount.toPresenter(currency, formatter),
+        remaining = amount.toPresenter(currency, formatter),
+        total = total.toPresenter(currency, formatter)
     )
 }
