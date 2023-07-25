@@ -8,8 +8,8 @@ plugins {
 
 kotlin {
     jvm {
-        library();
         withJava()
+        library();
         tasks.withType<Test> {
             useJUnitPlatform()
         }
