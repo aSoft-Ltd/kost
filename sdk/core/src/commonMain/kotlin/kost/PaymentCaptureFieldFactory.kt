@@ -3,6 +3,7 @@ package kost
 import kash.Currency
 import kash.MoneyFormatter
 import kash.MoneyPresenter
+import krono.Clock
 import neat.ValidationFactory
 import symphony.Changer
 import symphony.Fields
@@ -18,9 +19,10 @@ fun <P> Fields<*>.payment(
     reference: KProperty0<P>,
     total: KProperty0<MoneyPresenter>,
     paid: KProperty0<MoneyPresenter>,
+    clock: Clock,
     visibility: Visibility = Visibility.Hidden,
     onChange: Changer<PaymentCaptureOutput>? = null,
     factory: ValidationFactory<PaymentCaptureOutput>? = null
 ) = getOrCreate(name) {
-    PaymentCaptureField(name, label, visibility, currency, formatter, reference, total, paid, onChange, factory)
+    PaymentCaptureField(name, label, visibility, currency, formatter, reference, total, paid, clock, onChange, factory)
 }

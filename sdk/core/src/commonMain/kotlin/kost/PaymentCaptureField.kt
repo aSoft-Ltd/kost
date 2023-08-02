@@ -11,6 +11,7 @@ import kash.transformers.toPresenter
 import kollections.iEmptyList
 import koncurrent.Later
 import kost.PaymentCaptureField.State
+import krono.Clock
 import lexi.Logger
 import neat.ValidationFactory
 import neat.Validity
@@ -40,6 +41,7 @@ class PaymentCaptureField<out T>(
     referenceProperty: KProperty0<T>,
     totalProperty: KProperty0<MoneyPresenter>,
     paidProperty: KProperty0<MoneyPresenter>,
+    clock: Clock,
     private val onChange: Changer<PaymentCaptureOutput>?,
     factory: ValidationFactory<PaymentCaptureOutput>?
 ) : AbstractHideable(), Field<PaymentCaptureOutput, State>, Settable<PaymentCaptureOutput> {
@@ -52,6 +54,7 @@ class PaymentCaptureField<out T>(
         referenceProperty = referenceProperty,
         totalProperty = totalProperty,
         paidProperty = paidProperty,
+        clock = clock,
     ).toForm(
         heading = "Payment Capture Form",
         details = "Capture a payment",

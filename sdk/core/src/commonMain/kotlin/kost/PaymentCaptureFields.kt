@@ -8,6 +8,8 @@ import kash.MoneyPresenter
 import kash.ZeroCents
 import kash.transformers.toPresenter
 import kollections.JsExport
+import krono.Clock
+import krono.Instant
 import symphony.Fields
 import symphony.Option
 import symphony.date
@@ -23,7 +25,16 @@ class PaymentCaptureFields<out T>(
     private val referenceProperty: KProperty0<T>?,
     private val totalProperty: KProperty0<MoneyPresenter>?,
     private val paidProperty: KProperty0<MoneyPresenter>?,
-) : Fields<Output>(Output(totalProperty?.get()?.amount?.asDouble ?: 0.0, paidProperty?.get()?.amount?.asDouble ?: 0.0)) {
+    private val clock: Clock,
+) : Fields<Output>(
+    Output(
+        amountRequired = totalProperty?.get()?.amount?.asDouble ?: 0.0,
+        amountPaid = paidProperty?.get()?.amount?.asDouble ?: 0.0,
+        date = Instant(clock.currentMillisAsLong()).atSystemZone().date,
+        currency = currency,
+        formatter = formatter
+    )
+) {
 
     val amount = money(output::amount)
 
