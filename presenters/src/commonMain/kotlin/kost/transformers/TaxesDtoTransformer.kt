@@ -5,14 +5,14 @@ package kost.transformers
 import kash.Currency
 import kash.MoneyFormatter
 import kash.transformers.toPresenter
-import kost.TaxesDto
+import kost.LineItemDto
 import kost.TaxesPresenter
 
-inline fun TaxesDto.toPresenter(
+inline fun LineItemDto.toTaxesPresenter(
     currency: Currency,
     formatter: MoneyFormatter
 ) = TaxesPresenter(
-    src = this,
-    items = items.map { it.toPresenter(currency, formatter) },
-    total = total.toPresenter(currency, formatter)
+    src = taxes,
+    items = taxes.items.map { it.toPresenter(cost.before.tax, currency, formatter) },
+    total = cost.taxes.toPresenter(currency, formatter)
 )

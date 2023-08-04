@@ -8,7 +8,6 @@ import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
 import kash.sum
-import kollections.List
 import kollections.MutableList
 import kommerce.Offerable
 import kost.params.LineItemParams
@@ -25,7 +24,7 @@ class LineItemOutput(
     var unit: String?,
     var unitDiscount: Double?,
     var overallDiscount: Double?,
-    val taxes: MutableList<Tax>
+    val taxes: MutableList<TaxPresenter>
 ) {
 
     fun cost(): CostPresenter {
@@ -39,7 +38,7 @@ class LineItemOutput(
         return CostDto(
             beforeDiscount = beforeDiscount,
             discount = totalDiscount,
-            taxes = taxes.map { it.toDto(afterDiscount).amount }.sum()
+            taxes = taxes.map { it.of(afterDiscount) }.sum()
         ).toPresenter(currency, formatter)
     }
 
@@ -49,7 +48,7 @@ class LineItemOutput(
         quantity = quantity ?: 1.0,
         unit = unit ?: "each",
         unitDiscount = ZeroCents,
-        taxes = taxes,
+        taxes = taxes.map { it.src },
         unitPrice = unitPrice?.cents ?: ZeroCents,
         overallDiscount = overallDiscount?.cents ?: ZeroCents
     )

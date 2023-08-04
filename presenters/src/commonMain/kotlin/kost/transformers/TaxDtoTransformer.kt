@@ -2,17 +2,31 @@
 
 package kost.transformers
 
+import kash.Cents
 import kash.Currency
 import kash.MoneyFormatter
 import kash.transformers.toPresenter
+import kost.TaxAmountDto
+import kost.TaxAmountPresenter
+import kost.TaxDto
 import kost.TaxRateDto
-import kost.TaxPresenter
+import kost.TaxRatePresenter
 
-inline fun TaxRateDto.toPresenter(
+inline fun TaxDto.toPresenter(
+    cents: Cents,
     currency: Currency,
     formatter: MoneyFormatter
-) = TaxPresenter(
-    name = name,
-    rate = rate,
-    amount = amount.toPresenter(currency, formatter)
-)
+) = when (this) {
+    is TaxAmountDto -> TaxAmountPresenter(
+        src = this,
+        name = name,
+        total = of(cents).toPresenter(currency, formatter)
+    )
+
+    is TaxRateDto -> TaxRatePresenter(
+        src = this,
+        name = name,
+        rate = rate,
+        total = of(cents).toPresenter(currency, formatter)
+    )
+}

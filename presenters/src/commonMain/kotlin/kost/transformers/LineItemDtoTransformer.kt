@@ -23,8 +23,8 @@ inline fun LineItemDto.toPresenter(
     ref = ref,
     photos = photos,
     discount = discount.toPresenter(currency, formatter),
-    taxes = taxes.toPresenter(currency, formatter),
     cost = cost.toPresenter(currency, formatter),
+    taxes = toTaxesPresenter(currency, formatter),
     currency = currency,
     formatter = formatter
 )

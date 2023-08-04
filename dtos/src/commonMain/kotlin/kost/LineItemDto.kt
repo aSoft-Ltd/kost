@@ -27,10 +27,12 @@ data class LineItemDto(
 ) {
 
     val cost: CostDto by lazy {
+        val beforeDiscount = unitPrice * quantity
+        val afterDiscount = beforeDiscount - discount.total
         CostDto(
-            beforeDiscount = unitPrice * quantity,
+            beforeDiscount = beforeDiscount,
             discount = discount.total,
-            taxes = taxes.total
+            taxes = taxes.total(afterDiscount)
         )
     }
 
@@ -41,7 +43,7 @@ data class LineItemDto(
         quantity = quantity,
         unit = unit,
         unitDiscount = discount.unit(),
-        taxes = taxes.toTaxes(),
+        taxes = taxes.items,
         overallDiscount = discount.overall()
     )
 }

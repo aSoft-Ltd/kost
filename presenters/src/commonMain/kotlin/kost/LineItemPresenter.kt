@@ -37,7 +37,7 @@ data class LineItemPresenter(
         quantity = quantity,
         unit = unit,
         unitDiscount = ZeroCents,
-        taxes = taxes.src.items.map { Tax(it.name, it.rate) },
+        taxes = taxes.items.map { it.src },
         unitPrice = unitPrice.cents,
         overallDiscount = discount.total.cents
     )

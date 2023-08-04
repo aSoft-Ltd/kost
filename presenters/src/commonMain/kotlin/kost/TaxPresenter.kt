@@ -6,12 +6,8 @@ package kost
 import kash.MoneyPresenter
 import kotlin.js.JsExport
 
-data class TaxPresenter(
-    val name: String,
-    val rate: Int,
-    val amount: MoneyPresenter
-) {
-    fun toDto() = TaxRateDto(name, rate, amount.cents)
-
-    fun toTax() = Tax(name, rate)
+sealed interface TaxPresenter {
+    val src: TaxDto
+    val name: String
+    val total: MoneyPresenter
 }
