@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 data class TaxesDto(
     val items: List<TaxDto>
 ) {
-    val total: Cents by lazy { items.map { it.amount }.sum() }
+    fun total(cents: Cents): Cents = items.map { it.of(cents) }.sum()
 }

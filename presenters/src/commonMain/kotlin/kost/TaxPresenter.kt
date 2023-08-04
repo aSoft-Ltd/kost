@@ -11,7 +11,7 @@ data class TaxPresenter(
     val rate: Int,
     val amount: MoneyPresenter
 ) {
-    fun toDto() = TaxDto(name, rate, amount.cents)
+    fun toDto() = TaxRateDto(name, rate, amount.cents)
 
     fun toTax() = Tax(name, rate)
 }

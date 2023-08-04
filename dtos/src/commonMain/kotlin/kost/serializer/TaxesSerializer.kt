@@ -4,6 +4,7 @@ package kost.serializer
 
 import kollections.toIList
 import kost.TaxDto
+import kost.TaxRateDto
 import kost.TaxesDto
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer

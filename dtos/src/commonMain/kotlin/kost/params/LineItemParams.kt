@@ -8,6 +8,7 @@ import kash.ZeroCents
 import kollections.iEmptyList
 import kommerce.Offerable
 import kost.Tax
+import kost.TaxDto
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
@@ -19,6 +20,6 @@ data class LineItemParams(
     val quantity: Double = 1.0,
     val unit: String = "each",
     val unitDiscount: Cents = ZeroCents,
-    val taxes: List<Tax> = iEmptyList(),
+    val taxes: List<TaxDto> = iEmptyList(),
     val overallDiscount: Cents = ZeroCents
 )
