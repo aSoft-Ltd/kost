@@ -5,10 +5,10 @@ package kost.transformers
 import kash.Currency
 import kash.MoneyFormatter
 import kash.transformers.toPresenter
-import kost.TaxDto
+import kost.TaxRateDto
 import kost.TaxPresenter
 
-inline fun TaxDto.toPresenter(
+inline fun TaxRateDto.toPresenter(
     currency: Currency,
     formatter: MoneyFormatter
 ) = TaxPresenter(
