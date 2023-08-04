@@ -3,10 +3,12 @@
 
 package kost
 
+import kash.MoneyPresenter
 import kotlin.js.JsExport
 
-data class TaxRatePresenter(
+data class TaxRateValue(
     override val src: TaxRateDto,
     override val name: String,
     val rate: Int,
-) : TaxPresenter
+    override val total: MoneyPresenter,
+) : TaxValue

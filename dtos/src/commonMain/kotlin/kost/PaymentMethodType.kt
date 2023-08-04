@@ -1,6 +1,8 @@
+@file:JsExport
 package kost
 
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
 @Serializable
 enum class PaymentMethodType(val label: String) {

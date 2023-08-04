@@ -3,12 +3,11 @@
 
 package kost
 
+import kash.MoneyPresenter
 import kotlin.js.JsExport
 
-sealed interface TaxPresenter {
+sealed interface TaxValue {
     val src: TaxDto
     val name: String
-
-    val asAmount get() = this as? TaxAmountPresenter
-    val asRate get() = this as? TaxRatePresenter
+    val total: MoneyPresenter
 }

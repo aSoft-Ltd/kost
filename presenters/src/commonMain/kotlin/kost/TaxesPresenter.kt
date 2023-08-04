@@ -9,6 +9,6 @@ import kotlin.js.JsExport
 
 data class TaxesPresenter(
     val src: TaxesDto,
-    val items: List<TaxPresenter>,
+    val items: List<TaxValue>,
     val total: MoneyPresenter
-) : List<TaxPresenter> by items
+) : List<TaxValue> by items
