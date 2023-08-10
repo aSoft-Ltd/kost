@@ -14,6 +14,7 @@ sealed interface PaymentStatusDto {
     val asUnPaid get() = this as? UnpaidDto
     val asPartiallyPaid get() = this as? PartiallyPaidDto
     val asFullPaid get() = this as? FullyPaidDto
+    val asOverPaid get() = this as? OverPaidDto
 }
 
 @Serializable
@@ -35,3 +36,12 @@ data class FullyPaidDto(
     val payments: List<PaymentDto>,
     override val amount: Cents
 ) : PaymentStatusDto
+
+@Serializable
+data class OverPaidDto(
+    val payments: List<PaymentDto>,
+    override val amount: Cents,
+    val total: Cents,
+) : PaymentStatusDto {
+    val surplus = amount - total
+}

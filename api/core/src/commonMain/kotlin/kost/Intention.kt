@@ -18,6 +18,8 @@ data class Intention<out I : Any, out P : Any> @PublishedApi internal constructo
         Create, Update, Delete
     }
 
+    fun <R : Any> map(transform: (P) -> R): Intention<I, R> = Intention(uid, params = if (params != null) transform(params) else null, type)
+
     fun prettyString() = type.name + " uid = $uid, params = $params"
 }
 
@@ -29,7 +31,6 @@ inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.create(
     params: P,
     unique: (P?) -> Any?
 ) = append(CreateIntention(params), unique)
-
 
 
 inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.update(
