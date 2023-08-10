@@ -28,20 +28,21 @@ class LineItemOutput(
     val taxes: MutableList<TaxPresenter>
 ) {
 
-    fun cost(): CostPresenter {
-        val n = quantity ?: 1.0
-        val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
-        val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
-        val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
-        val totalDiscount = allItemsDiscount + (discountPerItem * n)
-        val beforeTaxes = beforeDiscount - totalDiscount
+    val cost
+        get() = run {
+            val n = quantity ?: 1.0
+            val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
+            val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
+            val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
+            val totalDiscount = allItemsDiscount + (discountPerItem * n)
+            val beforeTaxes = beforeDiscount - totalDiscount
 
-        return CostDto(
-            beforeDiscount = beforeDiscount,
-            discount = totalDiscount,
-            taxes = taxes.map { it.src.of(beforeTaxes) }.sum()
-        ).toPresenter(currency, formatter)
-    }
+            CostDto(
+                 beforeDiscount = beforeDiscount,
+                discount = totalDiscount,
+                taxes = taxes.map { it.src.of(beforeTaxes) }.sum()
+            ).toPresenter(currency, formatter)
+        }
 
     fun toParams() = LineItemParams(
         data = offerable,

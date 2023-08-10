@@ -39,12 +39,14 @@ inline fun TaxDto.toPresenter(
 ) = when (this) {
     is TaxAmountDto -> TaxAmountPresenter(
         src = this,
+        uid = uid,
         name = name,
         amount = amount.toPresenter(currency, formatter)
     )
 
     is TaxRateDto -> TaxRatePresenter(
         src = this,
+        uid = uid,
         name = name,
         rate = rate,
     )
