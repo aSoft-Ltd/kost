@@ -12,7 +12,6 @@ import kollections.MutableList
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kost.transformers.toPresenter
-import kost.transformers.toValue
 import kotlin.js.JsExport
 
 class LineItemOutput(
@@ -38,7 +37,7 @@ class LineItemOutput(
             val beforeTaxes = beforeDiscount - totalDiscount
 
             CostDto(
-                 beforeDiscount = beforeDiscount,
+                beforeDiscount = beforeDiscount,
                 discount = totalDiscount,
                 taxes = taxes.map { it.src.of(beforeTaxes) }.sum()
             ).toPresenter(currency, formatter)
@@ -49,9 +48,9 @@ class LineItemOutput(
         details = details ?: offerable.name,
         quantity = quantity ?: 1.0,
         unit = unit ?: "each",
-        unitDiscount = ZeroCents,
+        unitDiscount = 100.cents * (unitDiscount ?: 0.0),
         taxes = taxes.map { it.src },
-        unitPrice = unitPrice?.cents ?: ZeroCents,
-        overallDiscount = overallDiscount?.cents ?: ZeroCents
+        unitPrice = 100.cents * (unitPrice ?: 0.0),
+        overallDiscount = 100.cents * (overallDiscount ?: 0.0)
     )
 }
