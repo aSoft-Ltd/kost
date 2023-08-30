@@ -41,4 +41,11 @@ fun PaymentStatusDto.toPresenter(
         surplus = surplus.toPresenter(currency, formatter),
         total = total.toPresenter(currency, formatter)
     )
+
+    is OverPaidDto -> OverPaidPresenter(
+        payments = payments.map { it.toPresenter(tz, currency, pattern, formatter) },
+        amount = amount.toPresenter(currency, formatter),
+        surplus = surplus.toPresenter(currency, formatter),
+        total = total.toPresenter(currency, formatter)
+    )
 }

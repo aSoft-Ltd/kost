@@ -41,7 +41,7 @@ data class FullyPaidDto(
 data class OverPaidDto(
     val payments: List<PaymentDto>,
     override val amount: Cents,
-    val total: Cents
+    val total: Cents,
 ) : PaymentStatusDto {
     val surplus = amount - total
 }

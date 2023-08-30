@@ -26,8 +26,9 @@ data class PaymentSummaryDto(
         val paid = paidAmount()
         return when {
             paid == ZeroCents -> UnpaidDto(amount)
-            paid >= amount -> FullyPaidDto(items, amount)
-            else -> PartiallyPaidDto(items, paid, amount)
+            paid == amount -> FullyPaidDto(items, amount)
+            paid < amount -> PartiallyPaidDto(items, paid, amount)
+            else -> OverPaidDto(items, paid, amount)
         }
     }
 }
