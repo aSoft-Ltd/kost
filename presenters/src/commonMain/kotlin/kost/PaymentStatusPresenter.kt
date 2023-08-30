@@ -12,6 +12,7 @@ sealed interface PaymentStatusPresenter {
     val asUnPaid get() = this as? UnpaidPresenter
     val asPartiallyPaid get() = this as? PartiallyPaidPresenter
     val asFullPaid get() = this as? FullyPaidPresenter
+    val asOverPaid get() = this as? OverPaidPresenter
 }
 
 data class UnpaidPresenter(
@@ -28,4 +29,11 @@ data class PartiallyPaidPresenter(
 data class FullyPaidPresenter(
     val payments: List<PaymentPresenter>,
     override val amount: MoneyPresenter
+) : PaymentStatusPresenter
+
+data class OverPaidPresenter(
+    val payments: List<PaymentPresenter>,
+    override val amount: MoneyPresenter,
+    val surplus: MoneyPresenter,
+    val total: MoneyPresenter
 ) : PaymentStatusPresenter
