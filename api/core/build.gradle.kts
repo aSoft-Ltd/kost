@@ -34,6 +34,6 @@ kotlin {
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(),
+    version = libs.versions.asoft.get(),
     description = "A platform agnostic representation of payments and requests"
 )
