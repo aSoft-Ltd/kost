@@ -16,7 +16,7 @@ kotlin {
             dependencies {
                 api(projects.koncurrentLaterCore)
                 api(kotlinx.serialization.core)
-                api(projects.kollectionsInteroperable)
+                api(libs.kollections.interoperable)
                 api(projects.beeCore)
                 api(projects.kronoKotlinx)
                 api(projects.kostDtos)
