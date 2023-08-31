@@ -18,7 +18,7 @@ kotlin {
                 api(kotlinx.serialization.core)
                 api(libs.kollections.interoperable)
                 api(projects.beeCore)
-                api(projects.kronoKotlinx)
+                api(libs.krono.kotlinx)
                 api(projects.kostDtos)
                 api(libs.kash.money)
                 api(projects.symphonyCollections)
