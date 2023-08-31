@@ -25,8 +25,8 @@ kotlin {
                 api(libs.kollections.interoperable)
                 api(projects.beeCore)
                 api(libs.krono.kotlinx)
-                api(projects.identifierCore)
-                api(projects.identifierComm)
+                api(libs.identifier.core)
+                api(libs.identifier.comm)
                 api(libs.kash.money)
                 api(projects.kommerceCore)
             }

@@ -14,11 +14,11 @@ kotlin {
             dependencies {
                 api(projects.kostApiCore)
                 api(projects.kostPresenters)
-                api(projects.symphonyInputChoice)
+                api(libs.symphony.input.choice)
                 api(projects.symphonyInputKrono)
                 api(projects.symphonyInputKash)
-                api(projects.symphonyInputNumber)
-                api(projects.symphonyCollections)
+                api(libs.symphony.input.number)
+                api(libs.symphony.collections)
             }
         }
 
