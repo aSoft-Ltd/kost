@@ -20,7 +20,7 @@ kotlin {
                 api(projects.beeCore)
                 api(projects.kronoKotlinx)
                 api(projects.kostDtos)
-                api(projects.kashMoney)
+                api(libs.kash.money)
                 api(projects.symphonyCollections)
             }
         }

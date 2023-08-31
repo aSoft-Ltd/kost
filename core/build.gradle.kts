@@ -27,7 +27,7 @@ kotlin {
                 api(projects.kronoKotlinx)
                 api(projects.identifierCore)
                 api(projects.identifierComm)
-                api(projects.kashMoney)
+                api(libs.kash.money)
                 api(projects.kommerceCore)
             }
         }

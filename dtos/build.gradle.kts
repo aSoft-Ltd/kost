@@ -25,7 +25,7 @@ kotlin {
                 api(projects.beeCore)
                 api(projects.kronoKotlinx)
                 api(projects.kommerceCore)
-                api(projects.kashCents)
+                api(libs.kash.cents)
             }
         }
 
