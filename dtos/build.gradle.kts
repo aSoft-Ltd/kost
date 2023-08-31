@@ -32,7 +32,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-                implementation(projects.kommanderCore)
+                implementation(libs.kommander.core)
             }
         }
     }
