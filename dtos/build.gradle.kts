@@ -19,26 +19,26 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.koncurrentLaterCore)
+                api(libs.koncurrent.later.core)
                 api(kotlinx.serialization.core)
-                api(projects.kollectionsInteroperable)
+                api(libs.kollections.interoperable)
                 api(projects.beeCore)
-                api(projects.kronoKotlinx)
+                api(libs.krono.kotlinx)
                 api(projects.kommerceCore)
-                api(projects.kashCents)
+                api(libs.kash.cents)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-                implementation(projects.kommanderCore)
+                implementation(libs.kommander.core)
             }
         }
     }
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(),
+    version = libs.versions.asoft.get(),
     description = "A platform agnostic representation of payments and requests"
 )

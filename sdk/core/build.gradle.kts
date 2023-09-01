@@ -14,24 +14,24 @@ kotlin {
             dependencies {
                 api(projects.kostApiCore)
                 api(projects.kostPresenters)
-                api(projects.symphonyInputChoice)
+                api(libs.symphony.input.choice)
                 api(projects.symphonyInputKrono)
                 api(projects.symphonyInputKash)
-                api(projects.symphonyInputNumber)
-                api(projects.symphonyCollections)
+                api(libs.symphony.input.number)
+                api(libs.symphony.collections)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlinx.serialization.json)
-                implementation(projects.kommanderCore)
+                implementation(libs.kommander.core)
             }
         }
     }
 }
 
 aSoftOSSLibrary(
-    version = asoft.versions.root.get(),
+    version = libs.versions.asoft.get(),
     description = "A platform agnostic representation of payments and requests"
 )
