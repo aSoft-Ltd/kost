@@ -12,7 +12,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(projects.kostApiCore)
+                api(libs.kost.api.core)
                 api(projects.kostPresenters)
                 api(libs.symphony.input.choice)
 //                api(projects.symphonyInputKrono)
