@@ -23,12 +23,12 @@ kotlin {
                 api(libs.koncurrent.later.core)
                 api(kotlinx.serialization.core)
                 api(libs.kollections.interoperable)
-                api(projects.beeCore)
+                api(libs.bee.core)
                 api(libs.krono.kotlinx)
                 api(libs.identifier.core)
                 api(libs.identifier.comm)
                 api(libs.kash.money)
-                api(projects.kommerceCore)
+                api(libs.kommerce.core)
             }
         }
 

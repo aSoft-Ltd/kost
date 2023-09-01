@@ -1,26 +1,9 @@
 pluginManagement {
-    enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-    repositories {
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-    }
-
-    dependencyResolutionManagement {
-        versionCatalogs {
-            file("gradle/versions").listFiles().map { it.nameWithoutExtension }.forEach {
-                create(it) { from(files("gradle/versions/$it.toml")) }
-            }
-        }
-    }
+    includeBuild("../build-logic")
 }
 
-val tmp = 0
-
-fun includeRoot(name: String, path: String) {
-    include(":$name")
-    project(":$name").projectDir = File(path)
+plugins {
+    id("multimodule")
 }
 
 fun includeSubs(base: String, path: String = base, vararg subs: String) {
@@ -30,17 +13,13 @@ fun includeSubs(base: String, path: String = base, vararg subs: String) {
     }
 }
 
+listOf(
+    "kommander", "kollections", "kevlar", "neat", "identifier",
+    "kash", "krono", "bee", "koncurrent", "kommerce", "symphony"
+).forEach { includeBuild("../$it") }
+
 rootProject.name = "kost"
 
-// dependencies
-includeSubs("functions", "../functions", "core")
-includeSubs("expect", "../expect", "core", "coroutines")
-includeSubs("kollections", "../kollections", "interoperable")
-includeSubs("formatter", "../formatter", "core")
-
-includeBuild("../kash/kash-generator")
-includeSubs("kash", "../kash", "currency", "money")
-includeSubs("krono", "../krono", "api", "kotlinx")
-
-includeSubs("identifier", "../identifier", "core")
-includeSubs("kost", ".", "core")
+includeSubs("kost", "../kost", "core", "dtos", "presenters")
+includeSubs("kost-api", "../kost/api", "core")
+includeSubs("kost-sdk", "../kost/sdk", "core")

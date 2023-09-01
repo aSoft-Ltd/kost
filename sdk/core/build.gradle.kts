@@ -15,8 +15,8 @@ kotlin {
                 api(projects.kostApiCore)
                 api(projects.kostPresenters)
                 api(libs.symphony.input.choice)
-                api(projects.symphonyInputKrono)
-                api(projects.symphonyInputKash)
+//                api(projects.symphonyInputKrono)
+//                api(projects.symphonyInputKash)
                 api(libs.symphony.input.number)
                 api(libs.symphony.collections)
             }

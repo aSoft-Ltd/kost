@@ -17,7 +17,6 @@ kotlin {
                 api(libs.koncurrent.later.core)
                 api(kotlinx.serialization.core)
                 api(libs.kollections.interoperable)
-                api(projects.beeCore)
                 api(libs.krono.kotlinx)
                 api(projects.kostDtos)
                 api(libs.kash.money)
