@@ -5,7 +5,6 @@ package kost
 
 import kash.Currency
 import kotlinx.serialization.Serializable
-import krono.Now
 import krono.Instant
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
@@ -16,7 +15,7 @@ data class InvoiceHeader @JvmOverloads constructor(
     override val currency: Currency,
     val subject: String? = null,
     val number: String? = null,
-    override val issueDate: Instant = Now(),
+    override val issueDate: Instant,
     override val dueDate: Instant = issueDate,
     override val vendor: Vendor = Vendor.GENERIC,
     override val ref: VendorReference = VendorReference.UNSET,

@@ -12,7 +12,7 @@ import krono.Clock
 import krono.Instant
 import symphony.Fields
 import symphony.Option
-import symphony.date
+import krono.date
 import symphony.money
 import symphony.selectSingle
 import symphony.text
