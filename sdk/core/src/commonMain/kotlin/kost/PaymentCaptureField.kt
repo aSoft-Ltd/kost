@@ -7,7 +7,6 @@ import cinematic.mutableLiveOf
 import kash.Currency
 import kash.MoneyFormatter
 import kash.MoneyPresenter
-import kash.transformers.toPresenter
 import kollections.iEmptyList
 import koncurrent.Later
 import kost.PaymentCaptureField.State
