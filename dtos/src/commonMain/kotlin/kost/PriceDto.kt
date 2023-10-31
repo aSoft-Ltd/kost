@@ -5,7 +5,7 @@ package kost
 
 import kotlin.js.JsExport
 
-data class PriceDtoOld(
+data class PriceDto(
     val buying: CostDto,
     val selling: CostDto
 )

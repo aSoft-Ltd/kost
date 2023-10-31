@@ -4,6 +4,7 @@
 package kost
 
 import bee.TaskStatus
+import kash.Cents
 import kash.ZeroCents
 import kollections.List
 import kommerce.Offerable
@@ -25,7 +26,7 @@ data class LineItemDto2(
     val discount: LineItemDiscountDto,
 ) {
     val price by lazy {
-        PriceDtoOld(
+        PriceDto(
             buying = run {
                 val beforeDiscount = unit.price.buying * quantity
                 val afterDiscount = beforeDiscount - discount.total
@@ -68,7 +69,13 @@ data class LineItemDto2(
     class Unit(
         val price: PriceDto,
         val measure: String
-    )
+    ) {
+        @Serializable
+        class PriceDto(
+            val buying: Cents,
+            val selling: Cents
+        )
+    }
 
     fun toParams() = LineItemParams(
         data = data,
