@@ -12,4 +12,7 @@ import kotlin.jvm.JvmField
 data class CostBreakDownDto(
     @JvmField val tax: Cents,
     @JvmField val discount: Cents
-)
+) {
+    operator fun times(value: Int) = CostBreakDownDto(tax * value, discount * value)
+    operator fun div(value: Int) = CostBreakDownDto(tax / value, discount / value)
+}
