@@ -58,7 +58,7 @@ class PaymentCaptureField<out T>(
         heading = "Payment Capture Form",
         details = "Capture a payment",
         visibility = Visibility.Hidden,
-        config = SubmitConfig(Logger(), exitOnSuccess = false)
+        config = SubmitConfig(exitOnSuccess = false)
     ) {
         onSubmit { set(it); Later(it) }
     }
