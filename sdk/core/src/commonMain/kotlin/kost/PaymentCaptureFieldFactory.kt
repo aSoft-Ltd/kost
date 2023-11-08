@@ -10,6 +10,7 @@ import symphony.Fields
 import symphony.Visibility
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty0
+import symphony.Visibilities
 
 fun <P> Fields<*>.payment(
     name: KMutableProperty0<PaymentCaptureOutput?>,
@@ -20,7 +21,7 @@ fun <P> Fields<*>.payment(
     total: KProperty0<MoneyPresenter>,
     paid: KProperty0<MoneyPresenter>,
     clock: Clock,
-    visibility: Visibility = Visibility.Hidden,
+    visibility: Visibility = Visibilities.Hidden,
     onChange: Changer<PaymentCaptureOutput>? = null,
     factory: ValidationFactory<PaymentCaptureOutput>? = null
 ) = getOrCreate(name) {

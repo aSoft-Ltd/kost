@@ -9,27 +9,25 @@ import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kollections.iEmptyList
 import koncurrent.Later
-import kost.PaymentCaptureField.State
+import kotlin.js.JsExport
+import kotlin.reflect.KMutableProperty0
+import kotlin.reflect.KProperty0
 import krono.Clock
-import lexi.Logger
 import neat.ValidationFactory
 import neat.Validity
 import neat.custom
 import neat.required
-import symphony.FieldState
+import symphony.Changer
 import symphony.Feedbacks
 import symphony.Field
 import symphony.SubmitConfig
+import symphony.Visibilities
 import symphony.Visibility
 import symphony.internal.AbstractHideable
-import symphony.Changer
 import symphony.properties.Settable
 import symphony.toErrors
 import symphony.toForm
 import symphony.toWarnings
-import kotlin.js.JsExport
-import kotlin.reflect.KMutableProperty0
-import kotlin.reflect.KProperty0
 
 class PaymentCaptureField<out T>(
     private val property: KMutableProperty0<PaymentCaptureOutput?>,
@@ -43,7 +41,7 @@ class PaymentCaptureField<out T>(
     clock: Clock,
     private val onChange: Changer<PaymentCaptureOutput>?,
     factory: ValidationFactory<PaymentCaptureOutput>?
-) : AbstractHideable(), Field<PaymentCaptureOutput, State>, Settable<PaymentCaptureOutput> {
+) : AbstractHideable(), Field<PaymentCaptureOutput, PaymentCaptureFieldState>, Settable<PaymentCaptureOutput> {
 
     protected val validator = custom<PaymentCaptureOutput>(label).configure(factory)
 
@@ -57,7 +55,7 @@ class PaymentCaptureField<out T>(
     ).toForm(
         heading = "Payment Capture Form",
         details = "Capture a payment",
-        visibility = Visibility.Hidden,
+        visibility = Visibilities.Hidden,
         config = SubmitConfig(exitOnSuccess = false)
     ) {
         onSubmit { set(it); Later(it) }
@@ -73,14 +71,7 @@ class PaymentCaptureField<out T>(
         onChange?.invoke(res.value)
     }
 
-    data class State(
-        override val output: PaymentCaptureOutput?,
-        override val required: Boolean,
-        override val visibility: Visibility,
-        override val feedbacks: Feedbacks
-    ) : FieldState<PaymentCaptureOutput>
-
-    private val initial = State(
+    private val initial = PaymentCaptureFieldState(
         output = property.get(),
         required = this.validator.required,
         visibility = visibility,
