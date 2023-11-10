@@ -18,6 +18,7 @@ data class LineItem(
     val uid: String,
     val data: Offerable,
     val unitRate: Money,
+    val unitBuyingRate: Money,
     val status: TaskStatus,
     val details: String = data.name,
     val quantity: Double = 1.0,
