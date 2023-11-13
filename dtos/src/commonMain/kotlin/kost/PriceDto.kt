@@ -4,7 +4,9 @@
 package kost
 
 import kotlin.js.JsExport
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PriceDto(
     val buying: CostDto,
     val selling: CostDto

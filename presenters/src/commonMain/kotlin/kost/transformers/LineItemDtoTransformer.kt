@@ -4,7 +4,6 @@ package kost.transformers
 
 import kash.Currency
 import kash.MoneyFormatter
-import kash.transformers.toPresenter
 import kost.LineItemDto
 import kost.LineItemPresenter
 
@@ -15,16 +14,15 @@ inline fun LineItemDto.toPresenter(
     src = this,
     uid = uid,
     data = data,
-    unitPrice = unit.price.selling.toPresenter(currency, formatter),
+    unit = unit.toPresenter(currency, formatter),
     status = status,
     details = details,
     quantity = quantity,
-    unit = unit.measure,
     ref = ref,
     photos = photos,
     discount = discount.toPresenter(currency, formatter),
-    cost = cost.toPresenter(currency, formatter),
     taxes = toTaxesPresenter(currency, formatter),
     currency = currency,
-    formatter = formatter
+    formatter = formatter,
+    price = price.toPresenter(currency, formatter)
 )

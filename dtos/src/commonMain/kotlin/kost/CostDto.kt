@@ -6,7 +6,9 @@ package kost
 import kash.Cents
 import kotlin.js.JsExport
 import kotlin.jvm.JvmField
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CostDto internal constructor(
     @JvmField val after: CostBreakDownDto,
     @JvmField val before: CostBreakDownDto,

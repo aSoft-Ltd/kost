@@ -13,6 +13,6 @@ inline fun LineItemDto.toTaxesPresenter(
     formatter: MoneyFormatter
 ) = TaxesPresenter(
     src = taxes,
-    items = taxes.items.map { it.toValue(cost.before.tax, currency, formatter) },
-    total = cost.taxes.toPresenter(currency, formatter)
+    items = taxes.items.map { it.toValue(price.selling.before.tax, currency, formatter) },
+    total = price.selling.taxes.toPresenter(currency, formatter)
 )

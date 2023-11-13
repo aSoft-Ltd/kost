@@ -16,7 +16,7 @@ import kotlin.js.JsExport
 data class LineItemDto(
     val uid: String,
     val data: Offerable,
-    val unit: Unit,
+    val unit: UnitDto,
     val status: TaskStatus,
     val details: String,
     val quantity: Double,
@@ -28,7 +28,7 @@ data class LineItemDto(
     val price by lazy {
         PriceDto(
             buying = run {
-                val beforeDiscount = unit.price.buying * quantity
+                val beforeDiscount = unit.price.buying.before.discount * quantity
                 val afterDiscount = beforeDiscount
                 CostDto(
                     beforeDiscount = beforeDiscount,
@@ -37,7 +37,7 @@ data class LineItemDto(
                 )
             },
             selling = run {
-                val beforeDiscount = unit.price.selling * quantity
+                val beforeDiscount = unit.price.selling.before.discount * quantity
                 val afterDiscount = beforeDiscount - discount.total
                 CostDto(
                     beforeDiscount = beforeDiscount,
@@ -65,21 +65,9 @@ data class LineItemDto(
         )
     }
 
-    @Serializable
-    class Unit(
-        val price: PriceDto,
-        val measure: String
-    ) {
-        @Serializable
-        class PriceDto(
-            val buying: Cents,
-            val selling: Cents
-        )
-    }
-
     fun toParams() = LineItemParams(
         data = data,
-        unitPrice = unit.price.selling,
+        unitPrice = unit.price.selling.after.discount,
         details = details,
         quantity = quantity,
         unit = unit.measure,

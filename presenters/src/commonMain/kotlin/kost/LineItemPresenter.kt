@@ -6,7 +6,6 @@ package kost
 import bee.TaskStatus
 import kash.Currency
 import kash.MoneyFormatter
-import kash.MoneyPresenter
 import kash.ZeroCents
 import kollections.List
 import kommerce.Offerable
@@ -17,28 +16,27 @@ data class LineItemPresenter(
     val src: LineItemDto,
     val uid: String,
     val data: Offerable,
-    val unitPrice: MoneyPresenter,
+    val unit: UnitPresenter,
     val status: TaskStatus,
     val details: String,
     val quantity: Double,
-    val unit: String,
     val ref: VendorReference,
     val photos: List<String>,
     val currency: Currency,
     val formatter: MoneyFormatter,
-    override val discount: LineItemDiscountPresenter,
-    override val taxes: TaxesPresenter,
-    override val cost: CostPresenter
-) : LineItemCalculablePresenter {
+    val discount: LineItemDiscountPresenter,
+    val taxes: TaxesPresenter,
+    val price: PricePresenter
+) {
 
     fun toParams() = LineItemParams(
         data = data,
         details = details,
         quantity = quantity,
-        unit = unit,
+        unit = unit.measure,
         unitDiscount = ZeroCents,
         taxes = taxes.items.map { it.src },
-        unitPrice = unitPrice.cents,
+        unitPrice = price.selling.after.discount.cents,
         overallDiscount = discount.total.cents
     )
 }
