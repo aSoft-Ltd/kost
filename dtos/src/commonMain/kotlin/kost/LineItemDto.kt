@@ -32,7 +32,7 @@ data class LineItemDto(
                 val afterDiscount = beforeDiscount
                 CostDto(
                     beforeDiscount = beforeDiscount,
-                    discount = discount.total,
+                    discount = ZeroCents,
                     taxes = taxes.total(afterDiscount)
                 )
             },
