@@ -3,6 +3,7 @@
 
 package kost.params
 
+import books.FinancialAccountDto
 import kash.Cents
 import kash.ZeroCents
 import kollections.iEmptyList
@@ -20,5 +21,6 @@ data class LineItemParams(
     val unit: String = "each",
     val unitDiscount: Cents = ZeroCents,
     val taxes: List<TaxDto> = iEmptyList(),
+    val account: FinancialAccountDto? = null,
     val overallDiscount: Cents = ZeroCents
 )

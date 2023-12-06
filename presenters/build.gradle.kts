@@ -21,6 +21,7 @@ kotlin {
                 api(projects.kostDtos)
                 api(libs.kash.money)
                 api(libs.symphony.collections)
+                api("tz.co.asoft:books-accounts-sdk-client-core:0.0.0")
             }
         }
 

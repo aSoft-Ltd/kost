@@ -26,6 +26,7 @@ kotlin {
                 api(libs.krono.kotlinx)
                 api(libs.kommerce.core)
                 api(libs.kash.cents)
+                api("tz.co.asoft:books-accounts-api-core:0.0.0")
             }
         }
 

@@ -4,6 +4,7 @@
 package kost
 
 import bee.TaskStatus
+import books.FinancialAccountPresenter
 import kash.Currency
 import kash.MoneyFormatter
 import kash.ZeroCents
@@ -26,6 +27,7 @@ data class LineItemPresenter(
     val formatter: MoneyFormatter,
     val discount: LineItemDiscountPresenter,
     val taxes: TaxesPresenter,
+    val account: FinancialAccountPresenter,
     val price: PricePresenter
 ) {
 
@@ -37,6 +39,7 @@ data class LineItemPresenter(
         unitDiscount = ZeroCents,
         taxes = taxes.items.map { it.src },
         unitPrice = price.selling.after.discount.cents,
-        overallDiscount = discount.total.cents
+        overallDiscount = discount.total.cents,
+        account = account.src
     )
 }

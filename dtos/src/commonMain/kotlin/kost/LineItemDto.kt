@@ -4,6 +4,7 @@
 package kost
 
 import bee.TaskStatus
+import books.FinancialAccountDto
 import kash.Cents
 import kash.ZeroCents
 import kollections.List
@@ -23,6 +24,7 @@ data class LineItemDto(
     val ref: VendorReference,
     val photos: List<String>,
     val taxes: TaxesDto,
+    val account: FinancialAccountDto?,
     val discount: LineItemDiscountDto,
 ) {
     val price by lazy {
@@ -73,6 +75,7 @@ data class LineItemDto(
         unit = unit.measure,
         unitDiscount = discount.unit(),
         taxes = taxes.items,
-        overallDiscount = discount.overall()
+        overallDiscount = discount.overall(),
+        account = account
     )
 }

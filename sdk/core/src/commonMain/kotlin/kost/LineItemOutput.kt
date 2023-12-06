@@ -3,6 +3,7 @@
 
 package kost
 
+import books.FinancialAccountPresenter
 import kash.Currency
 import kash.MoneyFormatter
 import kash.ZeroCents
@@ -24,7 +25,8 @@ class LineItemOutput(
     var unit: String?,
     var unitDiscount: Double?,
     var overallDiscount: Double?,
-    val taxes: MutableList<TaxPresenter>
+    val taxes: MutableList<TaxPresenter>,
+    var account: FinancialAccountPresenter?,
 ) {
 
     val cost
@@ -51,6 +53,7 @@ class LineItemOutput(
         unitDiscount = 100.cents * (unitDiscount ?: 0.0),
         taxes = taxes.map { it.src },
         unitPrice = 100.cents * (unitPrice ?: 0.0),
-        overallDiscount = 100.cents * (overallDiscount ?: 0.0)
+        overallDiscount = 100.cents * (overallDiscount ?: 0.0),
+        account = account?.src
     )
 }

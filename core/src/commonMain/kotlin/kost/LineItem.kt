@@ -27,7 +27,7 @@ data class LineItem(
     val tax: TaxDeprecated = TaxDeprecated.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
     val photos: List<String> = iListOf(),
-    val compoundDiscount: Money = Zero
+    val compoundDiscount: Money = Zero,
 ) : Calculable {
 
     @Transient
