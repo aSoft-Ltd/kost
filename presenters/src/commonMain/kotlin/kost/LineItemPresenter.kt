@@ -27,7 +27,7 @@ data class LineItemPresenter(
     val formatter: MoneyFormatter,
     val discount: LineItemDiscountPresenter,
     val taxes: TaxesPresenter,
-    val account: FinancialAccountPresenter,
+    val account: FinancialAccountPresenter?,
     val price: PricePresenter
 ) {
 
@@ -40,6 +40,6 @@ data class LineItemPresenter(
         taxes = taxes.items.map { it.src },
         unitPrice = price.selling.after.discount.cents,
         overallDiscount = discount.total.cents,
-        account = account.src
+        account = account?.src
     )
 }

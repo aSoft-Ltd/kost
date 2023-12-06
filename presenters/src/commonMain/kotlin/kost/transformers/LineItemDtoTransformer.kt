@@ -2,6 +2,7 @@
 
 package kost.transformers
 
+import books.toPresenter
 import kash.Currency
 import kash.MoneyFormatter
 import kost.LineItemDto
@@ -24,5 +25,6 @@ inline fun LineItemDto.toPresenter(
     taxes = toTaxesPresenter(currency, formatter),
     currency = currency,
     formatter = formatter,
-    price = price.toPresenter(currency, formatter)
+    price = price.toPresenter(currency, formatter),
+    account = account?.toPresenter()
 )
