@@ -7,7 +7,7 @@ import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kash.ZeroCents
 import kash.transformers.toPresenter
-import kollections.JsExport
+import kotlinx.JsExport
 import krono.Clock
 import krono.Instant
 import symphony.Fields

@@ -10,7 +10,7 @@ import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
 import kash.transformers.toPresenter
-import kollections.JsExport
+import kotlinx.JsExport
 import kost.params.PaymentParams
 import krono.Instant
 import krono.LocalDate
