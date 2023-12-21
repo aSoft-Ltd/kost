@@ -10,7 +10,7 @@ import kost.CashDto
 import kost.PaymentMethodDto
 import kotlinx.serialization.Serializable
 import krono.Instant
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class PaymentParams(

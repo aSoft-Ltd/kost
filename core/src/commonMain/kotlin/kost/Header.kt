@@ -4,7 +4,7 @@
 package kost
 
 import kash.Currency
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import krono.Instant
 
 interface Header {

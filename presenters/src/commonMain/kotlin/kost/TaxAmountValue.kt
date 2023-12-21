@@ -4,7 +4,7 @@
 package kost
 
 import kash.MoneyPresenter
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class TaxAmountValue(
     override val src: TaxAmountDto,

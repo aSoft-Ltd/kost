@@ -11,7 +11,7 @@ import kollections.List
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class LineItemDto(

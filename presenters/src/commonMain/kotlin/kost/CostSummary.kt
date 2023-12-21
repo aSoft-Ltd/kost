@@ -4,6 +4,6 @@
 package kost
 
 import kash.MoneyPresenter
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class CostSummary(val label: String, val amount: MoneyPresenter)

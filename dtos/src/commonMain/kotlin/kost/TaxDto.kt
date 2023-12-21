@@ -2,7 +2,7 @@ package kost
 
 import kash.Cents
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 sealed interface TaxDto {

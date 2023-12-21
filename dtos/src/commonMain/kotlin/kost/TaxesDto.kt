@@ -3,6 +3,7 @@ package kost
 import kash.Cents
 import kash.sum
 import kollections.List
+import kollections.map
 import kost.serializer.TaxesSerializer
 import kotlinx.serialization.Serializable
 

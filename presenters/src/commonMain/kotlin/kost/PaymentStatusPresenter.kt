@@ -4,7 +4,8 @@
 package kost
 
 import kash.MoneyPresenter
-import kotlin.js.JsExport
+import kollections.List
+import kotlinx.JsExport
 
 sealed interface PaymentStatusPresenter {
     val amount: MoneyPresenter

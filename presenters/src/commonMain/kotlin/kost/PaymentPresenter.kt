@@ -6,7 +6,7 @@ package kost
 import bee.DocumentStatus
 import kash.MoneyPresenter
 import krono.DateTimePresenter
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class PaymentPresenter(
     val uid: String,

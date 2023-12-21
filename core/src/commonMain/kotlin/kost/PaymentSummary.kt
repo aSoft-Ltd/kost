@@ -7,8 +7,9 @@ import kash.Money
 import kash.Zero
 import kash.sum
 import kollections.List
+import kollections.map
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class PaymentSummary(

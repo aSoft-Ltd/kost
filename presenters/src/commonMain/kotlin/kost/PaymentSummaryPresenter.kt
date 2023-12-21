@@ -5,7 +5,7 @@ package kost
 
 import kash.MoneyPresenter
 import kollections.List
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class PaymentSummaryPresenter(
     val items: List<PaymentPresenter>,

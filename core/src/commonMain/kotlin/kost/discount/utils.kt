@@ -7,7 +7,7 @@ import kost.GlobalDiscount
 import kost.GranularLineItemsDiscount
 import kost.NoDiscount
 import kost.UnitDiscount
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface CanBeZero {
     val asZero: NoDiscount?

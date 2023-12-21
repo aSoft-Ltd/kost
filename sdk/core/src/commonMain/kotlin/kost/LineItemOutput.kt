@@ -10,10 +10,11 @@ import kash.ZeroCents
 import kash.cents
 import kash.sum
 import kollections.MutableList
+import kollections.map
 import kommerce.Offerable
 import kost.params.LineItemParams
 import kost.transformers.toPresenter
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 class LineItemOutput(
     val offerable: Offerable,

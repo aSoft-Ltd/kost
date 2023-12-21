@@ -5,7 +5,7 @@ package kost
 
 import kash.MoneyPresenter
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed interface LineItemsDiscountPresenter {
     val total: MoneyPresenter

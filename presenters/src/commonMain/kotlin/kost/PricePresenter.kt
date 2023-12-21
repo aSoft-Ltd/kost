@@ -3,7 +3,7 @@
 
 package kost
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class PricePresenter(
     val src: PriceDto,

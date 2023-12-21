@@ -7,11 +7,11 @@ import bee.TaskStatus
 import kash.Money
 import kash.Zero
 import kollections.List
-import kollections.iListOf
+import kollections.listOf
 import kommerce.Offerable
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class LineItem(
@@ -26,7 +26,7 @@ data class LineItem(
     val unitDiscount: Money = Zero,
     val tax: TaxDeprecated = TaxDeprecated.GENERIC_ZERO,
     val ref: VendorReference = VendorReference.UNSET,
-    val photos: List<String> = iListOf(),
+    val photos: List<String> = listOf(),
     val compoundDiscount: Money = Zero,
 ) : Calculable {
 

@@ -5,6 +5,10 @@ package kost
 import kost.Intention.Type.Create
 import kost.Intention.Type.Delete
 import kost.Intention.Type.Update
+import kollections.MutableList
+import kollections.add
+import kollections.find
+import kollections.remove
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,25 +33,25 @@ inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.create(params: P) {
 
 inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.create(
     params: P,
-    unique: (P?) -> Any?
+    crossinline unique: (P?) -> Any?
 ) = append(CreateIntention(params), unique)
 
 
 inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.update(
     uid: I,
     params: P,
-    unique: (P?) -> Any?
+    crossinline unique: (P?) -> Any?
 ) = append(UpdateIntention(uid, params), unique)
 
 inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.delete(
     uid: I,
     params: P,
-    unique: (P?) -> Any?
+    crossinline unique: (P?) -> Any?
 ) = append(DeleteIntention(uid, params), unique)
 
 inline fun <I : Any, P : Any> MutableList<Intention<I, P>>.append(
     i: Intention<I, P>,
-    unique: (p1: P?) -> Any?
+    crossinline unique: (p1: P?) -> Any?
 ) {
     val existing = find { unique(it.params) == unique(i.params) }
     when {

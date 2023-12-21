@@ -4,7 +4,7 @@
 package kost.params
 
 import kash.Cents
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class TaxAmountParams(
     override val name: String,

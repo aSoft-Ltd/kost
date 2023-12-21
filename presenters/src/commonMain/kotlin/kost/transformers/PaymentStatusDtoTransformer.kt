@@ -3,6 +3,7 @@ package kost.transformers
 import kash.Currency
 import kash.MoneyFormatter
 import kash.transformers.toPresenter
+import kollections.map
 import kost.FullyPaidDto
 import kost.FullyPaidPresenter
 import kost.OverPaidDto
@@ -32,13 +33,6 @@ fun PaymentStatusDto.toPresenter(
         payments = payments.map { it.toPresenter(tz, currency, pattern, formatter) },
         amount = amount.toPresenter(currency, formatter),
         remaining = remaining.toPresenter(currency, formatter),
-        total = total.toPresenter(currency, formatter)
-    )
-
-    is OverPaidDto -> OverPaidPresenter(
-        payments = payments.map { it.toPresenter(tz, currency, pattern, formatter) },
-        amount = amount.toPresenter(currency, formatter),
-        surplus = surplus.toPresenter(currency, formatter),
         total = total.toPresenter(currency, formatter)
     )
 

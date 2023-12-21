@@ -4,8 +4,9 @@
 package kost
 
 import kash.Money
+import kollections.List
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 sealed interface PaymentStatus {

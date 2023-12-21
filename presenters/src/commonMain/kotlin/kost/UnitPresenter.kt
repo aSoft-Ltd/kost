@@ -1,7 +1,7 @@
 @file:JsExport
 package kost
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class UnitPresenter(
     val src: UnitDto,

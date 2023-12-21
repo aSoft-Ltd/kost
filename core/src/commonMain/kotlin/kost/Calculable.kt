@@ -4,7 +4,7 @@
 package kost
 
 import kash.Money
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface Calculable {
     val costBeforeDiscount: Money

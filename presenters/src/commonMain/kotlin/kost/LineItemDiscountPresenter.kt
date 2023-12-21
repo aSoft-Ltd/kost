@@ -8,7 +8,7 @@ import kash.MoneyPresenter
 import kash.ZeroCents
 import kash.transformers.toPresenter
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed interface LineItemDiscountPresenter {
     val total: MoneyPresenter

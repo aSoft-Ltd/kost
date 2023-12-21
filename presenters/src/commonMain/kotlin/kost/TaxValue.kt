@@ -4,7 +4,7 @@
 package kost
 
 import kash.MoneyPresenter
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 sealed interface TaxValue {
     val src: TaxDto

@@ -14,7 +14,9 @@ import kost.discount.CanBeUnit
 import kost.discount.CanBeZero
 import kost.discount.HasGlobal
 import kost.discount.HasLineItems
-import kotlin.js.JsExport
+import kollections.Collection
+import kollections.map
+import kotlinx.JsExport
 import kotlin.js.JsName
 
 sealed interface Discount {

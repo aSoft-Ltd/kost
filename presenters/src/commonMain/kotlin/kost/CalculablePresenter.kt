@@ -3,7 +3,7 @@
 
 package kost
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface CalculablePresenter {
     val cost: CostPresenter

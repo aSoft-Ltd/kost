@@ -5,10 +5,10 @@ package kost
 
 import kash.Monetary
 import kollections.List
-import kollections.toIList
+import kollections.toList
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import kotlin.js.JsName
 
 @Serializable
@@ -17,7 +17,7 @@ class Body(
     val compoundDiscount: Monetary = Monetary(0)
 ) : ItemizedCalculable {
     @JsName("fromArray")
-    constructor(vararg items: LineItem) : this(items.toIList())
+    constructor(vararg items: LineItem) : this(items.toList())
 
     @Transient
     override val discount = discountOf(items, compoundDiscount)

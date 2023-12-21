@@ -7,9 +7,10 @@ import cinematic.mutableLiveOf
 import kash.Currency
 import kash.MoneyFormatter
 import kash.MoneyPresenter
-import kollections.iEmptyList
+import kollections.emptyList
+import kollections.isNotEmpty
 import koncurrent.Later
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty0
 import krono.Clock
@@ -75,7 +76,7 @@ class PaymentCaptureField<out T>(
         output = property.get(),
         required = this.validator.required,
         visibility = visibility,
-        feedbacks = Feedbacks(iEmptyList())
+        feedbacks = Feedbacks(emptyList())
     )
 
     override val state = mutableLiveOf(initial)

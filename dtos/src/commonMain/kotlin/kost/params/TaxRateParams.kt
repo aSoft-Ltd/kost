@@ -1,7 +1,7 @@
 @file:JsExport
 package kost.params
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class TaxRateParams(
     override val name: String,

@@ -7,8 +7,13 @@ import kash.Money
 import kash.Zero
 import kash.sum
 import kollections.List
-import kollections.toIMap
-import kotlin.js.JsExport
+import kollections.iterator
+import kollections.map
+import kollections.buildMap
+import kollections.getOrPut
+import kollections.put
+import kollections.values
+import kotlinx.JsExport
 
 interface ItemizedCalculable : Calculable {
     val items: List<LineItem>
@@ -24,7 +29,7 @@ interface ItemizedCalculable : Calculable {
                 val prev = getOrPut(item.tax) { Zero }
                 put(item.tax, prev + item.taxAmount)
             }
-        }.toIMap()
+        }
 
     override val taxAmount get() = taxRates.values.sum()
 }

@@ -6,7 +6,7 @@ package kost
 import kash.Currency
 import kotlinx.serialization.Serializable
 import krono.Instant
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class BillHeader(

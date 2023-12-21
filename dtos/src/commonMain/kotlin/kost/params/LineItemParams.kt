@@ -6,11 +6,12 @@ package kost.params
 import books.FinancialAccountDto
 import kash.Cents
 import kash.ZeroCents
-import kollections.iEmptyList
+import kollections.emptyList
+import kollections.List
 import kommerce.Offerable
 import kost.TaxDto
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class LineItemParams(
@@ -20,7 +21,7 @@ data class LineItemParams(
     val quantity: Double = 1.0,
     val unit: String = "each",
     val unitDiscount: Cents = ZeroCents,
-    val taxes: List<TaxDto> = iEmptyList(),
+    val taxes: List<TaxDto> = emptyList(),
     val account: FinancialAccountDto? = null,
     val overallDiscount: Cents = ZeroCents
 )

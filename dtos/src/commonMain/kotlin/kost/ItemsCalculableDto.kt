@@ -3,7 +3,7 @@
 
 package kost
 
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 interface ItemsCalculableDto : CalculableDto {
     val discount: LineItemsDiscountDto

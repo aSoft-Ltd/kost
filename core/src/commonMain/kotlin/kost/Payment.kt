@@ -7,7 +7,7 @@ import bee.DocumentStatus
 import kash.Monetary
 import kotlinx.serialization.Serializable
 import krono.Instant
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 data class Payment(

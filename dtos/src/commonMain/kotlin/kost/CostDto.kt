@@ -4,7 +4,7 @@
 package kost
 
 import kash.Cents
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import kotlin.jvm.JvmField
 import kotlinx.serialization.Serializable
 

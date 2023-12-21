@@ -3,7 +3,7 @@
 package kost
 
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 import kotlin.jvm.JvmField
 import kotlin.jvm.JvmOverloads
 

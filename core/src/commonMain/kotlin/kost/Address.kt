@@ -5,7 +5,7 @@ package kost
 import identifier.Email
 import identifier.Phone
 import kotlinx.serialization.Serializable
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 @Serializable
 sealed class Address {

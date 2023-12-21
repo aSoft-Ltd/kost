@@ -9,9 +9,10 @@ import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kash.ZeroCents
 import kollections.List
+import kollections.map
 import kommerce.Offerable
 import kost.params.LineItemParams
-import kotlin.js.JsExport
+import kotlinx.JsExport
 
 data class LineItemPresenter2(
     val src: LineItemDto,

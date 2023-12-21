@@ -5,6 +5,7 @@ package kost.transformers
 import kash.Currency
 import kash.MoneyFormatter
 import kash.transformers.toPresenter
+import kollections.map
 import kost.LineItemDto
 import kost.TaxesPresenter
 
