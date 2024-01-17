@@ -11,4 +11,4 @@ data class TaxesPresenter(
     val src: TaxesDto,
     val items: List<TaxValue>,
     val total: MoneyPresenter
-) : List<TaxValue> by items
+)
