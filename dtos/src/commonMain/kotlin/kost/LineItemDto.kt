@@ -5,6 +5,7 @@ package kost
 
 import bee.TaskStatus
 import books.FinancialAccountDto
+import identifier.Unique
 import kash.Cents
 import kash.ZeroCents
 import kollections.List
@@ -15,7 +16,7 @@ import kotlinx.JsExport
 
 @Serializable
 data class LineItemDto(
-    val uid: String,
+    override val uid: String,
     val data: Offerable,
     val unit: UnitDto,
     val status: TaskStatus,
@@ -26,7 +27,7 @@ data class LineItemDto(
     val taxes: TaxesDto,
     val account: FinancialAccountDto?,
     val discount: LineItemDiscountDto,
-) {
+):Unique {
     val price by lazy {
         PriceDto(
             buying = run {

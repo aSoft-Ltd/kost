@@ -18,6 +18,7 @@ import kotlinx.JsExport
 
 class LineItemOutput(
     val offerable: Offerable,
+    val line: LineItemDto?,
     val currency: Currency,
     val formatter: MoneyFormatter,
     var unitPrice: Double?,
