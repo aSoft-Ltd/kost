@@ -27,7 +27,7 @@ class LineItemOutput(
     var unit: String?,
     var unitDiscount: Double?,
     var overallDiscount: Double?,
-    val taxes: MutableList<TaxPresenter>,
+    var taxes: MutableList<TaxPresenter>,
     var account: FinancialAccountPresenter?,
 ) {
 
