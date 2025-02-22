@@ -9,7 +9,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = TaxesSerializer::class)
 data class TaxesDto(
-    val items: List<TaxDto>
+    val items: List<TaxDto>,
+    val inclusive: Boolean
 ) {
     fun total(cents: Cents): Cents = items.map { it.of(cents) }.sum()
+
+    fun subTotal(cents: Cents): Cents = items.map { it.before(cents) }.sum()
 }

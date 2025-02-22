@@ -1,8 +1,12 @@
 package kost
 
+import cinematic.MutableLive
+import cinematic.mutableLiveOf
 import kash.Currency
 import kash.MoneyFormatter
 import kash.MoneyPresenter
+import kollections.List
+import koncurrent.Later
 import krono.Clock
 import neat.ValidationFactory
 import symphony.Changer
@@ -23,7 +27,8 @@ fun <P> Fields<*>.payment(
     clock: Clock,
     visibility: Visibility = Visibilities.Hidden,
     onChange: Changer<PaymentCaptureOutput>? = null,
-    factory: ValidationFactory<PaymentCaptureOutput>? = null
+    factory: ValidationFactory<PaymentCaptureOutput>? = null,
+    gateways:MutableLive<List<PaymentCaptureGateway<*>>>
 ) = getOrCreate(name) {
-    PaymentCaptureField(name, label, visibility, currency, formatter, reference, total, paid, clock, onChange, factory)
+    PaymentCaptureField(name, label, visibility, currency, formatter, reference, total, paid, clock, onChange, factory, gateways)
 }

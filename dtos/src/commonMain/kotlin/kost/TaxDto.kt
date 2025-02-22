@@ -9,4 +9,6 @@ sealed interface TaxDto {
     val uid: String
     val name: String
     fun of(cents: Cents):Cents
+    fun before(cents: Cents):Cents
+    fun info():String
 }

@@ -3,22 +3,21 @@
 
 package kost
 
+import cinematic.MutableLive
 import cinematic.mutableLiveOf
 import kash.Currency
 import kash.MoneyFormatter
 import kash.MoneyPresenter
 import kollections.emptyList
+import kollections.List
 import kollections.isNotEmpty
 import koncurrent.Later
 import koncurrent.later.then
-import koncurrent.later.andThen
-import koncurrent.later.andZip
-import koncurrent.later.zip
-import koncurrent.later.catch
 import kotlinx.JsExport
 import kotlin.reflect.KMutableProperty0
 import kotlin.reflect.KProperty0
 import krono.Clock
+import krono.Instant
 import neat.ValidationFactory
 import neat.Validity
 import neat.custom
@@ -46,19 +45,27 @@ class PaymentCaptureField<out T>(
     paidProperty: KProperty0<MoneyPresenter>,
     clock: Clock,
     private val onChange: Changer<PaymentCaptureOutput>?,
-    factory: ValidationFactory<PaymentCaptureOutput>?
+    factory: ValidationFactory<PaymentCaptureOutput>?,
+    val gateways:MutableLive<List<PaymentCaptureGateway<*>>>
 ) : AbstractHideable(), Field<PaymentCaptureOutput, PaymentCaptureFieldState>, Settable<PaymentCaptureOutput> {
-
     protected val validator = custom<PaymentCaptureOutput>(label).configure(factory)
-
-    val form = PaymentCaptureFields(
+    private val fields = PaymentCaptureFields(
         currency = currency,
         formatter = formatter,
         referenceProperty = referenceProperty,
         totalProperty = totalProperty,
         paidProperty = paidProperty,
         clock = clock,
-    ).toForm(
+        output = PaymentCaptureOutput(
+            amountRequired = totalProperty.get().amount.asDouble ?: 0.0,
+            amountPaid = paidProperty.get().amount.asDouble ?: 0.0,
+            date = Instant(clock.currentMillisAsLong()).atSystemZone().date,
+            currency = currency,
+            formatter = formatter
+        )
+    )
+
+    val form = fields.toForm(
         heading = "Payment Capture Form",
         details = "Capture a payment",
         visibility = Visibilities.Hidden,
@@ -66,6 +73,22 @@ class PaymentCaptureField<out T>(
     ) {
         onSubmit { set(it); Later(it) }
     }
+
+//    val mode:MutableLive<PaymentCaptureMode<*>> = mutableLiveOf(fields)
+
+//    fun hasQR() = qr != null
+
+//    fun switchToQR() {
+//        qr?.let {
+//            it().then {
+//                mode.value = it
+//            }
+//        }
+//    }
+//
+//    fun switchToFields() {
+//        mode.value = fields
+//    }
 
     override fun set(value: PaymentCaptureOutput?) {
         property.set(value)

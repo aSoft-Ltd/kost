@@ -27,6 +27,7 @@ data class PaymentCaptureOutput(
     var to: String? = null,
     var status: DocumentStatus? = DocumentStatus.Draft,
     var method: PaymentMethodDto? = CashDto((amount?.cents ?: ZeroCents) * 100, ZeroCents),
+    var gateway: PaymentGateway? = null,
     var transactionId: String? = null
 ) {
     fun capturedAmount() = Cents((amount ?: 0.0) * 100).toPresenter(currency, formatter)
@@ -40,7 +41,8 @@ data class PaymentCaptureOutput(
             to = to,
             status = status ?: DocumentStatus.Draft,
             method = method ?: CashDto((amount ?: 0.0).cents, ZeroCents),
-            transactionId = transactionId
+            transactionId = transactionId,
+            gateway = gateway
         )
     }
 }

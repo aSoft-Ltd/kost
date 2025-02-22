@@ -121,9 +121,9 @@ data class GranularLineItemsDiscount internal constructor(
 }
 
 fun discountOf(costBefore: Money, rate: Money, quantity: Double, global: Money): LineItemDiscount = when {
-    rate.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
-    rate.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
-    rate.centsAsLong != 0uL && global.centsAsLong == 0uL -> UnitDiscount(costBefore, rate, quantity)
+    rate.centsAsLong == 0L && global.centsAsLong == 0L -> NoDiscount(costBefore)
+    rate.centsAsLong == 0L && global.centsAsLong != 0L -> GlobalDiscount(costBefore, global)
+    rate.centsAsLong != 0L && global.centsAsLong == 0L -> UnitDiscount(costBefore, rate, quantity)
     else -> CompoundLineItemDiscount(costBefore, rate, quantity, global)
 }
 
@@ -132,9 +132,9 @@ fun discountOf(items: Collection<LineItem>, global: Money): LineItemsDiscount {
     val costBefore = items.map { it.discount.costBefore }.sum()
     val itemsDiscount = items.map { it.discount.total }.sum()
     return when {
-        itemsDiscount.centsAsLong == 0uL && global.centsAsLong == 0uL -> NoDiscount(costBefore)
-        itemsDiscount.centsAsLong == 0uL && global.centsAsLong != 0uL -> GlobalDiscount(costBefore, global)
-        itemsDiscount.centsAsLong != 0uL && global.centsAsLong == 0uL -> GranularLineItemsDiscount(
+        itemsDiscount.centsAsLong == 0L && global.centsAsLong == 0L -> NoDiscount(costBefore)
+        itemsDiscount.centsAsLong == 0L && global.centsAsLong != 0L -> GlobalDiscount(costBefore, global)
+        itemsDiscount.centsAsLong != 0L && global.centsAsLong == 0L -> GranularLineItemsDiscount(
             costBefore, itemsDiscount
         )
 

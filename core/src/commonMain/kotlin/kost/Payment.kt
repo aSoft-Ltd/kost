@@ -18,5 +18,6 @@ data class Payment(
     val amount: Monetary,
     val to: String,
     val method: PaymentMethod,
+    val gateway: PaymentGatewayCst?,
     val status: DocumentStatus
 )

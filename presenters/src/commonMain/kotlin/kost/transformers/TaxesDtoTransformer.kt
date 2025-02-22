@@ -7,6 +7,7 @@ import kash.MoneyFormatter
 import kash.transformers.toPresenter
 import kollections.map
 import kost.LineItemDto
+import kost.TaxesDto
 import kost.TaxesPresenter
 
 inline fun LineItemDto.toTaxesPresenter(
@@ -17,3 +18,12 @@ inline fun LineItemDto.toTaxesPresenter(
     items = taxes.items.map { it.toValue(price.selling.before.tax, currency, formatter) },
     total = price.selling.taxes.toPresenter(currency, formatter)
 )
+
+//inline fun TaxesDto.toPresenter(
+//    currency: Currency,
+//    formatter: MoneyFormatter
+//) = TaxesPresenter(
+//    src = this,
+//    items = this.items.map { it.toValue(price.selling.before.tax, currency, formatter) },
+//    total = price.selling.taxes.toPresenter(currency, formatter)
+//)

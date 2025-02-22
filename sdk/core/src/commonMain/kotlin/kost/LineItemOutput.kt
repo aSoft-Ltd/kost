@@ -10,6 +10,7 @@ import kash.ZeroCents
 import kash.cents
 import kash.sum
 import kollections.MutableList
+import kollections.isNotEmpty
 import kollections.map
 import kommerce.Offerable
 import kost.params.LineItemParams
@@ -18,6 +19,7 @@ import kotlinx.JsExport
 
 class LineItemOutput(
     val offerable: Offerable,
+    val inventoryUid: String?,
     val line: LineItemDto?,
     val currency: Currency,
     val formatter: MoneyFormatter,
@@ -28,27 +30,39 @@ class LineItemOutput(
     var unitDiscount: Double?,
     var overallDiscount: Double?,
     var taxes: MutableList<TaxPresenter>,
+    var inclusiveTaxes:Boolean,
     var account: FinancialAccountPresenter?,
 ) {
 
     val cost
         get() = run {
             val n = quantity ?: 1.0
-            val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
-            val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
-            val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
-            val totalDiscount = allItemsDiscount + (discountPerItem * n)
-            val beforeTaxes = beforeDiscount - totalDiscount
+            val priceTimesQty = (unitPrice?.cents ?: ZeroCents) * n * 100
+            if (inclusiveTaxes && taxes.isNotEmpty()) {
+                val beforeAmount = taxes.map { it.src.before(priceTimesQty) }.sum()
+                CostDto(
+                    beforeDiscount = beforeAmount,
+                    discount = ZeroCents,
+                    taxes = priceTimesQty - beforeAmount
+                ).toPresenter(currency, formatter)
+            } else {
+                val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
+                val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
+                val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
+                val totalDiscount = allItemsDiscount + (discountPerItem * n)
+                val beforeTaxes = beforeDiscount - totalDiscount
 
-            CostDto(
-                beforeDiscount = beforeDiscount,
-                discount = totalDiscount,
-                taxes = taxes.map { it.src.of(beforeTaxes) }.sum()
-            ).toPresenter(currency, formatter)
+                CostDto(
+                    beforeDiscount = beforeDiscount,
+                    discount = totalDiscount,
+                    taxes = taxes.map { it.src.of(beforeTaxes) }.sum()
+                ).toPresenter(currency, formatter)
+            }
         }
 
     fun toParams() = LineItemParams(
         data = offerable,
+        inventoryUid = inventoryUid,
         details = details ?: offerable.name,
         quantity = quantity ?: 1.0,
         unit = unit ?: "each",

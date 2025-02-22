@@ -7,6 +7,7 @@ import bee.DocumentStatus
 import kash.Cents
 import kash.ZeroCents
 import kost.CashDto
+import kost.PaymentGateway
 import kost.PaymentMethodDto
 import kotlinx.serialization.Serializable
 import krono.Instant
@@ -21,5 +22,6 @@ data class PaymentParams(
     val to: String? = null,
     val status: DocumentStatus = DocumentStatus.Draft,
     val method: PaymentMethodDto = CashDto(Cents(amount * 100), ZeroCents),
+    val gateway: PaymentGateway?,
     val transactionId: String? = null
 )

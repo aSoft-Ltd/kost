@@ -6,7 +6,6 @@ package kost
 import bee.TaskStatus
 import books.FinancialAccountDto
 import identifier.Unique
-import kash.Cents
 import kash.ZeroCents
 import kollections.List
 import kommerce.Offerable
@@ -18,6 +17,7 @@ import kotlinx.JsExport
 data class LineItemDto(
     override val uid: String,
     val data: Offerable,
+    val inventoryUid: String? = null,
     val unit: UnitDto,
     val status: TaskStatus,
     val details: String,
@@ -31,24 +31,51 @@ data class LineItemDto(
     val price by lazy {
         PriceDto(
             buying = run {
-                val beforeDiscount = unit.price.buying.before.discount * quantity
-                val afterDiscount = beforeDiscount
+                val priceTimesQty = unit.price.buying.before.discount * quantity
+
+                val beforeAmount = if (taxes.inclusive) {
+                    taxes.subTotal(priceTimesQty)
+                } else {
+                    priceTimesQty
+                }
+                val taxes = if (taxes.inclusive) {
+                    priceTimesQty - beforeAmount
+                } else {
+                    taxes.total(beforeAmount)
+                }
+
                 CostDto(
-                    beforeDiscount = beforeDiscount,
+                    beforeDiscount = beforeAmount,
                     discount = ZeroCents,
-                    taxes = taxes.total(afterDiscount)
+                    taxes = taxes
                 )
             },
             selling = run {
                 val beforeDiscount = unit.price.selling.before.discount * quantity
                 val afterDiscount = beforeDiscount - discount.total
+
+                val beforeAmount = if (taxes.inclusive) {
+                    taxes.subTotal(beforeDiscount)
+                } else {
+                    beforeDiscount
+                }
+                val taxes = if (taxes.inclusive) {
+                    beforeDiscount - beforeAmount
+                } else {
+                    taxes.total(beforeAmount)
+                }
+
                 CostDto(
-                    beforeDiscount = beforeDiscount,
+                    beforeDiscount = beforeAmount,
                     discount = discount.total,
-                    taxes = taxes.total(afterDiscount)
+                    taxes = taxes
                 )
             }
         )
+    }
+
+    private fun includedTax() {
+
     }
 
     val profit by lazy {
@@ -70,6 +97,7 @@ data class LineItemDto(
 
     fun toParams() = LineItemParams(
         data = data,
+        inventoryUid = inventoryUid,
         unitPrice = unit.price.selling.after.discount,
         details = details,
         quantity = quantity,

@@ -40,5 +40,6 @@ fun PaymentDto.toPresenter(
     amount = amount.toPresenter(currency, formatter),
     to = to,
     method = method.toPresenter(currency, formatter),
-    status = status
+    status = status,
+    gateway = gateway
 )

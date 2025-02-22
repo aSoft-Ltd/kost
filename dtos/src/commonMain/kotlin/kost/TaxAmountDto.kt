@@ -14,4 +14,7 @@ data class TaxAmountDto(
     val amount: Cents,
 ):TaxDto {
     override fun of(cents: Cents): Cents = amount
+    override fun before(cents: Cents): Cents = cents.minus(amount)
+
+    override fun info(): String = "TaxAmount=${amount},name=${name}"
 }

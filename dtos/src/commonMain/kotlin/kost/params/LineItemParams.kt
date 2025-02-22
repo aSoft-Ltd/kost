@@ -16,6 +16,7 @@ import kotlinx.JsExport
 @Serializable
 data class LineItemParams(
     val data: Offerable,
+    val inventoryUid: String? = null,
     val unitPrice: Cents,
     val details: String = data.name,
     val quantity: Double = 1.0,

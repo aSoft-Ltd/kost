@@ -34,6 +34,7 @@ data class LineItemPresenter2(
 
     fun toParams() = LineItemParams(
         data = data,
+        inventoryUid = src.inventoryUid,
         details = details,
         quantity = quantity,
         unit = unit,

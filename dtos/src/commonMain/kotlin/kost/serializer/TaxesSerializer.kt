@@ -19,7 +19,7 @@ object TaxesSerializer : KSerializer<TaxesDto> {
     private val serializer = ListSerializer(TaxDto.serializer())
 
     override fun deserialize(decoder: Decoder): TaxesDto {
-        return TaxesDto(decoder.decodeSerializableValue(serializer).toList())
+        return TaxesDto(decoder.decodeSerializableValue(serializer).toList(), false)
     }
 
     override fun serialize(encoder: Encoder, value: TaxesDto) {

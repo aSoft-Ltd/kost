@@ -16,5 +16,6 @@ data class PaymentPresenter(
     val amount: MoneyPresenter,
     val to: String,
     val method: PaymentMethodPresenter,
+    val gateway: PaymentGateway?,
     val status: DocumentStatus
 )

@@ -13,5 +13,7 @@ data class TaxRateDto(
     override val name: String,
     val rate: Int,
 ):TaxDto {
-    override fun of(cents: Cents): Cents = cents * rate / 100
+    override fun of(cents: Cents): Cents = cents * rate.toDouble() / 100.0
+    override fun before(cents: Cents): Cents = cents / ((rate.toDouble()/100.0) + 1)
+    override fun info(): String = "TaxRate=${rate}%,name=${name}"
 }

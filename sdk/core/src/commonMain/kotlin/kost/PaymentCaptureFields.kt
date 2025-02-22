@@ -16,6 +16,7 @@ import krono.date
 import symphony.money
 import symphony.selectSingle
 import kollections.listOf
+import kost.PaymentCaptureOutput
 import symphony.text
 import kotlin.reflect.KProperty0
 import kost.PaymentCaptureOutput as Output
@@ -27,15 +28,8 @@ class PaymentCaptureFields<out T>(
     private val totalProperty: KProperty0<MoneyPresenter>?,
     private val paidProperty: KProperty0<MoneyPresenter>?,
     private val clock: Clock,
-) : Fields<Output>(
-    Output(
-        amountRequired = totalProperty?.get()?.amount?.asDouble ?: 0.0,
-        amountPaid = paidProperty?.get()?.amount?.asDouble ?: 0.0,
-        date = Instant(clock.currentMillisAsLong()).atSystemZone().date,
-        currency = currency,
-        formatter = formatter
-    )
-) {
+    output: PaymentCaptureOutput
+) : PaymentCaptureMode<@UnsafeVariance T>, Fields<Output>(output) {
 
     val amount = money(output::amount)
 

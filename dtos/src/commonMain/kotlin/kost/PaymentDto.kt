@@ -18,5 +18,6 @@ data class PaymentDto(
     val amount: Cents,
     val to: String,
     val method: PaymentMethodDto,
+    val gateway: PaymentGateway?,
     val status: DocumentStatus
 )
