@@ -9,6 +9,7 @@ import kash.Currency
 import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
+import kash.centsBy100
 import kash.transformers.toPresenter
 import kotlinx.JsExport
 import kost.params.PaymentParams
@@ -26,7 +27,7 @@ data class PaymentCaptureOutput(
     var from: String? = null,
     var to: String? = null,
     var status: DocumentStatus? = DocumentStatus.Draft,
-    var method: PaymentMethodDto? = CashDto((amount?.cents ?: ZeroCents) * 100, ZeroCents),
+    var method: PaymentMethodDto? = CashDto((amount?.centsBy100 ?: ZeroCents), ZeroCents),
     var gateway: PaymentGateway? = null,
     var transactionId: String? = null
 ) {

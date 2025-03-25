@@ -8,6 +8,7 @@ import kash.Currency
 import kash.MoneyFormatter
 import kash.ZeroCents
 import kash.cents
+import kash.centsBy100
 import kash.sum
 import kollections.MutableList
 import kollections.isNotEmpty
@@ -30,15 +31,16 @@ class LineItemOutput(
     var unitDiscount: Double?,
     var overallDiscount: Double?,
     var taxes: MutableList<TaxPresenter>,
-    var inclusiveTaxes:Boolean,
+    var inclusiveTaxes:Boolean?,
     var account: FinancialAccountPresenter?,
 ) {
+    private fun isinclusiveTaxes() = inclusiveTaxes ?: false
 
     val cost
         get() = run {
             val n = quantity ?: 1.0
-            val priceTimesQty = (unitPrice?.cents ?: ZeroCents) * n * 100
-            if (inclusiveTaxes && taxes.isNotEmpty()) {
+            val priceTimesQty = (unitPrice?.centsBy100 ?: ZeroCents) * n
+            if (isinclusiveTaxes() && taxes.isNotEmpty()) {
                 val beforeAmount = taxes.map { it.src.before(priceTimesQty) }.sum()
                 CostDto(
                     beforeDiscount = beforeAmount,
@@ -46,9 +48,9 @@ class LineItemOutput(
                     taxes = priceTimesQty - beforeAmount
                 ).toPresenter(currency, formatter)
             } else {
-                val beforeDiscount = (unitPrice?.cents ?: ZeroCents) * n * 100
-                val discountPerItem = (unitDiscount?.cents ?: ZeroCents) * 100
-                val allItemsDiscount = (overallDiscount?.cents ?: ZeroCents) * 100
+                val beforeDiscount = (unitPrice?.centsBy100 ?: ZeroCents) * n
+                val discountPerItem = (unitDiscount?.centsBy100 ?: ZeroCents)
+                val allItemsDiscount = (overallDiscount?.centsBy100 ?: ZeroCents)
                 val totalDiscount = allItemsDiscount + (discountPerItem * n)
                 val beforeTaxes = beforeDiscount - totalDiscount
 
